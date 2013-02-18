@@ -1,0 +1,22 @@
+color desert
+" color molokai
+" color railscasts
+
+"set guifont=Monaco:h14:b:cANSI
+set guifont=Andale\ Mono:h16
+
+" set guioptions=aegimrLt
+" hide toolbar
+set guioptions-=T
+
+" use console menus
+set guioptions-=c
+
+"win 120 50
+"set fuopt=maxvert,maxhorz
+" toggle FS mode https://wincent.com/wiki/MacVim_fullscreen_mode
+set fullscreen
+
+
+" maximize for macos
+" defaults write org.vim.MacVim MMZoomBoth 1

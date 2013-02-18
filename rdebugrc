@@ -1,0 +1,9 @@
+# http://bashdb.sourceforge.net/rdebug-emacs.html
+# http://bashdb.sourceforge.net/ruby-debug.html
+# http://bashdb.sourceforge.net/ruby-debug/
+
+set autolist
+set autoeval
+set autoreload
+set forcestep
+set listsize 25

@@ -1,0 +1,58 @@
+find . -type f | xargs -n 1 -i -0 echo "{}"
+
+alter user postgres with password 'postgres_password';
+
+svn switch --relocate FROM TO [PATH...]
+
+awk '{ total+=$9;} END { print total }'
+
+perl -i.bak -p -e 's/xyz\.rice\.edu/abc.rice.edu/ig' *.html
+
+http://benoithamelin.tumblr.com/ruby1line
+
+Выполнение команды раз в сек. и перерисовка результата.
+  watch -n1 "cat /proc/interrupts"
+
+Копирование файлов на удаленную машину (gzip не нужен, так как ssh умеет сам сжимать данные)
+  ( tar cf - /dir/to/copy ) | gzip | ssh user@remote 'cd /where/to/ &&
+gzip -dc | tar xf -'
+
+Поиск строки в .c и .h файлах
+  find -name "*.[ch]" | xargs grep -E "search string"
+
+Преобразование из эпохального времени
+  date --date '1970-01-01 UTC 130204800 seconds'
+
+Узнать какой день недели
+  date --date='25 Dec' +%A
+
+Математические вычисления
+  echo "(321-123)/123" | bc -l
+  echo "framing=20; minsize=64; (100*10^6)/((framing+minsize)*8)" | bc
+
+Рисование графика
+  echo "framing=20; plot [64:1518] (100*10* *6)/((framing+x)*8)" | gnuplot -persist
+
+Из десятичного в шестнадцатеричный вид
+  echo "obase=16;ibase=10;123" | bc
+
+Удаление комментариев и пустых строк
+  sed '/ *#/d; /^ *$/d'
+
+Объединение строк разделенных символом \
+  sed ':a; /\\$/N; s/\\\n//; ta'
+
+Удаление граничных пробелов и табуляций
+  sed 's/[ \t]*$//'
+
+scp www.zhazhda.ru:/usr/local/www/mirror/zhazhda/pic/topics/67723/* .
+emerge -vDuN system --pretend
+
+mplayer -dumpaudio my_video_file.avi -dumpfile extracted_audio.mp3
+
+ffmpeg -i my_video_file.avi extracted_audio.mp3
+
+
+freebsd orionet.ru -p 444 установка пкаета portinstall ??? или pgk_add -r git
+
+

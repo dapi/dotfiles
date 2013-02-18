@@ -1,0 +1,15 @@
+# MacPorts Installer addition on 2011-06-28_at_10:42:25: adding an appropriate PATH variable for use with MacPorts.
+export PATH=~/bin:/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+export PATH="/Library/PostgreSQL/9.0/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+
+
+[[ -s "/Users/danil/.rvm/scripts/rvm" ]] && source "/Users/danil/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+
+#alias mysql=/usr/local/mysql/bin/mysql
+#alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+
+export TERM=xterm-color
+export CLICOLOR=1

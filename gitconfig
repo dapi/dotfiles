@@ -1,0 +1,11 @@
+[user]
+	name = Danil Pismenny
+	email = danil@orionet.ru
+[github]
+	user = dapi
+        token = token
+        password = password
+[push]
+	default = current
+[core]
+	excludesfile = ~/.gitignore_global

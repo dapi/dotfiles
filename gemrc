@@ -1,0 +1,3 @@
+install: --no-rdoc
+update: --no-rdoc
+gem: --no-rdoc

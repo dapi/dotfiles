@@ -1,0 +1,27 @@
+[submodule "janus/vim-bundler"]
+	path = janus/vim-bundler
+	url = https://github.com/tpope/vim-bundler.git
+[submodule "janus/delimitMate"]
+	path = janus/delimitMate
+	url = git://github.com/Raimondi/delimitMate.git
+[submodule "janus/Rename2"]
+	path = janus/Rename2
+	url = http://github.com/vim-scripts/Rename2
+[submodule "janus/vim-matchit"]
+	path = janus/vim-matchit
+	url = git://github.com/tsaleh/vim-matchit.git
+[submodule "janus/vim-pasta"]
+	path = janus/vim-pasta
+	url = https://github.com/sickill/vim-pasta.git
+[submodule "janus/vim-textobj-rubyblock"]
+	path = janus/vim-textobj-rubyblock
+	url = git://github.com/nelstrom/vim-textobj-rubyblock.git
+[submodule "janus/vim-textobj-user"]
+	path = janus/vim-textobj-user
+	url = http://github.com/kana/vim-textobj-user.git
+[submodule "janus/vim-space"]
+	path = janus/vim-space
+  url = git://github.com/sitaktif/vim-space.git
+[submodule "janus/vim-powerline"]
+  path = janus/vim-powerline
+  url = git://github.com/Lokaltog/vim-powerline.git

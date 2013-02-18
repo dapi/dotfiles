@@ -1,0 +1,82 @@
+" ctags
+" http://andrewradev.com/2011/06/08/vim-and-ctags/
+" http://blog.bojica.com/2010/06/27/ctags-and-vim-for-ruby-on-rails-development
+" http://stackoverflow.com/questions/1327044/how-does-one-navigate-ruby-methods-in-vim
+
+
+set tags+=gems.tags
+
+
+" Выключаем номера строк
+" set nonumber
+
+" let mapleader = ","
+
+nnoremap <Leader>a :Ack 
+" o to open (same as enter)
+" go to preview file (open but maintain focus on ack.vim results)
+" t to open in new tab
+" T to open in new tab silently
+" q to close the quickfix window
+
+" NERD_tree_ACK.vim
+" http://www.vim.org/scripts/script.php?script_id=3357
+"
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
+
+" http://www.pixelbeat.org/settings/.vimrc
+
+
+" Автодополнение как в bash
+set wildmode=longest,list,full
+set wildmenu
+
+" Отключаем подстветку найденных вариантов, и так всё видно.
+set nohlsearch
+
+
+"-------------------------
+"" Горячие клавишы
+"-------------------------
+"
+"" Пробел в нормальном режиме перелистывает страницы
+" nmap <Space> <PageDown>
+
+" :A - альтернативный файл
+nnoremap ga :A<CR>
+
+" gf - идем на файл определяющий класс на котором сейчас находиися
+" http://stackoverflow.com/questions/2886436/change-font-size-macvim
+"set gfn="DejaVu Sans Mono":h13
+set gfn=Menlo:h16
+" Monaco:h12
+
+" С большим значением Tagbar и другие окна уменьшается до минимума
+"set winwidth=84
+"set winheight=35
+"set winminheight=5
+"
+"set statusline+=%{fugitive#statusline()}
+"
+
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>
+color desert
+
+au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
+
+
+" ctrlP
+" the nearest ancestor that contains one of these directories or files: .git
+let g:ctrlp_working_path_mode = 2
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+
+" vim-pasta
+let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml']
+
