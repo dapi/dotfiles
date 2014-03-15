@@ -1,19 +1,13 @@
-#key=~/.ssh/identity
-#IdentityFile ~/.ssh/identity
-ServerAliveInterval 15
-#ControlMaster auto
-#ControlPath ~/.ssh/master-%r@%h:%p
-# /tmp/ssh_mux_%h_%p_%r
-#ControlPersist 1h
 ForwardAgent yes
-
-Host ayda
-  User wwwdata
+# ServerAliveInterval 6000
 Host office
-  HostName office.icfdev.ru
-Host ci
-  HostName 192.168.0.200
-  Ciphers arcfour
+  HostName office.vkontraste.ru
+  ControlMaster auto
+  ControlPath /tmp/ssh_mux_%h_%p_%r
+  ControlPersist 1h
 
-#Host investcafe.ru
-#  User kamin
+Host icfdev.ru
+  HostName icfdev.ru
+  ControlMaster auto
+  ControlPath /tmp/ssh_mux_%h_%p_%r
+  ControlPersist 1h
