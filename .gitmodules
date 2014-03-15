@@ -25,3 +25,6 @@
 [submodule "janus/vim-powerline"]
   path = janus/vim-powerline
   url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "janus/vimerl"]
+	path = janus/vimerl
+	url = git@github.com:jimenezrick/vimerl.git
