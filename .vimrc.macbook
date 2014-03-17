@@ -1,36 +1,7 @@
- set nocompatible               " be iMproved
- syntax on
- filetype off                   " required!
- " Install vundles
- " :BundleInstall
-
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
-
- " let Vundle manage Vundle
- " required! 
- Bundle 'gmarik/vundle'
- Bundle 'kikijump/tslime.vim'
- Bundle 'guns/vim-clojure-static'
-
- " My Bundles here:
- "
- " original repos on github
- Bundle 'guns/vim-clojure-static'
- Bundle 'tpope/vim-fugitive'
- Bundle 'Lokaltog/vim-easymotion'
- Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
- Bundle 'tpope/vim-rails.git'
- " vim-scripts repos
- Bundle 'L9'
- Bundle 'FuzzyFinder'
- " non github repos
- Bundle 'git://git.wincent.com/command-t.git'
- " git repos on your local machine (ie. when working on your own plugin)
- "Bundle 'file:///Users/gmarik/path/to/plugin'
- " ...
-autocmd BufRead,BufNewFile *.hamlc set filetype=haml
- filetype plugin indent on     " required!
+" Install Vundle
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
+" Install vundles
+" :BundleInstall
  "
  " Brief help
  " :BundleList          - list configured bundles
@@ -41,4 +12,45 @@ autocmd BufRead,BufNewFile *.hamlc set filetype=haml
  " see :h vundle for more details or wiki for FAQ
  " NOTE: comments after Bundle command are not allowed..
  "
- 
+
+
+set nocompatible               " be iMproved
+syntax on
+filetype off                   " required!
+set t_Co=256
+let g:solarized_termcolors=256
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+Bundle 'kikijump/tslime.vim'
+Bundle 'guns/vim-clojure-static'
+
+" My Bundles here:
+"
+" original repos on github
+Bundle 'guns/vim-clojure-static'
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'tpope/vim-rails.git'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'flazz/vim-colorschemes'
+
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (ie. when working on your own plugin)
+"Bundle 'file:///Users/gmarik/path/to/plugin'
+" ...
+
+
+color desert
+
+autocmd BufRead,BufNewFile *.hamlc set filetype=haml
+ filetype plugin indent on     " required!
