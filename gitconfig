@@ -9,3 +9,15 @@
 	default = current
 [core]
 	excludesfile = ~/.gitignore_global
+	
+	
+[color]
+   branch = auto
+   diff = auto
+   interactive = auto
+   status = auto
+   ui = auto
+   pager = true
+ 
+[merge]
+   summary=true
