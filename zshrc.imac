@@ -17,7 +17,8 @@ ZSH_THEME="kolo"
 export NODE_PATH="/usr/local/lib/node"
 export NODE_PATH=/usr/local/share/npm/lib/node_modules
 export ANDROID_HOME=/usr/local/opt/android-sdk
-export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH:/usr/local/share/npm/bin/"
+# export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
+export PATH="$PATH:/usr/local/share/npm/bin/"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
