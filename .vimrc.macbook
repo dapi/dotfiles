@@ -30,7 +30,6 @@ set shiftwidth=2
 set nu
 
 set t_Co=256
-let g:indentLine_char = '|'
 let g:solarized_termcolors=256
 if !has("gui_running")
    let g:gruvbox_italic=0
@@ -38,6 +37,9 @@ endif
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
+" Для textobject-а
+runtime macros/matchit.vim
 
 " let Vundle manage Vundle
 " required! 
@@ -55,7 +57,8 @@ Bundle 'groenewege/vim-less'
 Bundle 'sickill/vim-pasta'
 "Bundle 'Lokaltog/powerline'
 Bundle 'scrooloose/nerdcommenter'
-
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 "Bundle 'tpope/vim-fugitive'
 Bundle 'morhetz/gruvbox'
 Bundle 'tpope/vim-fugitive'
@@ -83,6 +86,21 @@ Bundle 'bling/vim-airline'
 " git repos on your local machine (ie. when working on your own plugin)
 "Bundle 'file:///Users/gmarik/path/to/plugin'
 " ...
+
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+
+Bundle 'scrooloose/syntastic'
+
+set list lcs=tab:\|\ 
+Bundle 'Yggdroot/indentLine'
+"let g:indentLine_color_term = 239
+"let g:indentLine_char = '|' " ¦, ┆
+
+" Включить <Leader>ig
+"Bundle 'nathanaelkane/vim-indent-guides'
+
+
 set tabstop=2 shiftwidth=2 expandtab
 syntax enable
 filetype plugin indent on     " required!
