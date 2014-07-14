@@ -1,16 +1,16 @@
 " Install Vundle
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " Install vundles
-" :BundleInstall
+" :PluginInstall
  "
  " Brief help
- " :BundleList          - list configured bundles
- " :BundleInstall(!)    - install(update) bundles
- " :BundleSearch(!) foo - search(or refresh cache first) for foo
- " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+ " :PluginList          - list configured bundles
+ " :PluginInstall(!)    - install(update) bundles
+ " :PluginSearch(!) foo - search(or refresh cache first) for foo
+ " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
  "
  " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Bundle command are not allowed..
+ " NOTE: comments after Plugin command are not allowed..
  
 imap ;; <Esc>
 set nocompatible                " be iMproved
@@ -31,77 +31,79 @@ set nu
 
 set t_Co=256
 let g:solarized_termcolors=256
+
 if !has("gui_running")
    let g:gruvbox_italic=0
 endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " Для textobject-а
 runtime macros/matchit.vim
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
-Bundle 'kikijump/tslime.vim'
-Bundle 'guns/vim-clojure-static'
-Bundle 'jelera/vim-javascript-syntax'
+Plugin 'gmarik/vundle'
+Plugin 'kikijump/tslime.vim'
+Plugin 'guns/vim-clojure-static'
+Plugin 'jelera/vim-javascript-syntax'
 
 
-" My Bundles here:
+" My Plugins here:
 "
 " original repos on github
-Bundle 'groenewege/vim-less'
-"Bundle 'altercation/vim-colors-solarized'
-Bundle 'sickill/vim-pasta'
-"Bundle 'Lokaltog/powerline'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'kana/vim-textobj-user'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-"Bundle 'tpope/vim-fugitive'
-Bundle 'morhetz/gruvbox'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mxw/vim-jsx'
+Plugin 'groenewege/vim-less'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'sickill/vim-pasta'
+"Plugin 'Lokaltog/powerline'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+"Plugin 'tpope/vim-fugitive'
+Plugin 'morhetz/gruvbox'
+" cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'tpope/vim-rails.git'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+" Plugin 'flazz/vim-colorschemes'
+" # after downloading; unpacking; cd'ing
+" cp colors/* ~/.vim/colors
+Plugin 'mxw/vim-jsx'
 
-Bundle 'groenewege/vim-less'
-Bundle 'cakebaker/scss-syntax.vim'
+Plugin 'cakebaker/scss-syntax.vim'
 
-Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
 " non github repos
-" Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'bling/vim-airline'
+" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'bling/vim-airline'
 " git repos on your local machine (ie. when working on your own plugin)
-"Bundle 'file:///Users/gmarik/path/to/plugin'
+"Plugin 'file:///Users/gmarik/path/to/plugin'
 " ...
 
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
 
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
-Bundle 'othree/html5.vim'
-Bundle 'othree/xml.vim'
+Plugin 'othree/html5.vim'
+Plugin 'othree/xml.vim'
 
 set list lcs=tab:\|\ 
-Bundle 'Yggdroot/indentLine'
+"Plugin 'Yggdroot/indentLine'
 "let g:indentLine_color_term = 239
 "let g:indentLine_char = '|' " ¦, ┆
 
 " Включить <Leader>ig
-"Bundle 'nathanaelkane/vim-indent-guides'
+"Plugin 'nathanaelkane/vim-indent-guides'
 
 
 set tabstop=2 shiftwidth=2 expandtab
@@ -110,7 +112,7 @@ filetype plugin indent on     " required!
 set nohlsearch
 
 "color desert
-"colorscheme solarized
+" colorscheme solarized
 colorscheme gruvbox
 set background=dark 
 
