@@ -92,6 +92,9 @@ Bundle 'tpope/vim-surround'
 
 Bundle 'scrooloose/syntastic'
 
+Bundle 'othree/html5.vim'
+Bundle 'othree/xml.vim'
+
 set list lcs=tab:\|\ 
 Bundle 'Yggdroot/indentLine'
 "let g:indentLine_color_term = 239
@@ -138,6 +141,12 @@ let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'csxj']
 
 " airline
 set laststatus=2
+
+"set paste
+"set nopaste
+nnoremap <F4> :set invpaste paste?<CR>
+set pastetoggle=<F4>
+set showmode
 
 autocmd BufRead,BufNewFile *.hamlc set filetype=haml
  filetype plugin indent on     " required!
