@@ -1,42 +1,14 @@
 " Install Vundle
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" Install vundles
+"set rtp+=~/.vim/bundle/Vundle.vim/
 " :PluginInstall
- "
- " Brief help
- " :PluginList          - list configured bundles
- " :PluginInstall(!)    - install(update) bundles
- " :PluginSearch(!) foo - search(or refresh cache first) for foo
  " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Plugin command are not allowed..
- 
 imap ;; <Esc>
+ 
 set nocompatible                " be iMproved
-syntax on
 filetype off                    " required!
-set t_Co=256
-"set list lcs=tab:' '
-set tags+=gems.tags
-set fileformat=unix
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-"#set expandtab
-
-" Show line numbers
-set nu
-
-set t_Co=256
-let g:solarized_termcolors=256
-
-if !has("gui_running")
-   let g:gruvbox_italic=0
-endif
-
-set rtp+=~/.vim/bundle/Vundle.vim/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
 " Для textobject-а
@@ -45,8 +17,8 @@ runtime macros/matchit.vim
 " let Vundle manage Vundle
 " required! 
 Plugin 'gmarik/vundle'
-Plugin 'kikijump/tslime.vim'
-Plugin 'guns/vim-clojure-static'
+" Plugin 'kikijump/tslime.vim'
+" Plugin 'guns/vim-clojure-static'
 Plugin 'jelera/vim-javascript-syntax'
 
 
@@ -59,10 +31,9 @@ Plugin 'sickill/vim-pasta'
 "Plugin 'Lokaltog/powerline'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kana/vim-textobj-user'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 "Plugin 'tpope/vim-fugitive'
-Plugin 'morhetz/gruvbox'
-" cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -74,9 +45,19 @@ Plugin 'kien/ctrlp.vim'
 " cp colors/* ~/.vim/colors
 Plugin 'mxw/vim-jsx'
 
-Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'mileszs/ack.vim'
+" o    to open (same as enter)
+" O    to open and close quickfix window
+" go   to preview file (open but maintain focus on ack.vim results)
+" t    to open in new tab
+" T    to open in new tab silently
+" h    to open in horizontal split
+" H    to open in horizontal split silently
+" v    to open in vertical split
+" gv   to open in vertical split silently
+" q    to close the quickfix window
 
-Plugin 'ervandew/supertab'
+Plugin 'cakebaker/scss-syntax.vim'
 
 " vim-scripts repos
 Plugin 'L9'
@@ -97,6 +78,38 @@ Plugin 'scrooloose/syntastic'
 Plugin 'othree/html5.vim'
 Plugin 'othree/xml.vim'
 
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'garbas/vim-snipmate'
+Plugin 'ervandew/supertab'
+" <c-n> <c-p> to move curson in completion list
+
+Plugin 'dapi/gruvbox'
+" cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
+
+call vundle#end() 
+
+
+syntax on
+set t_Co=256
+"set list lcs=tab:' '
+set tags+=gems.tags
+set fileformat=unix
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+"#set expandtab
+
+" Show line numbers
+set nu
+
+set t_Co=256
+let g:solarized_termcolors=256
+
+if !has("gui_running")
+   let g:gruvbox_italic=0
+endif
+
 set list lcs=tab:\|\ 
 "Plugin 'Yggdroot/indentLine'
 "let g:indentLine_color_term = 239
@@ -105,11 +118,11 @@ set list lcs=tab:\|\
 " Включить <Leader>ig
 "Plugin 'nathanaelkane/vim-indent-guides'
 
-
-set tabstop=2 shiftwidth=2 expandtab
+set tabstop=2 shiftwidth=2 expandtab softtabstop=2
 syntax enable
-filetype plugin indent on     " required!
-set nohlsearch
+filetype on
+filetype indent on  
+filetype plugin on
 
 "color desert
 " colorscheme solarized
@@ -120,11 +133,9 @@ au BufRead,BufNewFile *.hamlc set filetype=haml
 au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
 au BufNewFile,BufRead *.sql setf pgsql
 au BufRead,BufNewFile *.csxj set filetype=coffee
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
 
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
-
-" http://www.pixelbeat.org/settings/.vimrc
-
 
 " Автодополнение как в bash
 set wildmode=longest,list,full
@@ -148,31 +159,14 @@ set laststatus=2
 "set nopaste
 nnoremap <F4> :set invpaste paste?<CR>
 set pastetoggle=<F4>
-set showmode
-
-autocmd BufRead,BufNewFile *.hamlc set filetype=haml
- filetype plugin indent on     " required!
-
-autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
-au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
-
-set tags+=gems.tags
-
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
-
-" http://www.pixelbeat.org/settings/.vimrc
-
-
-" Автодополнение как в bash
-set wildmode=longest,list,full
-set wildmenu
-
-" Отключаем подстветку найденных вариантов, и так всё видно.
-set nohlsearch
-
 " vim-pasta
 let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml']
 
+set showmode
+
+set tags+=gems.tags
+" Отключаем подстветку найденных вариантов, и так всё видно.
+set nohlsearch
 
 " jumps in edit mode
 " https://coderwall.com/p/fd_bea
