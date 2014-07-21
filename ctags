@@ -1,0 +1,3 @@
+--exclude=*.js
+--exclude=public/*
+--regex-ruby=/^[ 	]*scope[ 	]*:([a-zA-Z0-9_]+)/\1/
