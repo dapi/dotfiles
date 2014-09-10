@@ -38,6 +38,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'tpope/vim-rails.git'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
 " Plugin 'flazz/vim-colorschemes'
@@ -85,6 +86,9 @@ Plugin 'ervandew/supertab'
 
 Plugin 'dapi/gruvbox'
 " cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
+
+Plugin 'Shougo/unite.vim'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end() 
 
@@ -173,3 +177,16 @@ set nohlsearch
 "
 imap <C-e> <C-o>$
 imap <C-a> <C-o>0
+
+
+" Unite
+nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>
+nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 buffer<cr>
+nnoremap <Leader>f :Unite grep:.<cr>
+
+" CtrlP search
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('file_rec/async','sorters','sorter_rank')
+" replacing unite with ctrl-p
+nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>

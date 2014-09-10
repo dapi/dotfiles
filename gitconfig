@@ -1,15 +1,18 @@
 [user]
 	name = Danil Pismenny
-	email = danil@orionet.ru
+	email = email
+
 [github]
 	user = dapi
-        token = token
-        password = password
+  token = token
+  password = password
+
 [push]
 	default = current
+
 [core]
 	excludesfile = ~/.gitignore_global
-	
+	editor = /usr/bin/vim
 	
 [color]
    branch = auto
