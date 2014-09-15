@@ -46,6 +46,9 @@ Plugin 'kien/ctrlp.vim'
 " cp colors/* ~/.vim/colors
 Plugin 'mxw/vim-jsx'
 
+Plugin 'majutsushi/tagbar'
+Bundle 'lukaszkorecki/CoffeeTags'
+
 Plugin 'mileszs/ack.vim'
 " o    to open (same as enter)
 " O    to open and close quickfix window
@@ -92,6 +95,9 @@ Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end() 
 
+"let g:CoffeeAutoTagFile=<filename>       " Name of the generated tag file (Default: ./tags)
+"let g:CoffeeAutoTagIncludeVars=<0 or 1>  " Includes variables (Default: 0 [false])
+"let g:CoffeeAutoTagTagRelative=<0 or 1>  " Sets file names to the relative path from the tag file location to the tag file location (Default: 1 [true])
 
 syntax on
 set t_Co=256
@@ -153,9 +159,6 @@ nmap ; :CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 
-" vim-pasta
-let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'csxj']
-
 " airline
 set laststatus=2
 
@@ -164,7 +167,7 @@ set laststatus=2
 nnoremap <F4> :set invpaste paste?<CR>
 set pastetoggle=<F4>
 " vim-pasta
-let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml']
+let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'csxj']
 
 set showmode
 
