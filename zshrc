@@ -1,9 +1,10 @@
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.rbenv/bin:$PATH"
 export EDITOR=/usr/local/bin/vim
 export PGOPTIONS='--client-min-messages=warning'
-#eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 #
 
 export LANG=ru_RU.UTF-8
