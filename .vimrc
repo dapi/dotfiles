@@ -103,6 +103,8 @@ call vundle#end()
 syntax on
 set t_Co=256
 "set list lcs=tab:' '
+"http://andrew.stwrt.ca/posts/vim-ctags
+":CtrlPTag
 set tags+=gems.tags
 set fileformat=unix
 
@@ -172,7 +174,6 @@ let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'csxj']
 
 set showmode
 
-set tags+=gems.tags
 " Отключаем подстветку найденных вариантов, и так всё видно.
 set nohlsearch
 
