@@ -47,7 +47,7 @@ Plugin 'slim-template/vim-slim'
 " cp colors/* ~/.vim/colors
 Plugin 'mxw/vim-jsx'
 
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 Bundle 'lukaszkorecki/CoffeeTags'
 
 Plugin 'mileszs/ack.vim'
@@ -96,6 +96,8 @@ Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end() 
 
+"https://github.com/majutsushi/tagbar/wiki#coffeescript
+let g:tlist_coffee_settings = 'coffee;f:function;v:variable'
 "let g:CoffeeAutoTagFile=<filename>       " Name of the generated tag file (Default: ./tags)
 "let g:CoffeeAutoTagIncludeVars=<0 or 1>  " Includes variables (Default: 0 [false])
 "let g:CoffeeAutoTagTagRelative=<0 or 1>  " Sets file names to the relative path from the tag file location to the tag file location (Default: 1 [true])
