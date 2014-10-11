@@ -49,3 +49,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # http://snupt.com/?p=1908
 export NODE_PATH=/usr/local/share/npm/lib/node_modules
+
+# Другой способ:
+# http://stackoverflow.com/questions/19533528/installing-java-on-os-x-10-9-mavericks
+#export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/

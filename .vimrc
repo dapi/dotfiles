@@ -18,7 +18,6 @@ runtime macros/matchit.vim
 " required! 
 Plugin 'gmarik/vundle'
 " Plugin 'kikijump/tslime.vim'
-" Plugin 'guns/vim-clojure-static'
 Plugin 'jelera/vim-javascript-syntax'
 
 
@@ -51,6 +50,8 @@ Plugin 'mxw/vim-jsx'
 Bundle 'lukaszkorecki/CoffeeTags'
 
 Plugin 'noprompt/vim-yardoc'
+Plugin 'guns/vim-clojure-static'
+Plugin 'guns/vim-clojure-highlight'
 
 Plugin 'mileszs/ack.vim'
 " o    to open (same as enter)
@@ -151,6 +152,7 @@ au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
 au BufNewFile,BufRead *.sql setf pgsql
 au BufRead,BufNewFile *.csxj set filetype=coffee
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.cljx setfiletype clojure
 
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
 
