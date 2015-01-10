@@ -50,6 +50,8 @@ Plugin 'mxw/vim-jsx'
 "Plugin 'majutsushi/tagbar'
 Bundle 'lukaszkorecki/CoffeeTags'
 
+Plugin 'noprompt/vim-yardoc'
+
 Plugin 'mileszs/ack.vim'
 " o    to open (same as enter)
 " O    to open and close quickfix window
