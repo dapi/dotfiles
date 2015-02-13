@@ -79,6 +79,10 @@ Plugin 'bling/vim-airline'
 " ...
 
 Plugin 'tpope/vim-repeat'
+
+" cs{( to change { on (
+" ysiw] обернуть слово в ]
+" https://github.com/tpope/vim-surround
 Plugin 'tpope/vim-surround'
 
 Plugin 'scrooloose/syntastic'
