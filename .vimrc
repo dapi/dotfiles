@@ -19,7 +19,7 @@ runtime macros/matchit.vim
 Plugin 'gmarik/vundle'
 " Plugin 'kikijump/tslime.vim'
 Plugin 'jelera/vim-javascript-syntax'
-
+Plugin 'mtscout6/vim-cjsx'
 
 " My Plugins here:
 "
@@ -154,7 +154,7 @@ set background=dark
 au BufRead,BufNewFile *.hamlc set filetype=haml
 au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
 au BufNewFile,BufRead *.sql setf pgsql
-au BufRead,BufNewFile *.csxj set filetype=coffee
+au BufRead,BufNewFile *.cjsx set filetype=coffee
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.cljx setfiletype clojure
 
@@ -180,7 +180,7 @@ set laststatus=2
 nnoremap <F4> :set invpaste paste?<CR>
 set pastetoggle=<F4>
 " vim-pasta
-let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'csxj']
+let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'cjsx']
 
 set showmode
 

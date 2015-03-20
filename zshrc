@@ -73,7 +73,7 @@ if echo $TERM | grep screen > /dev/null; then
 else
   session='Castor'
   #((tmux has-session -t $session && tmux attach-session -t $session) || (tmux new-session -s $session) ) && exit 0
-  tmux attach && exit 0
+  /usr/local/bin/tmux attach && exit 0
   echo "tmux failed to start"
 fi
 
