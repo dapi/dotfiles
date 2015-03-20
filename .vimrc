@@ -1,6 +1,5 @@
 " Install Vundle
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-"set rtp+=~/.vim/bundle/Vundle.vim/
 " :PluginInstall
  " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 imap ;; <Esc>
@@ -8,7 +7,7 @@ imap ;; <Esc>
 set nocompatible                " be iMproved
 filetype off                    " required!
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " Для textobject-а
