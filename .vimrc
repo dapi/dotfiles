@@ -96,17 +96,7 @@ Plugin 'noprompt/vim-yardoc'
 Plugin 'guns/vim-clojure-static'
 Plugin 'guns/vim-clojure-highlight'
 
-Plugin 'mileszs/ack.vim'
-" o    to open (same as enter)
-" O    to open and close quickfix window
-" go   to preview file (open but maintain focus on ack.vim results)
-" t    to open in new tab
-" T    to open in new tab silently
-" h    to open in horizontal split
-" H    to open in horizontal split silently
-" v    to open in vertical split
-" gv   to open in vertical split silently
-" q    to close the quickfix window
+Plugin 'rking/ag.vim'
 
 Plugin 'cakebaker/scss-syntax.vim'
 
