@@ -6,5 +6,8 @@ test -f .rdebugrc || ln -s dotfiles/rdebugrc .rdebugrc
 test -f .ackrc || ln -s dotfiles/ackrc .ackrc
 test -f .gitconfig || cp dotfiles/gitconfig .gitconfig
 test -f .gitignore_global || ln -s dotfiles/gitignore_global .gitignore_global
-test -f .zshrc || ln -s dotfiles/zshrc .zshrc
+
+rm -f .zshrc.before_dotfiles
+mv .zshrc .zshrc.before_dotfiles
+ln -s dotfiles/zshrc .zshrc
 # echo install oh-my-zsh and patch .zshrc

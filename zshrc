@@ -45,6 +45,8 @@ plugins=(git git-extras rbenv vagrant brew brew-cask vundle)
 
 source $ZSH/oh-my-zsh.sh
 
+export LANG=en_US.UTF-8
+
 test "$HOME" = '/Users/danil' || alias office='ssh office.icfdev.ru'
 
 # Customize to your needs...
