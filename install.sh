@@ -11,3 +11,5 @@ test -f .gitignore_global || ln -s dotfiles/gitignore_global .gitignore_global
 
 test -f .zshrc && mv -f .zshrc .zshrc.before_dotfiles
 ln -s dotfiles/zshrc .zshrc
+
+test -f .tmux.conf || ln -s dotfiles/tmux.conf .tmux.conf
