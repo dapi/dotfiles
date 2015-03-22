@@ -6,6 +6,7 @@ export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 export ZSH_THEME="dapi-maran"
 test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
 
+export EDITOR=vim
 # Nice default theme
 #export ZSH_THEME="agnoster"
 
@@ -41,13 +42,17 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extras rbenv vagrant brew brew-cask vundle)
+# linux
+plugins=(git git-extras rbenv vagrant ruby rake vundle rake-fast)
+# mac
+#plugins=(git git-extras rbenv vagrant brew brew-cask vundle rake-fast)
 
 source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 
-test "$HOME" = '/Users/danil' || alias office='ssh office.icfdev.ru'
+# test "$HOME" = '/Users/danil'
+alias office='ssh office.icfdev.ru'
 
 # Customize to your needs...
 #
