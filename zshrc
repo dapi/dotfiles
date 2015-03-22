@@ -49,7 +49,7 @@ plugins=(git git-extras rbenv vagrant ruby rake vundle rake-fast)
 
 source $ZSH/oh-my-zsh.sh
 
-export LANG=en_US.UTF-8
+export LANG=ru_RU.UTF-8
 
 # test "$HOME" = '/Users/danil'
 alias office='ssh office.icfdev.ru'
