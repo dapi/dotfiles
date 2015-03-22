@@ -7,6 +7,5 @@ test -f .ackrc || ln -s dotfiles/ackrc .ackrc
 test -f .gitconfig || cp dotfiles/gitconfig .gitconfig
 test -f .gitignore_global || ln -s dotfiles/gitignore_global .gitignore_global
 
-rm -f .zshrc.before_dotfiles
-mv .zshrc .zshrc.before_dotfiles
+test -f .zshrc && mv -f .zshrc .zshrc.before_dotfiles
 ln -s dotfiles/zshrc .zshrc
