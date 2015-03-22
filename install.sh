@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ~
+
 test -f .irbrc || ln -s dotfiles/irbrc .irbrc
 test -f .vimrc || ln -s dotfiles/.vimrc .vimrc
 test -f .rdebugrc || ln -s dotfiles/rdebugrc .rdebugrc

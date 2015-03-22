@@ -43,9 +43,11 @@ export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
-plugins=(git git-extras rbenv vagrant ruby rake vundle rake-fast)
-# mac
-#plugins=(git git-extras rbenv vagrant brew brew-cask vundle rake-fast)
+if echo "$TERM_PROGRAM" | grep Apple_Terminal > /dev/null; then
+  plugins=(git git-extras rbenv vagrant brew brew-cask vundle rake-fast)
+else
+  plugins=(git git-extras rbenv vagrant ruby rake vundle rake-fast)
+fi
 
 source $ZSH/oh-my-zsh.sh
 

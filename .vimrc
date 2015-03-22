@@ -20,10 +20,19 @@ Plugin 'gmarik/vundle'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mtscout6/vim-cjsx'
 
+Plugin 'sjbach/lusty'
+":LustyFilesystemExplorer
+":LustyFilesystemExplorerFromHere
+":LustyBufferExplorer
+":LustyBufferGrep (for searching through all open buffers)
+
+"<Leader>lf  - Opens filesystem explorer.
+"<Leader>lr  - Opens filesystem explorer at the directory of the current file.
+"<Leader>lb  - Opens buffer explorer.
+"<Leader>lg  - Opens buffer grep. - самая фишка
 "Plugin 'techlivezheng/vim-plugin-minibufexpl'
 
 Plugin 'bling/vim-bufferline'
-
 Plugin 'majutsushi/tagbar'
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = ''
@@ -142,12 +151,15 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bling/vim-airline'
 "let g:airline_enable_syntastic = 1
 "let g:airline#extensions#syntastic#enabled = 1
-
 " only on mac
 let g:airline_powerline_fonts = 1
 " git repos on your local machine (ie. when working on your own plugin)
 "Plugin 'file:///Users/gmarik/path/to/plugin'
 " ...
+ 
+Plugin 'szw/vim-ctrlspace'
+let g:airline_exclude_preview = 1
+set hidden
 
 call vundle#end() 
 
