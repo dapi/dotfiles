@@ -10,7 +10,8 @@ export ZSH_THEME="dapi-maran"
 export TERM=xterm-256color
 #screen-256color
 
-export PATH=/usr/local/bin:~/bin:$PATH:/usr/local/sbin
+# На mac-е не зачем устанавливать PATH
+#export PATH=/usr/local/bin:~/bin:$PATH
 
 #export PATH=$PATH:/usr/local/mysql/bin/
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
@@ -22,13 +23,9 @@ export PATH=/usr/local/bin:~/bin:$PATH:/usr/local/sbin
 #export PATH=/usr/local/opt/android-sdk/tools:$PATH
 #export ANDROID_HOME=/usr/local/opt/android-sdk
 
-#export RBENV_ROOT=/usr/local/var/rbenv
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
-
 unsetopt correct_all
 
-~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
+test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
 
 # Set to this to use case-sensitive completion
 export CASE_SENSITIVE="true"
@@ -44,9 +41,11 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx vagrant brew)
+plugins=(git git-extras rbenv vagrant brew brew-cask vundle)
 
 source $ZSH/oh-my-zsh.sh
+
+alias office='ssh office.icfdev.ru'
 
 # Customize to your needs...
 #
