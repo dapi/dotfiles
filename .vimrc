@@ -1,5 +1,5 @@
 " Install Vundle
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
 " :PluginInstall
  " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 imap ;; <Esc>
@@ -7,7 +7,7 @@ imap ;; <Esc>
 set nocompatible                " be iMproved
 filetype off                    " required!
 
-set rtp+=~/.vim/bundle/Vundle.vim/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
 " Для textobject-а
@@ -20,32 +20,67 @@ Plugin 'gmarik/vundle'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mtscout6/vim-cjsx'
 
+"Plugin 'techlivezheng/vim-plugin-minibufexpl'
+
+Plugin 'bling/vim-bufferline'
+
+Plugin 'majutsushi/tagbar'
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = ''
+"let g:airline#extensions#tagbar#flags = 'f'
+"let g:airline#extensions#tagbar#flags = 's'
+"let g:airline#extensions#tagbar#flags = 'p'
+nmap <F8> :TagbarToggle<CR>
+
+
 " My Plugins here:
 "
 " original repos on github
 Plugin 'groenewege/vim-less'
 "Plugin 'altercation/vim-colors-solarized'
 Plugin 'sickill/vim-pasta'
-"Plugin 'Lokaltog/powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+" Run NERD if there is not files opened
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close vim is there is NERD only
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+nnoremap <F2> :NERDTreeTabsToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
+
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kana/vim-textobj-user'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'nelstrom/vim-textobj-rubyblock'
-"Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'tpope/vim-rails.git'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'kchmck/vim-coffee-script'
+
 Plugin 'kien/ctrlp.vim'
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
+nnoremap <Leader>e :CtrlP<CR>
+"let g:ctrlp_cmd = 'CtrlPMRU'
+
+"nmap ; :CtrlPBuffer<CR>
+" the nearest ancestor that contains one of these directories or files: .git
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|bin$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
 Plugin 'slim-template/vim-slim'
 " Plugin 'flazz/vim-colorschemes'
 " # after downloading; unpacking; cd'ing
 " cp colors/* ~/.vim/colors
 Plugin 'mxw/vim-jsx'
 
-"Plugin 'majutsushi/tagbar'
 Bundle 'lukaszkorecki/CoffeeTags'
 
 Plugin 'noprompt/vim-yardoc'
@@ -67,16 +102,10 @@ Plugin 'mileszs/ack.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 
 " vim-scripts repos
-Plugin 'L9'
-Plugin 'FuzzyFinder'
+"Plugin 'L9'
+"Plugin 'FuzzyFinder'
 " non github repos
-" Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'bling/vim-airline'
-" git repos on your local machine (ie. when working on your own plugin)
-"Plugin 'file:///Users/gmarik/path/to/plugin'
-" ...
-
+"Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'tpope/vim-repeat'
 
 " cs{( to change { on (
@@ -85,6 +114,15 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 
 Plugin 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 Plugin 'othree/html5.vim'
 Plugin 'othree/xml.vim'
@@ -94,11 +132,22 @@ Plugin 'othree/xml.vim'
 Plugin 'ervandew/supertab'
 " <c-n> <c-p> to move curson in completion list
 
+Plugin 'airblade/vim-gitgutter'
 Plugin 'dapi/gruvbox'
 " cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
 
 Plugin 'Shougo/unite.vim'
 Plugin 'terryma/vim-multiple-cursors'
+
+Plugin 'bling/vim-airline'
+"let g:airline_enable_syntastic = 1
+"let g:airline#extensions#syntastic#enabled = 1
+
+" only on mac
+let g:airline_powerline_fonts = 1
+" git repos on your local machine (ie. when working on your own plugin)
+"Plugin 'file:///Users/gmarik/path/to/plugin'
+" ...
 
 call vundle#end() 
 
@@ -157,19 +206,11 @@ au BufRead,BufNewFile *.cjsx set filetype=coffee
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.cljx setfiletype clojure
 
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
 
 " Автодополнение как в bash
 set wildmode=longest,list,full
 set wildmenu
 
-nnoremap <Leader>e :CtrlP<CR>
-nmap ; :CtrlPBuffer<CR>
-
-" ctrlP
-" the nearest ancestor that contains one of these directories or files: .git
-let g:ctrlp_working_path_mode = 2
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 
 " airline
 set laststatus=2
@@ -193,14 +234,19 @@ imap <C-e> <C-o>$
 imap <C-a> <C-o>0
 
 
+" Switch to alternate file
+" gvim
+nnoremap <C-Tab> :bnext<CR>
+nnoremap <C-S-Tab> :bprevious<CR>
+
 " Unite
 nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>
 nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 buffer<cr>
 nnoremap <Leader>f :Unite grep:.<cr>
 
 " CtrlP search
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('file_rec/async','sorters','sorter_rank')
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#custom#source('file_rec/async','sorters','sorter_rank')
 " replacing unite with ctrl-p
-nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
+"nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
