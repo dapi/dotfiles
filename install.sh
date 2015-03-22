@@ -10,4 +10,3 @@ test -f .gitignore_global || ln -s dotfiles/gitignore_global .gitignore_global
 rm -f .zshrc.before_dotfiles
 mv .zshrc .zshrc.before_dotfiles
 ln -s dotfiles/zshrc .zshrc
-# echo install oh-my-zsh and patch .zshrc
