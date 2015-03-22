@@ -1,12 +1,14 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Custom theme
 export ZSH_THEME="dapi-maran"
+test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
+
+# Nice default theme
 #export ZSH_THEME="agnoster"
+
 export TERM=xterm-256color
 #screen-256color
 
@@ -24,8 +26,6 @@ export TERM=xterm-256color
 #export ANDROID_HOME=/usr/local/opt/android-sdk
 
 unsetopt correct_all
-
-test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
 
 # Set to this to use case-sensitive completion
 export CASE_SENSITIVE="true"
@@ -45,7 +45,7 @@ plugins=(git git-extras rbenv vagrant brew brew-cask vundle)
 
 source $ZSH/oh-my-zsh.sh
 
-alias office='ssh office.icfdev.ru'
+test "$HOME" = '/Users/danil' || alias office='ssh office.icfdev.ru'
 
 # Customize to your needs...
 #
