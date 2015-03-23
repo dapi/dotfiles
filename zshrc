@@ -7,6 +7,7 @@ export ZSH_THEME="dapi-maran"
 test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
 
 export EDITOR=vim
+export PGOPTIONS='--client-min-messages=warning'
 # Nice default theme
 #export ZSH_THEME="agnoster"
 
@@ -51,10 +52,20 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-export LANG=ru_RU.UTF-8
+#export LANG=ru_RU.UTF-8
 
 # test "$HOME" = '/Users/danil'
 alias office='ssh office.icfdev.ru'
+
+if hostname | grep office; then
+  if echo $TERM | grep screen > /dev/null; then
+  else
+    session='Castor'
+    #((tmux has-session -t $session && tmux attach-session -t $session) || (tmux new-session -s $session) ) && exit 0
+    /usr/local/bin/tmux attach && exit 0
+    echo "tmux failed to start"
+  fi
+fi
 
 # Customize to your needs...
 #
