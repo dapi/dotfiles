@@ -57,11 +57,8 @@ source $ZSH/oh-my-zsh.sh
 # test "$HOME" = '/Users/danil'
 alias office='ssh office.icfdev.ru'
 
-if hostname | grep office; then
-  if echo $TERM | grep screen > /dev/null; then
-  else
-    session='Castor'
-    #((tmux has-session -t $session && tmux attach-session -t $session) || (tmux new-session -s $session) ) && exit 0
+if test -f .tmux_auto; then
+  if test -z "$TMUX" ; then
     /usr/local/bin/tmux attach && exit 0
     echo "tmux failed to start"
   fi
