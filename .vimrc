@@ -33,7 +33,7 @@ Plugin 'sjbach/lusty'
 "Plugin 'techlivezheng/vim-plugin-minibufexpl'
 
 Plugin 'bling/vim-bufferline'
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = ''
 "let g:airline#extensions#tagbar#flags = 'f'
