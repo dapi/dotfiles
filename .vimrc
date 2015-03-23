@@ -46,8 +46,8 @@ nmap <F8> :TagbarToggle<CR>
 "
 " original repos on github
 Plugin 'groenewege/vim-less'
-Plugin 'altercation/vim-colors-solarized'
-let g:solarized_termcolors=256
+"Plugin 'altercation/vim-colors-solarized'
+"let g:solarized_termcolors=256
 
 Plugin 'sickill/vim-pasta'
 Plugin 'scrooloose/nerdtree'
