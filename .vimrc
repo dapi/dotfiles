@@ -46,7 +46,9 @@ nmap <F8> :TagbarToggle<CR>
 "
 " original repos on github
 Plugin 'groenewege/vim-less'
-"Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
+let g:solarized_termcolors=256
+
 Plugin 'sickill/vim-pasta'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -133,6 +135,10 @@ Plugin 'ervandew/supertab'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'dapi/gruvbox'
+if !has("gui_running")
+   let g:gruvbox_italic=0
+endif
+
 " cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
 
 Plugin 'Shougo/unite.vim'
@@ -160,7 +166,11 @@ let g:tlist_coffee_settings = 'coffee;f:function;v:variable'
 "let g:CoffeeAutoTagTagRelative=<0 or 1>  " Sets file names to the relative path from the tag file location to the tag file location (Default: 1 [true])
 
 syntax on
-set t_Co=256
+"set t_Co=256
+"
+" С такой настройкой нормльно работает фон в tmux на vagrant-е
+set term=screen-256color
+"set term=xterm-256color
 "set list lcs=tab:' '
 "http://andrew.stwrt.ca/posts/vim-ctags
 ":CtrlPTag
@@ -174,13 +184,6 @@ set shiftwidth=2
 
 " Show line numbers
 set nu
-
-set t_Co=256
-let g:solarized_termcolors=256
-
-if !has("gui_running")
-   let g:gruvbox_italic=0
-endif
 
 set list lcs=tab:\|\ 
 "Plugin 'Yggdroot/indentLine'
