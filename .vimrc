@@ -9,17 +9,25 @@ filetype off                    " required!
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
-
-" Для textobject-а
-runtime macros/matchit.vim
-
 " let Vundle manage Vundle
 " required! 
 Plugin 'gmarik/vundle'
 
+" Sparkup lets you write HTML code faster. 
+" div#header expands to:   <div id="header"></div>
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mtscout6/vim-cjsx'
+Plugin 'groenewege/vim-less'
+Plugin 'mxw/vim-jsx'
+Plugin 'noprompt/vim-yardoc'
+Plugin 'guns/vim-clojure-static'
+Plugin 'guns/vim-clojure-highlight'
+Plugin 'cakebaker/scss-syntax.vim'
+
+Plugin 'lukaszkorecki/CoffeeTags'
 
 Plugin 'sjbach/lusty'
 ":LustyFilesystemExplorer
@@ -46,7 +54,6 @@ nmap <F8> :TagbarToggle<CR>
 " My Plugins here:
 "
 " original repos on github
-Plugin 'groenewege/vim-less'
 "Plugin 'altercation/vim-colors-solarized'
 "let g:solarized_termcolors=256
 
@@ -63,25 +70,40 @@ nnoremap <F2> :NERDTreeTabsToggle<CR>
 " map <C-n> :NERDTreeToggle<CR>
 
 Plugin 'scrooloose/nerdcommenter'
+
+" gcc Use gcc to comment out a line (takes a count),
+" gc to comment out the target of a motion
+Plugin 'tpope/vim-commentary'
+
 Plugin 'kana/vim-textobj-user'
-Plugin 'vim-ruby/vim-ruby'
+
+" Для textobject-а
+runtime macros/matchit.vim
+
+" vir - select inner ruby block
+" var - select all method definitios
 Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'tpope/vim-fugitive'
+Plugin 'vim-ruby/vim-ruby'
+
+" <lead><lead>w - o trigger the word motion w
+"      <cursor>Lorem {a}psum {b}olor {c}it {d}met.
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" : Gcommit
+Plugin 'tpope/vim-fugitive'
 
 " Heuristically set buffer options
 " tpope/vim-sleuth
 
-Plugin 'tpope/vim-abolish'
 " Want to turn fooBar into 
 " foo_bar? Press crs (coerce to snake_case).
 " MixedCase (crm)
 " camelCase (crc)
 " snake_case (crs)
 " UPPER_CASE (cru) are
+Plugin 'tpope/vim-abolish'
 
-Plugin 'tpope/vim-rails.git'
+Plugin 'tpope/vim-rails'
 " :A - Alternative file
 " :R - Related
 " gf - goto file
@@ -125,17 +147,8 @@ Plugin 'slim-template/vim-slim'
 " Plugin 'flazz/vim-colorschemes'
 " # after downloading; unpacking; cd'ing
 " cp colors/* ~/.vim/colors
-Plugin 'mxw/vim-jsx'
-
-Bundle 'lukaszkorecki/CoffeeTags'
-
-Plugin 'noprompt/vim-yardoc'
-Plugin 'guns/vim-clojure-static'
-Plugin 'guns/vim-clojure-highlight'
-
 Plugin 'rking/ag.vim'
 
-Plugin 'cakebaker/scss-syntax.vim'
 
 " vim-scripts repos
 "Plugin 'L9'
