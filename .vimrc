@@ -16,8 +16,9 @@ runtime macros/matchit.vim
 " let Vundle manage Vundle
 " required! 
 Plugin 'gmarik/vundle'
-" Plugin 'kikijump/tslime.vim'
+
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'mtscout6/vim-cjsx'
 
 Plugin 'sjbach/lusty'
@@ -32,7 +33,7 @@ Plugin 'sjbach/lusty'
 "<Leader>lg  - Opens buffer grep. - самая фишка
 "Plugin 'techlivezheng/vim-plugin-minibufexpl'
 
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
 "Plugin 'majutsushi/tagbar'
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = ''
@@ -50,8 +51,9 @@ Plugin 'groenewege/vim-less'
 "let g:solarized_termcolors=256
 
 Plugin 'sickill/vim-pasta'
+
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'jistr/vim-nerdtree-tabs'
 " Run NERD if there is not files opened
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -67,9 +69,42 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Heuristically set buffer options
+" tpope/vim-sleuth
+
+Plugin 'tpope/vim-abolish'
+" Want to turn fooBar into 
+" foo_bar? Press crs (coerce to snake_case).
+" MixedCase (crm)
+" camelCase (crc)
+" snake_case (crs)
+" UPPER_CASE (cru) are
+
 Plugin 'tpope/vim-rails.git'
+" :A - Alternative file
+" :R - Related
+" gf - goto file
+" :Emodel - goto model
+" :Rextract partial
+
+" This is a simple vim script to send portion of text from a vim buffer to a
+" running tmux session.
+"Plugin 'jgdavey/tslime.vim'
+
+
+Plugin 'tpope/vim-dispatch'
+
+
 Plugin 'thoughtbot/vim-rspec'
-Plugin 'kchmck/vim-coffee-script'
+" With tslime
+" let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
+"let g:rspec_command = '!spring rspec {spec}'
+let g:rspec_command = 'Dispatch spring rspec {spec}'
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 Plugin 'kien/ctrlp.vim'
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
@@ -107,6 +142,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 "Plugin 'FuzzyFinder'
 " non github repos
 "Plugin 'git://git.wincent.com/command-t.git'
+
 Plugin 'tpope/vim-repeat'
 
 " cs{( to change { on (
