@@ -83,11 +83,23 @@ runtime macros/matchit.vim
 " vir - select inner ruby block
 " var - select all method definitios
 Plugin 'nelstrom/vim-textobj-rubyblock'
+
+"am      "a method", select from "def" until matching "end"
+"im      "inner method", select contents of "def"/"end" block,
+"aM      "a class", select from "class" until matching "end"
+"iM      "inner class", select contents of "class"/"end" "block, excluding the "class" and "end" themselves.
 Plugin 'vim-ruby/vim-ruby'
+
+"Plugin 'ngmy/vim-rubocop'
 
 " <lead><lead>w - o trigger the word motion w
 "      <cursor>Lorem {a}psum {b}olor {c}it {d}met.
 Plugin 'Lokaltog/vim-easymotion'
+
+" Должен быть ДО easyclip
+Plugin 'tpope/vim-repeat'
+" не подключился
+"Plugin 'svermeulen/vim-easyclip'
 
 " : Gcommit
 Plugin 'tpope/vim-fugitive'
@@ -102,6 +114,18 @@ Plugin 'tpope/vim-fugitive'
 " snake_case (crs)
 " UPPER_CASE (cru) are
 Plugin 'tpope/vim-abolish'
+
+" gq - auto format (wrap long comment lines)
+"
+" <lead>==
+" Plugin 'KurtPreston/vim-autoformat-rails'
+" Plugin 'Chiel92/vim-autoformat'
+
+" gJ - join lines
+" gS - split lines
+Plugin 'AndrewRadev/splitjoin.vim'
+let g:splitjoin_ruby_hanging_args = 1
+let g:splitjoin_ruby_curly_braces = 0
 
 Plugin 'tpope/vim-rails'
 " :A - Alternative file
@@ -156,7 +180,6 @@ Plugin 'rking/ag.vim'
 " non github repos
 "Plugin 'git://git.wincent.com/command-t.git'
 
-Plugin 'tpope/vim-repeat'
 
 " cs{( to change { on (
 " ysiw] обернуть слово в ]
@@ -167,6 +190,9 @@ Plugin 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+"let g:syntastic_ruby_checkers = ['mri', 'reek']
+let g:syntastic_aggregate_errors = 1
 
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
@@ -231,22 +257,31 @@ set softtabstop=2
 set shiftwidth=2
 "#set expandtab
 
+set colorcolumn=120
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%>120v.\+/
+"match OverLength /\%81v.\+/
+
 " Show line numbers
 set nu
 
 set list lcs=tab:\|\ 
-"Plugin 'Yggdroot/indentLine'
-"let g:indentLine_color_term = 239
-"let g:indentLine_char = '|' " ¦, ┆
 
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_color_term = 239
+let g:indentLine_char = '|' " ¦, ┆
+"
+"
 " Включить <Leader>ig
-"Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
+hi IndentGuidesOdd  ctermbg=235 
+hi IndentGuidesEven ctermbg=4
 
 set tabstop=2 shiftwidth=2 expandtab softtabstop=2
-syntax enable
-filetype on
-filetype indent on  
-filetype plugin on
+syntax enable       " Enable syntax highlighting
+filetype on         " Enable filetype detection
+filetype indent on  " Enable filetype-specific indenting
+filetype plugin on  " Enable filetype-specific plugins
 
 "color desert
 " colorscheme solarized
@@ -259,7 +294,10 @@ au BufNewFile,BufRead *.sql setf pgsql
 au BufRead,BufNewFile *.cjsx set filetype=coffee
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.cljx setfiletype clojure
-
+au BufRead,BufNewFile *.md setlocal textwidth=80
+autocmd FileType python
+    \ setlocal ai si et sta sw=4
+    \ textwidth=80 backspace=indent,eol,start fo=croql
 
 " Автодополнение как в bash
 set wildmode=longest,list,full
