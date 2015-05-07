@@ -29,7 +29,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 
 Plugin 'lukaszkorecki/CoffeeTags'
 
-Plugin 'sjbach/lusty'
+"Plugin 'sjbach/lusty'
 ":LustyFilesystemExplorer
 ":LustyFilesystemExplorerFromHere
 ":LustyBufferExplorer
@@ -42,20 +42,37 @@ Plugin 'sjbach/lusty'
 "Plugin 'techlivezheng/vim-plugin-minibufexpl'
 
 "Plugin 'bling/vim-bufferline'
-"Plugin 'majutsushi/tagbar'
+Plugin 'gorkunov/smartgf.vim'
+" gF smart find file at cursor definition
+map <F5> :SmargfRefreshTags<CR>
+
+"
+Plugin 'majutsushi/tagbar'
+" :ts[elect][!] [ident]
+" :tj[ump][!] [ident]
+" g CTRL-] - перескок с выбором вариантов
+" CTRL-T - возврат обратно
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = ''
 "let g:airline#extensions#tagbar#flags = 'f'
 "let g:airline#extensions#tagbar#flags = 's'
 "let g:airline#extensions#tagbar#flags = 'p'
 nmap <F8> :TagbarToggle<CR>
-
+let g:tagbar_type_javascript = {
+    \ 'ctagstype' : 'JavaScript',
+    \ 'kinds'     : [
+        \ 'o:objects',
+        \ 'f:functions',
+        \ 'a:arrays',
+        \ 's:strings'
+    \ ]
+\ }
 
 " My Plugins here:
 "
 " original repos on github
-"Plugin 'altercation/vim-colors-solarized'
-"let g:solarized_termcolors=256
+Plugin 'altercation/vim-colors-solarized'
+let g:solarized_termcolors=256
 
 Plugin 'sickill/vim-pasta'
 
@@ -127,12 +144,29 @@ Plugin 'AndrewRadev/splitjoin.vim'
 let g:splitjoin_ruby_hanging_args = 1
 let g:splitjoin_ruby_curly_braces = 0
 
+
 Plugin 'tpope/vim-rails'
 " :A - Alternative file
 " :R - Related
 " gf - goto file
 " :Emodel - goto model
 " :Rextract partial
+
+Plugin 'stefanoverna/vim-i18n'
+" Visual select and `:call I18nTranslateString()`
+vmap <Leader>z :call I18nTranslateString()<CR>
+
+
+Plugin 'tpope/vim-vinegar'
+" http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
+" Press - in any buffer to hop up to the directory listing and seek 
+" I -  to toggle until you adapt.
+" Press . on a file to pre-populate it at the end of a : command line. -
+
+" window splitting
+" <c-w>s - horixontal
+" <c-w>v - vertical
+" http://vimcasts.org/images/blog/cell-division.png
 
 " This is a simple vim script to send portion of text from a vim buffer to a
 " running tmux session.
@@ -142,37 +176,66 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-dispatch'
 
 
-Plugin 'thoughtbot/vim-rspec'
+" Plugin 'janx/vim-rubytest'
+"
+Plugin 'achm/vim-rspec'
+let g:RspecBin = 'spring rspec'
+map <Leader>T :RunSpec<CR>
+map <Leader>S :RunSpecLine<CR>
+
+Plugin 'thoughtbot/vim-rspec', {'name': 'vim-rspec-thoughbot'}
 " With tslime
-" let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
-"let g:rspec_command = '!spring rspec {spec}'
-let g:rspec_command = 'Dispatch spring rspec {spec}'
+" В этом случае выводится в терминале
+let g:rspec_command = '!spring rspec {spec}'
+" В этом случае выводится в quickfix
+"let g:rspec_command = 'Dispatch spring rspec {spec}'
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
 
 Plugin 'kien/ctrlp.vim'
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,public/assets*,tmp/*,app/assets/images*,public/ima,coverage/*,public/*,vendor/assets/*,.sass-cache/*,solr/*,*/uploads/*,doc/*,doc
+set wildignore+=*.log,*.o,*.obj,.git,*.rbc,*.class,.svn,.sass-cache/*,solr/*,*tags,*.lock
+set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/*
+set wildignore+=*/vendor/gems/*,*/vendor/static/*,*/vendor/assets/*
+set wildignore+=public/*
+set wildignore+=*/scripts/*,*/doc/*,*/bin/*
 nnoremap <Leader>e :CtrlP<CR>
+nnoremap <leader>. :CtrlPTag<cr>
 "let g:ctrlp_cmd = 'CtrlPMRU'
-
-"nmap ; :CtrlPBuffer<CR>
+":CtrlPBuffer
+" ctrl-<f> - cicles between modes
 " the nearest ancestor that contains one of these directories or files: .git
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+"let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)|bin$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'file': '\v\.(exe|so|dll|bin/rake)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-Plugin 'slim-template/vim-slim'
+Plugin 'sgur/ctrlp-extensions.vim'
+" CtrlPCmdline
+" CtrlPYankring
+" CtrlPMenu
+
+Plugin 'mhinz/vim-startify'
+":SLoad    load a session
+":SSave    save a session
+":SDelete  delete a session
+
 " Plugin 'flazz/vim-colorschemes'
 " # after downloading; unpacking; cd'ing
 " cp colors/* ~/.vim/colors
+Plugin 'mileszs/ack.vim'
+"if executable('ag')
+let g:ackprg = 'ag --nogroup --nocolor --column'
+"let g:ackprg = 'ag --vimgrep'
+"endif
 Plugin 'rking/ag.vim'
 
+Plugin 'yegappan/mru'
 
 " vim-scripts repos
 "Plugin 'L9'
@@ -185,7 +248,22 @@ Plugin 'rking/ag.vim'
 " ysiw] обернуть слово в ]
 " https://github.com/tpope/vim-surround
 Plugin 'tpope/vim-surround'
+Plugin 'gorkunov/smartpairs.vim'
+" vi* -> viv
+" va* -> vav
+" ci* -> civ
+" ca* -> cav
+" di* -> div
+" da* -> dav
+" yi* -> yiv
+" ya* -> yav
+" Where * is in <, >, ", ', `, (, ), [, ], {, } or t as tag
 
+"Plugin 'tpope/vim-unimpaired'
+" alternative QuickFixCurrentNumber
+" http://www.vim.org/scripts/script.php?script_id=4449
+"
+" http://choorucode.com/2014/11/06/how-to-use-syntastic-plugin-for-vim/
 Plugin 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -193,15 +271,26 @@ set statusline+=%*
 "let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 "let g:syntastic_ruby_checkers = ['mri', 'reek']
 let g:syntastic_aggregate_errors = 1
-
-"let g:syntastic_always_populate_loc_list = 1
+" If you have installed Tim Pope’s unimpaired plugin, you can jump between
+" errors using ]l and [l.
+" /uni
+" setup Syntastic to automatically load errors into the location list
+" нужно чтобы :lnext сразу работало после отрытия
+let g:syntastic_always_populate_loc_list = 1
+" Read :h location-list for a complete list of commands.
 "let g:syntastic_auto_loc_list = 1
+"check for errors when a file is loaded into Vim
 let g:syntastic_check_on_open = 1
+" check on writing
 let g:syntastic_check_on_wq = 0
+" :Errors
+" :lclose
+" next/prev errors :lnext, :lprev
 
 
 Plugin 'othree/html5.vim'
 Plugin 'othree/xml.vim'
+Plugin 'slim-template/vim-slim'
 
 "Plugin 'MarcWeber/vim-addon-mw-utils'
 "Plugin 'garbas/vim-snipmate'
@@ -214,23 +303,57 @@ if !has("gui_running")
    let g:gruvbox_italic=0
 endif
 
-" cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
+Plugin 'editorconfig/editorconfig-vim'
 
-Plugin 'Shougo/unite.vim'
+" cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
+" https://github.com/hukl/Smyck-Color-Scheme
+" https://github.com/endel/vim-github-colorscheme
+
+"Plugin 'Shougo/unite.vim'
+" Unite
+"nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>
+"nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 buffer<cr>
+"nnoremap <Leader>f :Unite grep:.<cr>
+
 Plugin 'terryma/vim-multiple-cursors'
+" Default mapping
+" let g:multi_cursor_next_key='<C-n>'
+" let g:multi_cursor_prev_key='<C-p>'
+" let g:multi_cursor_skip_key='<C-x>'
+" let g:multi_cursor_quit_key='<Esc>'
 
 Plugin 'bling/vim-airline'
 "let g:airline_enable_syntastic = 1
 "let g:airline#extensions#syntastic#enabled = 1
 " only on mac
 let g:airline_powerline_fonts = 1
-" git repos on your local machine (ie. when working on your own plugin)
-"Plugin 'file:///Users/gmarik/path/to/plugin'
-" ...
- 
-Plugin 'szw/vim-ctrlspace'
 let g:airline_exclude_preview = 1
-set hidden
+
+Plugin 'junegunn/vim-easy-align'
+vmap <Enter> :EasyAlign<CR>
+nmap ga :EasyAlign<CR>
+" vip<Enter>=
+" gaip=
+
+Plugin 'godlygeek/tabular'
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
+" Vim Workspace Controller
+" Это та самая штука, которая выводит количество файлов табе буффера
+Plugin 'szw/vim-ctrlspace'
+" :ls - список буферов
+" o Jump to File List (aka Open List)
+" O Jump to File List (aka Open List) in Search Mode
+" l Jump to Tab List
+" L Jump to Tab List in Search Mode
+"
+"
+" Противная опция держит файл открытым,
+" в то время когда ты его уже не редактируешь
+" set hidden
 
 call vundle#end() 
 
@@ -277,16 +400,40 @@ Plugin 'nathanaelkane/vim-indent-guides'
 hi IndentGuidesOdd  ctermbg=235 
 hi IndentGuidesEven ctermbg=4
 
+Plugin 'michaeljsmith/vim-indent-object'
+" <count>ai         (A)n (I)ndentation level and line above.
+" <count>ii         (I)nner (I)ndentation level (no line above).
+" <count>aI         (A)n (I)ndentation level and lines above/below.
+" <count>iI         (I)nner (I)ndentation level (no lines above/below).
+
+Plugin 'tpope/vim-markdown'
+
 set tabstop=2 shiftwidth=2 expandtab softtabstop=2
 syntax enable       " Enable syntax highlighting
 filetype on         " Enable filetype detection
 filetype indent on  " Enable filetype-specific indenting
 filetype plugin on  " Enable filetype-specific plugins
 
+set autowrite                  " automatically write a file when leaving a modified buffer
+set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
+
 "color desert
 " colorscheme solarized
 colorscheme gruvbox
 set background=dark 
+
+" Fix rubocop: Align the parameters of a method call if they span more than
+" one line.
+" http://stackoverflow.com/questions/88931/lining-up-function-parameter-lists-with-vim
+" https://github.com/sportngin/styleguide/issues/21
+" :help cinoptions-values
+" auto indent arguments
+set cino=(0<Enter>
+
+" remember last position in file
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 au BufRead,BufNewFile *.hamlc set filetype=haml
 au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
@@ -295,6 +442,10 @@ au BufRead,BufNewFile *.cjsx set filetype=coffee
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.cljx setfiletype clojure
 au BufRead,BufNewFile *.md setlocal textwidth=80
+
+" Remove trailing spaces
+" http://www.bestofvim.com/tip/trailing-whitespace/
+autocmd FileType ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd FileType python
     \ setlocal ai si et sta sw=4
     \ textwidth=80 backspace=indent,eol,start fo=croql
@@ -331,10 +482,6 @@ imap <C-a> <C-o>0
 nnoremap <C-Tab> :bnext<CR>
 nnoremap <C-S-Tab> :bprevious<CR>
 
-" Unite
-nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>
-nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 buffer<cr>
-nnoremap <Leader>f :Unite grep:.<cr>
 
 " CtrlP search
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -342,3 +489,5 @@ nnoremap <Leader>f :Unite grep:.<cr>
 "call unite#custom#source('file_rec/async','sorters','sorter_rank')
 " replacing unite with ctrl-p
 "nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
+
+set showbreak=↪
