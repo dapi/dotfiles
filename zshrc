@@ -45,12 +45,14 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
 if echo "$TERM_PROGRAM" | grep Apple_Terminal > /dev/null; then
-  plugins=(ssh-agent git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
+  plugins=(git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
 else
-  plugins=(ssh-agent git git-extras rbenv vagrant capistrano ruby rake vundle rake-fast)
+  plugins=(git git-extras rbenv vagrant capistrano ruby rake vundle rake-fast)
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+source ~/.local.zsh
 
 #export LANG=ru_RU.UTF-8
 
@@ -59,8 +61,7 @@ alias office='ssh office.icfdev.ru'
 
 if test -f ~/.tmux_auto; then
   if test -z "$TMUX" ; then
-    /usr/local/bin/tmux attach && exit 0
-    echo "tmux failed to start"
+    /usr/local/bin/tmux attach && /usr/local/bin/tmux && echo "tmux failed to start"
   fi
 fi
 
