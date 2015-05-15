@@ -52,7 +52,7 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/.local.zsh
+test -f ~/.local.zsh && source ~/.local.zsh
 
 #export LANG=ru_RU.UTF-8
 

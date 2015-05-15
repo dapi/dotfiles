@@ -419,7 +419,9 @@ set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
 
 "color desert
 " colorscheme solarized
-colorscheme gruvbox
+"
+" Почему-то не подключается по-умолчанию
+" colorscheme gruvbox
 set background=dark 
 
 " Fix rubocop: Align the parameters of a method call if they span more than
