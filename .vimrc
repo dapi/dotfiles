@@ -1,9 +1,20 @@
 " Install Vundle
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
 " :PluginInstall
- " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+"
+
+" jumps in edit mode
+" https://coderwall.com/p/fd_bea
+"
+imap <C-e> <C-o>$
+imap <C-a> <C-o>0
+
+imap jk <Esc>
+imap kj <Esc>
 imap ;; <Esc>
- 
+
 set nocompatible                " be iMproved
 filetype off                    " required!
 
@@ -26,6 +37,7 @@ Plugin 'noprompt/vim-yardoc'
 Plugin 'guns/vim-clojure-static'
 Plugin 'guns/vim-clojure-highlight'
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'tpope/vim-liquid'
 
 Plugin 'lukaszkorecki/CoffeeTags'
 
@@ -421,7 +433,7 @@ set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
 " colorscheme solarized
 "
 " Почему-то не подключается по-умолчанию
-" colorscheme gruvbox
+colorscheme gruvbox
 set background=dark 
 
 " Fix rubocop: Align the parameters of a method call if they span more than
@@ -471,13 +483,6 @@ set showmode
 
 " Отключаем подстветку найденных вариантов, и так всё видно.
 set nohlsearch
-
-" jumps in edit mode
-" https://coderwall.com/p/fd_bea
-"
-imap <C-e> <C-o>$
-imap <C-a> <C-o>0
-
 
 " Switch to alternate file
 " gvim
