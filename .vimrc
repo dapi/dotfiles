@@ -204,7 +204,7 @@ Plugin 'tpope/vim-rails'
 " :Emodel - goto model
 " :Rextract partial
 
-Plugin 'stefanoverna/vim-i18n'
+" Plugin 'stefanoverna/vim-i18n'
 " Visual select and `:call I18nTranslateString()`
 vmap <Leader>z :call I18nTranslateString()<CR>
 

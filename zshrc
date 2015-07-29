@@ -45,9 +45,9 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
 if echo "$TERM_PROGRAM" | grep Apple_Terminal > /dev/null; then
-  plugins=(ssh-agent lein git git-extras rbenv vagrant capistrano brew brew-cask vundle emacs rake-fast)
+  plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle emacs rake-fast)
 else
-  plugins=(git git-extras rbenv nvm vagrant capistrano ruby rake vundle emacs rake-fast)
+  plugins=(ssh-agent nvm git git-extras rbenv nvm vagrant capistrano ruby rake vundle emacs rake-fast)
 fi
 
 source $ZSH/oh-my-zsh.sh
