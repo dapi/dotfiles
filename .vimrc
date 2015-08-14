@@ -11,10 +11,13 @@
 imap <C-e> <C-o>$
 imap <C-a> <C-o>0
 
-imap jk <Esc>
-imap kj <Esc>
-imap ;; <Esc>
+"imap jk <Esc>
+"imap kj <Esc>
+"imap ;; <Esc>
 
+ " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
+"imap ;; <Esc>
+ 
 set nocompatible                " be iMproved
 filetype off                    " required!
 
@@ -23,6 +26,43 @@ call vundle#begin()
 " let Vundle manage Vundle
 " required! 
 Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-sensible'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'tpope/vim-classpath'
+Plugin 'tpope/vim-salve'
+Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-dispatch'
+
+" Evaluate Clojure buffers on load
+autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
+autocmd Syntax clojure EnableSyntaxExtension
+autocmd VimEnter *       RainbowParenthesesToggle
+autocmd Syntax   clojure RainbowParenthesesLoadRound
+autocmd Syntax   clojure RainbowParenthesesLoadSquare
+autocmd Syntax   clojure RainbowParenthesesLoadBraces
+
+" https://github.com/clojuredocs/guides/blob/master/articles/tutorials/vim_fireplace.md
+"
+" `cpr` (my mnemonic: clojure please require) takes the content from the active buffer and requires it inside the REPL.
+" `cpp` (my mnemonic: clojure please print) evaluates the outermost form under the cursor and prints it at the bottom of the screen.
+" `cqp` (my mnemonic: clojure quick print) gives you a one-line REPL prompt at the bottom of the screen (for quick one-liner evals).
+" cqc to bring up a command-line window similar to what you'd get with q: in normal Vim
+" `[` jumps to the definition for the symbol under your cursor, even if it’s inside the Clojure source!
+" `K` gives you documentation for symbol under cursor.
+" `:A` takes you to the test (if you’re in the implementation) or vice-versa,
+" and `:AS` or `:AV` gives it to you in a horizontal or vertical split.
+"
+" Hit % to jump to the matching paren.
+" Hit d% to delete the parens and everything they contain.
+" Hit y% to "yank"/copy the parens and everything in them.
+" Hit c% to delete the parens and the text they contain and start editing.
+" Hit v% to select the parens and the text they contain visually.
+"
+" Hit dab ("delete all block") to delete the entire form.
+" Hit cab ("change all block") to delete the entire form and enter insert mode.
+" Hit yab ("yank all block") to copy the entire form including parens.
+"
+Plugin 'tpope/vim-fireplace'
 
 " Sparkup lets you write HTML code faster. 
 " div#header expands to:   <div id="header"></div>
@@ -185,7 +225,6 @@ Plugin 'tpope/vim-vinegar'
 "Plugin 'jgdavey/tslime.vim'
 
 
-Plugin 'tpope/vim-dispatch'
 
 
 " Plugin 'janx/vim-rubytest'
@@ -353,6 +392,9 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
+
+" Plugin 'mbbill/undotree'
+
 " Vim Workspace Controller
 " Это та самая штука, которая выводит количество файлов табе буффера
 Plugin 'szw/vim-ctrlspace'
@@ -476,6 +518,9 @@ set laststatus=2
 "set nopaste
 nnoremap <F4> :set invpaste paste?<CR>
 set pastetoggle=<F4>
+"nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
+"imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
+
 " vim-pasta
 let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'cjsx']
 
@@ -484,11 +529,34 @@ set showmode
 " Отключаем подстветку найденных вариантов, и так всё видно.
 set nohlsearch
 
+" case insensitive search
+set smartcase
+set ignorecase
+
+" jumps in edit mode
+" https://coderwall.com/p/fd_bea
+"
+imap <C-e> <C-o>$
+imap <C-a> <C-o>0
+
+
 " Switch to alternate file
 " gvim
 nnoremap <C-Tab> :bnext<CR>
 nnoremap <C-S-Tab> :bprevious<CR>
 
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
+
+" Allow to copy/paste between VIM instances
+" "copy the current visual selection to ~/.vbuf
+vmap <Leader>y :w! ~/.vbuf<CR>
+" "copy the current line to the buffer file if no visual selection
+nmap <Leader>y :.w! ~/.vbuf<CR>
+" "paste the contents of the buffer file
+nmap <Leader>p :r ~/.vbuf<CR>
 
 " CtrlP search
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -498,3 +566,17 @@ nnoremap <C-S-Tab> :bprevious<CR>
 "nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
 
 set showbreak=↪
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
