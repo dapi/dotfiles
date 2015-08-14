@@ -14,8 +14,8 @@ export PGOPTIONS='--client-min-messages=warning'
 export TERM=xterm-256color
 #screen-256color
 
-# На mac-е не зачем устанавливать PATH
-#export PATH=/usr/local/bin:~/bin:$PATH
+# На mac-е не зачем устанавливать PATH, а вот на ubuntu нужно
+export PATH=~/bin:$PATH
 
 #export PATH=$PATH:/usr/local/mysql/bin/
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
@@ -45,9 +45,9 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
 if echo "$TERM_PROGRAM" | grep Apple_Terminal > /dev/null; then
-  plugins=(ssh-agent lein git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
+  plugins=(ssh-agent lein git git-extras rbenv vagrant capistrano brew brew-cask vundle emacs rake-fast)
 else
-  plugins=(git git-extras rbenv vagrant capistrano ruby rake vundle rake-fast)
+  plugins=(git git-extras rbenv nvm vagrant capistrano ruby rake vundle emacs rake-fast)
 fi
 
 source $ZSH/oh-my-zsh.sh
