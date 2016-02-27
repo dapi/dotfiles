@@ -2,6 +2,8 @@
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 
+eval "$(direnv hook zsh)"
+
 # Custom theme
 export ZSH_THEME="dapi-maran"
 test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
@@ -47,7 +49,7 @@ export DISABLE_AUTO_UPDATE="true"
 if echo "$TERM_PROGRAM" | grep Apple_Terminal > /dev/null; then
   plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle emacs rake-fast)
 else
-  plugins=(ssh-agent nvm git git-extras rbenv nvm vagrant capistrano ruby rake vundle emacs rake-fast)
+  plugins=(ssh-agent nvm git git-extras rbenv vagrant capistrano ruby rake vundle emacs rake-fast)
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -58,6 +60,7 @@ test -f ~/.local.zsh && source ~/.local.zsh
 
 # test "$HOME" = '/Users/danil'
 alias office='ssh office.icfdev.ru'
+alias tmux='direnv exec / tmux'
 
 if test -f ~/.tmux_auto; then
   if test -z "$TMUX" ; then
