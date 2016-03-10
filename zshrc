@@ -46,8 +46,10 @@ export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
-if echo "$TERM_PROGRAM" | grep Apple_Terminal > /dev/null; then
-  plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle emacs rake-fast)
+if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
+  export NVM_DIR=~/.nvm
+  . $(brew --prefix nvm)/nvm.sh
+  plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
 else
   plugins=(ssh-agent nvm git git-extras rbenv vagrant capistrano ruby rake vundle emacs rake-fast)
 fi
