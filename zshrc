@@ -64,6 +64,15 @@ test -f ~/.local.zsh && source ~/.local.zsh
 alias office='ssh office.icfdev.ru'
 alias tmux='direnv exec / tmux'
 
+# http://jetpackweb.com/blog/2009/09/23/pbcopy-in-ubuntu-command-line-clipboard/
+# Simulate OSX's pbcopy and pbpaste on other platforms
+if [ ! $(uname -s) = "Darwin" ]; then
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+  #alias pbcopy='xclip -selection clipboard'
+  #alias pbpaste='xclip -selection clipboard -o'
+fi
+
 if test -f ~/.tmux_auto; then
   if test -z "$TMUX" ; then
     /usr/local/bin/tmux attach && /usr/local/bin/tmux && echo "tmux failed to start"
