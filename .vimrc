@@ -11,6 +11,8 @@
 imap <C-e> <C-o>$
 imap <C-a> <C-o>0
 
+set encoding=utf-8
+
 "imap jk <Esc>
 "imap kj <Esc>
 "imap ;; <Esc>
