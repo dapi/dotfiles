@@ -11,6 +11,8 @@
 imap <C-e> <C-o>$
 imap <C-a> <C-o>0
 
+set clipboard=unnamed
+
 set encoding=utf-8
 
 "imap jk <Esc>
@@ -23,7 +25,12 @@ set encoding=utf-8
 set nocompatible                " be iMproved
 filetype off                    " required!
 
+" https://github.com/junegunn/fzf
+set rtp+=~/.fzf
+nnoremap <silent> <C-p> :FZF<cr>
+
 set rtp+=~/.vim/bundle/vundle/
+
 call vundle#begin()
 " let Vundle manage Vundle
 " required! 
@@ -264,14 +271,16 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 "map <Leader>a :call RunAllSpecs()<CR>
 
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
 set wildignore+=*.log,*.o,*.obj,.git,*.rbc,*.class,.svn,.sass-cache/*,solr/*,*tags,*.lock
 set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/*,*/node_modules/*,*/dist/*
 set wildignore+=*/vendor/gems/*,*/vendor/static/*,*/vendor/assets/*
 set wildignore+=public/*
 set wildignore+=*/scripts/*,*/doc/*,*/bin/*
-nnoremap <Leader>e :CtrlP<CR>
-nnoremap <leader>. :CtrlPTag<cr>
+" Отключил в пользу FZF
+"nnoremap <Leader>e :CtrlP<CR>
+"nnoremap <leader>. :CtrlPTag<cr>
+"
 "let g:ctrlp_cmd = 'CtrlPMRU'
 ":CtrlPBuffer
 " ctrl-<f> - cicles between modes
@@ -285,7 +294,7 @@ let g:ctrlp_custom_ignore = {
       \ 'link': 'some_bad_symbolic_links',
       \ }
 
-Plugin 'sgur/ctrlp-extensions.vim'
+" Plugin 'sgur/ctrlp-extensions.vim'
 " CtrlPCmdline
 " CtrlPYankring
 " CtrlPMenu
