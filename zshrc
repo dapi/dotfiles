@@ -58,7 +58,9 @@ source $ZSH/oh-my-zsh.sh
 
 test -f ~/.local.zsh && source ~/.local.zsh
 
-#export LANG=ru_RU.UTF-8
+# export LANG=ru_RU.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8 # Почему-то она не установлена в office
 
 # test "$HOME" = '/Users/danil'
 alias office='ssh office.icfdev.ru'
@@ -84,3 +86,8 @@ fi
 # Другой способ:
 # http://stackoverflow.com/questions/19533528/installing-java-on-os-x-10-9-mavericks
 #export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
+alias v='vim $(fzf)'
