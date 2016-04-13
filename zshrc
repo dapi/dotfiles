@@ -51,7 +51,7 @@ if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
   . $(brew --prefix nvm)/nvm.sh
   plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
 else
-  plugins=(ssh-agent nvm git git-extras rbenv vagrant capistrano ruby rake vundle emacs rake-fast)
+  plugins=(ssh-agent rails bundle nvm git git-extras rbenv vagrant capistrano ruby rake vundle emacs rake-fast)
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -75,12 +75,6 @@ if [ ! $(uname -s) = "Darwin" ]; then
   #alias pbpaste='xclip -selection clipboard -o'
 fi
 
-if test -f ~/.tmux_auto; then
-  if test -z "$TMUX" ; then
-    /usr/local/bin/tmux attach && /usr/local/bin/tmux && echo "tmux failed to start"
-  fi
-fi
-
 # Customize to your needs...
 #
 # Другой способ:
@@ -91,3 +85,10 @@ fi
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
 alias v='vim $(fzf)'
+
+if test -f ~/.tmux_auto; then
+  if test -z "$TMUX" ; then
+    /usr/local/bin/tmux attach && /usr/local/bin/tmux && echo "tmux failed to start"
+  fi
+fi
+
