@@ -464,7 +464,7 @@ set softtabstop=2
 set shiftwidth=2
 "#set expandtab
 
-set colorcolumn=120
+set colorcolumn=160
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>120v.\+/
 "match OverLength /\%81v.\+/
@@ -521,6 +521,8 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+au BufRead,BufNewFile {Makefile} set filetype=make
+" au BufRead,BufNewFile {Makefile} setlocal noexpandtab shiftwidth=8 softtabstop=0
 au BufRead,BufNewFile *.hamlc set filetype=haml
 au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
 au BufNewFile,BufRead *.sql setf pgsql
@@ -532,9 +534,13 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 "autocmd BufNewFile,BufRead *.jsx let b:jsx_ext_found = 1
 "autocmd BufNewFile,BufRead *.jsx set filetype=javascript
 
+autocmd FileType make 
+      \ setlocal noexpandtab shiftwidth=8 softtabstop=0
+
 " Remove trailing spaces
 " http://www.bestofvim.com/tip/trailing-whitespace/
-autocmd FileType ruby,javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType ruby,javascript
+      \ autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd FileType python
       \ setlocal ai si et sta sw=4
       \ textwidth=80 backspace=indent,eol,start fo=croql
