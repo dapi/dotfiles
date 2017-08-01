@@ -19,7 +19,8 @@ export TERM=xterm-256color
 #screen-256color
 
 # На mac-е не зачем устанавливать PATH, а вот на ubuntu нужно
-export PATH=~/bin:$PATH
+export PATH=~/bin:~/.kiex/bin:~/erlang/bin:$PATH
+[[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
 
 #export PATH=$PATH:/usr/local/mysql/bin/
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
@@ -48,19 +49,13 @@ export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
-<<<<<<< df1b72164683f8d36fba18853984fe4e8f14d54f
+export NVM_DIR=~/.nvm
 if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
-  export NVM_DIR=~/.nvm
   . $(brew --prefix nvm)/nvm.sh
   plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
 else
   plugins=(ssh-agent rails bundle nvm git git-extras rbenv vagrant capistrano ruby rake vundle emacs rake-fast)
-=======
-if echo "$TERM_PROGRAM" | grep Apple_Terminal > /dev/null; then
-  plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
-else
-  plugins=(git nvm git-extras rbenv vagrant capistrano ruby rake vundle rake-fast)
->>>>>>> zshrc for mac
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -74,6 +69,8 @@ export LC_ALL=en_US.UTF-8 # Почему-то она не установлена
 # test "$HOME" = '/Users/danil'
 alias office='ssh office.icfdev.ru'
 alias tmux='direnv exec / tmux'
+alias rake='bundle exec rake'
+alias rails='bundle exec rails'
 
 # http://jetpackweb.com/blog/2009/09/23/pbcopy-in-ubuntu-command-line-clipboard/
 # Simulate OSX's pbcopy and pbpaste on other platforms
@@ -101,3 +98,25 @@ if test -f ~/.tmux_auto; then
   fi
 fi
 
+
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
