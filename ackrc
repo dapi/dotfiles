@@ -11,6 +11,7 @@
 --ignore-dir=log
 --ignore-dir=.git
 --ignore-dir=doc
+--ignore-dir=stylesheets
 --type-add=ruby=.ru
 --type-add=ruby=.rake
 --type-add=ruby=.haml
