@@ -2,10 +2,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 
-eval "$(direnv hook zsh)"
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
 # Custom theme
 export ZSH_THEME="dapi-maran"
 test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
@@ -58,6 +54,8 @@ else
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 fi
 
+eval "$(direnv hook zsh)"
+
 source $ZSH/oh-my-zsh.sh
 
 test -f ~/.local.zsh && source ~/.local.zsh
@@ -67,7 +65,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8 # Почему-то она не установлена в office
 
 # test "$HOME" = '/Users/danil'
-alias office='ssh office.icfdev.ru'
+alias office='ssh office'
 alias tmux='direnv exec / tmux'
 alias rake='bundle exec rake'
 alias rails='bundle exec rails'
@@ -97,7 +95,6 @@ if test -f ~/.tmux_auto; then
     /usr/local/bin/tmux attach && /usr/local/bin/tmux && echo "tmux failed to start"
   fi
 fi
-
 
 # place this after nvm initialization!
 autoload -U add-zsh-hook
