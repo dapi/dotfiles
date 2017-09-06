@@ -34,6 +34,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 " let Vundle manage Vundle
 " required! 
+Plugin 'pearofducks/ansible-vim'
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-sensible'
 Plugin 'kien/rainbow_parentheses.vim'
