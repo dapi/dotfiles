@@ -276,7 +276,8 @@ set wildignore+=*.log,*.o,*.obj,.git,*.rbc,*.class,.svn,.sass-cache/*,solr/*,*ta
 set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/*,*/node_modules/*,*/dist/*
 set wildignore+=*/vendor/gems/*,*/vendor/static/*,*/vendor/assets/*
 set wildignore+=public/*
-set wildignore+=*/scripts/*,*/doc/*,*/bin/*
+" set wildignore+=*/scripts/*,*/doc/*,*/bin/*
+set wildignore+=*/doc/*,*/bin/*
 " Отключил в пользу FZF
 "nnoremap <Leader>e :CtrlP<CR>
 "nnoremap <leader>. :CtrlPTag<cr>
