@@ -130,7 +130,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 
 Plugin 'tpope/vim-liquid'
 
-Plugin 'lukaszkorecki/CoffeeTags'
+" Plugin 'lukaszkorecki/CoffeeTags'
 
 "Plugin 'sjbach/lusty'
 ":LustyFilesystemExplorer
@@ -312,7 +312,7 @@ map <Leader>l :call RunLastSpec()<CR>
 " Plugin 'kien/ctrlp.vim'
 set wildignore+=*.log,*.o,*.obj,.git,*.rbc,*.class,.svn,.sass-cache/*,solr/*,*tags,*.lock
 set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/*,*/node_modules/*,*/dist/*
-set wildignore+=*/vendor/gems/*,*/vendor/static/*,*/vendor/assets/*
+set wildignore+=*/vendor/gems/*,*/vendor/static/* " ,*/vendor/assets/*
 set wildignore+=public/*
 " set wildignore+=*/scripts/*,*/doc/*,*/bin/*
 set wildignore+=*/doc/*,*/bin/*
