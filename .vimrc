@@ -37,13 +37,20 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-sensible'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-salve'
-Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-dispatch'
+
+" classpath.vim: Set 'path' from the Java class path
+" Plugin 'tpope/vim-classpath'
+"
+" salve.vim: static support for Leiningen and Boot
+" Plugin 'tpope/vim-salve'
+"
+" Plugin 'tpope/vim-projectionist'
+"
+" dispatch.vim: asynchronous build and test dispatcher 
+" Plugin 'tpope/vim-dispatch'
 
 " :saveas
-Plugin 'Rename'
+" Plugin 'Rename'
 
 " Evaluate Clojure buffers on load
 autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
@@ -74,7 +81,8 @@ autocmd Syntax   clojure RainbowParenthesesLoadBraces
 " Hit cab ("change all block") to delete the entire form and enter insert mode.
 " Hit yab ("yank all block") to copy the entire form including parens.
 "
-Plugin 'tpope/vim-fireplace'
+" fireplace.vim: Clojure REPL support
+" Plugin 'tpope/vim-fireplace'
 
 " Sparkup lets you write HTML code faster. 
 " div#header expands to:   <div id="header"></div>
@@ -83,25 +91,43 @@ Plugin 'tpope/vim-fireplace'
 " Legacy. Не используется из-за слабой поддержки ES6
 " Plugin 'jelera/vim-javascript-syntax'
 
+" YAJS.vim: Yet Another JavaScript Syntax for Vim
 Plugin 'othree/yajs.vim'
 Plugin 'isRuslan/vim-es6'
+
 " Plugin 'randunel/vim-javascript'
-Plugin 'jbgutierrez/vim-babel'
+"
+" Babel shows how the current file or a snippet of Javascript will be
+" transformed by Babel.
+" Plugin 'jbgutierrez/vim-babel'
+"
+" Syntax file for JavaScript libraries. 
 Plugin 'othree/javascript-libraries-syntax.vim'
+
 Plugin 'othree/es.next.syntax.vim'
+
 let g:used_javascript_libs = 'react'
+
+" Vim plugin for managing ctags files
 Plugin 'grassdog/tagman.vim'
 
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mtscout6/vim-cjsx'
+
+" vim syntax for LESS (dynamic CSS)
 Plugin 'groenewege/vim-less'
+
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-Plugin 'noprompt/vim-yardoc'
-Plugin 'guns/vim-clojure-static'
-Plugin 'guns/vim-clojure-highlight'
+" Ruby syntax extensions for highlighting YARD documentation.
+" Plugin 'noprompt/vim-yardoc'
+
+" Plugin 'guns/vim-clojure-static'
+" Plugin 'guns/vim-clojure-highlight'
+"
 Plugin 'cakebaker/scss-syntax.vim'
+
 Plugin 'tpope/vim-liquid'
 
 Plugin 'lukaszkorecki/CoffeeTags'
@@ -119,32 +145,35 @@ Plugin 'lukaszkorecki/CoffeeTags'
 "Plugin 'techlivezheng/vim-plugin-minibufexpl'
 
 "Plugin 'bling/vim-bufferline'
+
+" Vim 'goto file' on steroids!
+" uses ctags and the_silver_searcher
 Plugin 'gorkunov/smartgf.vim'
 " gF smart find file at cursor definition
 map <F5> :SmargfRefreshTags<CR>
 
 "
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 " :ts[elect][!] [ident]
 " :tj[ump][!] [ident]
 " g CTRL-] - перескок с выбором вариантов
 " CTRL-T - возврат обратно
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tagbar#flags = ''
+" let g:airline#extensions#tagbar#enabled = 1
+" let g:airline#extensions#tagbar#flags = ''
 "let g:airline#extensions#tagbar#flags = 'f'
 "let g:airline#extensions#tagbar#flags = 's'
 "let g:airline#extensions#tagbar#flags = 'p'
-nmap <F8> :TagbarToggle<CR>
-let g:tagbar_type_javascript = {
-      \ 'ctagstype' : 'JavaScript',
-      \ 'kinds'     : [
-      \ 'o:objects',
-      \ 'f:functions',
-      \ 'a:arrays',
-      \ 's:strings',
-      \ 'v:variables'
-      \ ]
-      \ }
+" nmap <F8> :TagbarToggle<CR>
+"let g:tagbar_type_javascript = {
+      "\ 'ctagstype' : 'JavaScript',
+      "\ 'kinds'     : [
+      "\ 'o:objects',
+      "\ 'f:functions',
+      "\ 'a:arrays',
+      "\ 's:strings',
+      "\ 'v:variables'
+      "\ ]
+      "\ }
 
 " My Plugins here:
 "
@@ -154,20 +183,23 @@ let g:solarized_termcolors=256
 
 Plugin 'sickill/vim-pasta'
 
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 "Plugin 'jistr/vim-nerdtree-tabs'
 " Run NERD if there is not files opened
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim is there is NERD only
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-nnoremap <F2> :NERDTreeTabsToggle<CR>
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" nnoremap <F2> :NERDTreeTabsToggle<CR>
 " map <C-n> :NERDTreeToggle<CR>
 
 Plugin 'scrooloose/nerdcommenter'
+" [count]<leader>cc |NERDComComment|
+" [count]<leader>cn |NERDComNestedComment|
 
 " gcc Use gcc to comment out a line (takes a count),
 " gc to comment out the target of a motion
+" gcap  to comment out a paragraph
 Plugin 'tpope/vim-commentary'
 
 Plugin 'kana/vim-textobj-user'
@@ -185,19 +217,25 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 "iM      "inner class", select contents of "class"/"end" "block, excluding the "class" and "end" themselves.
 Plugin 'vim-ruby/vim-ruby'
 
-"Plugin 'ngmy/vim-rubocop'
+" Plugin 'ngmy/vim-rubocop'
 
 " <lead><lead>w - o trigger the word motion w
 "      <cursor>Lorem {a}psum {b}olor {c}it {d}met.
-Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'Lokaltog/vim-easymotion'
 
+" f you've ever tried using the . command after a plugin map, you were likely
+" disappointed to discover it only repeated the last native command inside
+" that map, rather than the map as a whole. That disappointment ends today.
+" Repeat.vim remaps . in a way that plugins can tap into it.
+"
 " Должен быть ДО easyclip
-Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-repeat'
+
 " не подключился
 "Plugin 'svermeulen/vim-easyclip'
 
 " : Gcommit
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 
 " Heuristically set buffer options
 " tpope/vim-sleuth
@@ -234,8 +272,9 @@ Plugin 'tpope/vim-rails'
 " Visual select and `:call I18nTranslateString()`
 vmap <Leader>z :call I18nTranslateString()<CR>
 
+" vinegar.vim: combine with netrw to create a delicious salad dressing
 
-Plugin 'tpope/vim-vinegar'
+" Plugin 'tpope/vim-vinegar'
 " http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
 " Press - in any buffer to hop up to the directory listing and seek 
 " I -  to toggle until you adapt.
@@ -249,7 +288,6 @@ Plugin 'tpope/vim-vinegar'
 " This is a simple vim script to send portion of text from a vim buffer to a
 " running tmux session.
 "Plugin 'jgdavey/tslime.vim'
-
 
 
 
@@ -300,7 +338,7 @@ let g:ctrlp_custom_ignore = {
 " CtrlPYankring
 " CtrlPMenu
 
-Plugin 'mhinz/vim-startify'
+" Plugin 'mhinz/vim-startify'
 ":SLoad    load a session
 ":SSave    save a session
 ":SDelete  delete a session
@@ -308,13 +346,20 @@ Plugin 'mhinz/vim-startify'
 " Plugin 'flazz/vim-colorschemes'
 " # after downloading; unpacking; cd'ing
 " cp colors/* ~/.vim/colors
-Plugin 'mileszs/ack.vim'
+
+
+
+" Plugin 'mileszs/ack.vim'
 "if executable('ag')
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" let g:ackprg = 'ag --nogroup --nocolor --column'
 "let g:ackprg = 'ag --vimgrep'
 "endif
-Plugin 'rking/ag.vim'
+"
+" Plugin 'rking/ag.vim'
 
+" The Most Recently Used (MRU) plugin provides an easy access to a list of 
+" recently opened/edited files in Vim. This plugin automatically stores the 
+" file names as you open/edit them in Vim. 
 Plugin 'yegappan/mru'
 
 " vim-scripts repos
@@ -377,7 +422,10 @@ Plugin 'slim-template/vim-slim'
 Plugin 'ervandew/supertab'
 " <c-n> <c-p> to move curson in completion list
 
-Plugin 'airblade/vim-gitgutter'
+" A Vim plugin which shows a git diff in the gutter (sign column) and
+" stages/undoes hunks.
+" Plugin 'airblade/vim-gitgutter'
+
 Plugin 'dapi/gruvbox'
 if !has("gui_running")
   let g:gruvbox_italic=0
@@ -415,11 +463,11 @@ nmap ga :EasyAlign<CR>
 " vip<Enter>=
 " gaip=
 
-Plugin 'godlygeek/tabular'
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+" Plugin 'godlygeek/tabular'
+" nmap <Leader>a= :Tabularize /=<CR>
+" vmap <Leader>a= :Tabularize /=<CR>
+" nmap <Leader>a: :Tabularize /:\zs<CR>
+" vmap <Leader>a: :Tabularize /:\zs<CR>
 
 " Ему нужен tabular
 Plugin 'plasticboy/vim-markdown'
@@ -428,7 +476,7 @@ Plugin 'plasticboy/vim-markdown'
 
 " Vim Workspace Controller
 " Это та самая штука, которая выводит количество файлов табе буффера
-Plugin 'szw/vim-ctrlspace'
+" Plugin 'szw/vim-ctrlspace'
 " :ls - список буферов
 " o Jump to File List (aka Open List)
 " O Jump to File List (aka Open List) in Search Mode
@@ -485,7 +533,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 hi IndentGuidesOdd  ctermbg=235 
 hi IndentGuidesEven ctermbg=4
 
-Plugin 'michaeljsmith/vim-indent-object'
+" Plugin 'michaeljsmith/vim-indent-object'
 " <count>ai         (A)n (I)ndentation level and line above.
 " <count>ii         (I)nner (I)ndentation level (no line above).
 " <count>aI         (A)n (I)ndentation level and lines above/below.
