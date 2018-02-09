@@ -1,32 +1,32 @@
 [user]
-	name = Danil Pismenny
+  name = Danil Pismenny
   email = danil@brandymint.ru
 
 [github]
-	user = dapi
+  user = dapi
   token = token
   password = password
 
 [push]
-	default = current
+  default = current
 
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = /usr/bin/vim
+  excludesfile = ~/.gitignore_global
+  editor = /usr/bin/vim
   preloadindex = true
-	
+
 [color]
-   branch = auto
-   diff = auto
-   interactive = auto
-   status = auto
-   ui = auto
-   pager = true
- 
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  ui = auto
+  pager = true
+
 [merge]
-   summary=true
+  summary=true
 
 [pull]
   rebase = true
 [alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
