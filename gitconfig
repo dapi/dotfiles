@@ -1,3 +1,5 @@
+# Put it in ~/.gitconfig
+
 [user]
   name = Danil Pismenny
   email = danil@brandymint.ru
@@ -9,6 +11,12 @@
 
 [push]
   default = current
+
+[pull]
+  rebase = true
+
+[merge]
+  summary=true
 
 [core]
   excludesfile = ~/.gitignore_global
@@ -23,10 +31,5 @@
   ui = auto
   pager = true
 
-[merge]
-  summary=true
-
-[pull]
-  rebase = true
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
