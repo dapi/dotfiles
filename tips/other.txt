@@ -56,4 +56,7 @@ ffmpeg -i my_video_file.avi extracted_audio.mp3
 
 freebsd orionet.ru -p 444 установка пкаета portinstall ??? или pgk_add -r git
 
+rename: https://stackoverflow.com/questions/9984722/git-rename-many-files-and-folders
+rename files: find . -name '*foo*' -exec bash -c 'file={}; git mv $file ${file/foo/bar}' \;
 
+rename: find (app|config|test) -name 'current_exchange_rate*' -exec bash -c 'file={}; git mv $file ${file/current_exchange_rate/currency_rate}' \;
