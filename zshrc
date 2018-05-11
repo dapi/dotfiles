@@ -10,16 +10,9 @@ export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 #export ZSH_THEME="agnoster"
 export ZSH_THEME="dapi-maran"
 eval "$(direnv hook zsh)"
-source $ZSH/oh-my-zsh.sh
 test -f ~/.local.zsh && source ~/.local.zsh
 echo 'Done'
 
-
-## NVM
-echo -n 'Start nvm: '
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-echo 'Done'
 
 # Custom theme
 test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
@@ -30,7 +23,7 @@ export PGOPTIONS='--client-min-messages=warning'
 export TERM=xterm-256color #screen-256color
 
 # На mac-е не зачем устанавливать PATH, а вот на ubuntu нужно
-export PATH=~/bin:$PATH
+# export PATH=~/bin:~/.rbenv/bin:$PATH
 
 unsetopt correct_all
 
@@ -44,15 +37,26 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
 if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
-  plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
+  plugins=(ssh-agent nvm lein git git-extras rbenv capistrano brew brew-cask vundle rake-fast)
+  ## NVM
+  echo -n 'Start nvm: '
+  export NVM_DIR=~/.nvm
+  source $(brew --prefix nvm)/nvm.sh
+  echo 'Done'
+
 else
-  plugins=(ssh-agent rails bundle nvm git git-extras rbenv vagrant capistrano ruby rake vundle emacs rake-fast)
+  plugins=(ssh-agent rails bundle nvm git git-extras rbenv capistrano ruby rake vundle emacs rake-fast)
 fi
+
+# Должен вызываться после plugins
+source $ZSH/oh-my-zsh.sh
 
 alias tmux='direnv exec / tmux'
 alias rails='bundle exec rails'
 alias rspec='bundle exec rspec'
 alias rake='bundle exec rake'
+alias cap='bundle exec cap'
+alias m='bundle exec m'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
@@ -66,5 +70,9 @@ if test -f ~/.tmux_auto; then
 fi
 
 # export RBENV_ROOT=/usr/local/var/rbenv
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
