@@ -35,6 +35,14 @@ call vundle#begin()
 " let Vundle manage Vundle
 " required! 
 Plugin 'pearofducks/ansible-vim'
+au BufReadPost,BufNewFile */playbooks/*.yml set filetype=ansible
+au BufReadPost,BufNewFile */ansible*/*.yml set filetype=ansible
+au BufReadPost,BufNewFile playbook.yml set filetype=ansible
+" let g:ansible_unindent_after_newline = 0
+
+Plugin 'stephpy/vim-yaml'
+"  au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
+
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-sensible'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -95,6 +103,9 @@ autocmd Syntax   clojure RainbowParenthesesLoadBraces
 " YAJS.vim: Yet Another JavaScript Syntax for Vim
 Plugin 'othree/yajs.vim'
 Plugin 'isRuslan/vim-es6'
+
+Plugin 'Quramy/tsuquyomi'
+Plugin 'leafgarland/typescript-vim'
 
 " Plugin 'randunel/vim-javascript'
 "
@@ -471,7 +482,7 @@ nmap ga :EasyAlign<CR>
 " vmap <Leader>a: :Tabularize /:\zs<CR>
 
 " Ему нужен tabular
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'
 
 " Plugin 'mbbill/undotree'
 
@@ -509,11 +520,6 @@ set term=screen-256color
 set tags+=gems.tags
 set fileformat=unix
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-"#set expandtab
-
 set colorcolumn=160
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>120v.\+/
@@ -542,7 +548,11 @@ hi IndentGuidesEven ctermbg=4
 
 " Plugin 'tpope/vim-markdown'
 
-set tabstop=2 shiftwidth=2 expandtab softtabstop=2
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+
 syntax enable       " Enable syntax highlighting
 filetype on         " Enable filetype detection
 filetype indent on  " Enable filetype-specific indenting
@@ -572,14 +582,17 @@ if has("autocmd")
 endif
 
 au BufRead,BufNewFile {Makefile} set filetype=make
-" au BufRead,BufNewFile {Makefile} setlocal noexpandtab shiftwidth=8 softtabstop=0
+au BufRead,BufNewFile Makefile set filetype=make
+au BufReadPost,BufNewFile {Makefile} setlocal noexpandtab shiftwidth=8 softtabstop=0
+
 au BufRead,BufNewFile *.hamlc set filetype=haml
-au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile}    set ft=ruby
-au BufNewFile,BufRead *.sql setf pgsql
+au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile} set ft=ruby
+au BufRead,BufNewFile *.sql setf pgsql
 au BufRead,BufNewFile *.cjsx set filetype=coffee
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
-au BufNewFile,BufReadPost *.cljx setfiletype clojure
 au BufRead,BufNewFile *.md setlocal textwidth=80
+au BufReadPost,BufNewFile *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
+au BufReadPost,BufNewFile *.cljx setfiletype clojure
+au BufReadPost,BufNewFile *.php setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
 "autocmd BufNewFile,BufRead *.jsx let b:jsx_ext_found = 1
 "autocmd BufNewFile,BufRead *.jsx set filetype=javascript
