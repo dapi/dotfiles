@@ -40,6 +40,10 @@ au BufReadPost,BufNewFile */ansible*/*.yml set filetype=ansible
 au BufReadPost,BufNewFile playbook.yml set filetype=ansible
 " let g:ansible_unindent_after_newline = 0
 
+Plugin 'editorconfig/editorconfig-vim'
+
+Plugin 'chr4/nginx.vim'
+
 Plugin 'stephpy/vim-yaml'
 "  au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
 
@@ -272,7 +276,6 @@ Plugin 'AndrewRadev/splitjoin.vim'
 let g:splitjoin_ruby_hanging_args = 1
 let g:splitjoin_ruby_curly_braces = 0
 
-
 Plugin 'tpope/vim-rails'
 " :A - Alternative file
 " :R - Related
@@ -443,8 +446,6 @@ if !has("gui_running")
   let g:gruvbox_italic=0
 endif
 
-Plugin 'editorconfig/editorconfig-vim'
-
 " cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
 " https://github.com/hukl/Smyck-Color-Scheme
 " https://github.com/endel/vim-github-colorscheme
@@ -598,7 +599,7 @@ au BufReadPost,BufNewFile *.php setlocal tabstop=4 softtabstop=4 shiftwidth=4
 "autocmd BufNewFile,BufRead *.jsx set filetype=javascript
 
 autocmd FileType make 
-      \ setlocal noexpandtab shiftwidth=8 softtabstop=0
+      \ setlocal noexpandtab shiftwidth=4 softtabstop=0
 
 " Remove trailing spaces
 " http://www.bestofvim.com/tip/trailing-whitespace/
