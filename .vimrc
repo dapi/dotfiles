@@ -34,6 +34,9 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 " let Vundle manage Vundle
 " required! 
+
+" set tabstop=2 shiftwidth=2 expandtab
+" retab
 Plugin 'pearofducks/ansible-vim'
 au BufReadPost,BufNewFile */playbooks/*.yml set filetype=ansible
 au BufReadPost,BufNewFile */ansible*/*.yml set filetype=ansible
@@ -43,6 +46,9 @@ au BufReadPost,BufNewFile playbook.yml set filetype=ansible
 Plugin 'editorconfig/editorconfig-vim'
 
 Plugin 'chr4/nginx.vim'
+
+" Plugin 'syngan/vim-vimlint'
+" Plugin 'vim-vimlparser'
 
 Plugin 'stephpy/vim-yaml'
 "  au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
@@ -105,8 +111,6 @@ autocmd Syntax   clojure RainbowParenthesesLoadBraces
 " Plugin 'jelera/vim-javascript-syntax'
 
 " YAJS.vim: Yet Another JavaScript Syntax for Vim
-Plugin 'othree/yajs.vim'
-Plugin 'isRuslan/vim-es6'
 
 Plugin 'Quramy/tsuquyomi'
 Plugin 'leafgarland/typescript-vim'
@@ -118,9 +122,11 @@ Plugin 'leafgarland/typescript-vim'
 " Plugin 'jbgutierrez/vim-babel'
 "
 " Syntax file for JavaScript libraries. 
+Plugin 'isRuslan/vim-es6'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
-
-Plugin 'othree/es.next.syntax.vim'
+" Plugin 'othree/es.next.syntax.vim'
 
 let g:used_javascript_libs = 'react'
 
@@ -136,6 +142,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
+Plugin 'elzr/vim-json'
 " Ruby syntax extensions for highlighting YARD documentation.
 " Plugin 'noprompt/vim-yardoc'
 
@@ -264,6 +271,10 @@ Plugin 'vim-ruby/vim-ruby'
 " UPPER_CASE (cru) are
 Plugin 'tpope/vim-abolish'
 
+Plugin 'prettier/vim-prettier'
+
+Plugin 'Shougo/vimproc.vim'
+
 " gq - auto format (wrap long comment lines)
 "
 " <lead>==
@@ -283,9 +294,14 @@ Plugin 'tpope/vim-rails'
 " :Emodel - goto model
 " :Rextract partial
 
-" Plugin 'stefanoverna/vim-i18n'
-" Visual select and `:call I18nTranslateString()`
-vmap <Leader>z :call I18nTranslateString()<CR>
+" 
+"Plugin 'benjmin-r/vim-i18n'
+"vmap <Leader>z :call I18nTranslateString()<CR>
+"vmap <Leader>dt :call I18nDisplayTranslation()<CR>
+
+"Plugin 'airblade/vim-localorie'
+"nnoremap <silent> <leader>lt :call localorie#translate()<CR>
+"nnoremap <silent> <leader>le :call localorie#expand_key()<CR>
 
 " vinegar.vim: combine with netrw to create a delicious salad dressing
 
@@ -300,50 +316,20 @@ vmap <Leader>z :call I18nTranslateString()<CR>
 " <c-w>v - vertical
 " http://vimcasts.org/images/blog/cell-division.png
 
-" This is a simple vim script to send portion of text from a vim buffer to a
-" running tmux session.
-"Plugin 'jgdavey/tslime.vim'
-
-
-
-" Plugin 'janx/vim-rubytest'
-"
-Plugin 'achm/vim-rspec'
-let g:RspecBin = 'spring rspec'
-map <Leader>T :RunSpec<CR>
-map <Leader>S :RunSpecLine<CR>
-
-Plugin 'thoughtbot/vim-rspec', {'name': 'vim-rspec-thoughbot'}
-" With tslime
-" В этом случае выводится в терминале
-let g:rspec_command = '!spring rspec {spec}'
-" В этом случае выводится в quickfix
-"let g:rspec_command = 'Dispatch spring rspec {spec}'
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-"map <Leader>a :call RunAllSpecs()<CR>
-
-" Plugin 'kien/ctrlp.vim'
 set wildignore+=*.log,*.o,*.obj,.git,*.rbc,*.class,.svn,.sass-cache/*,solr/*,*tags,*.lock
-set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/*,*/node_modules/*,*/dist/*
-set wildignore+=*/vendor/gems/*,*/vendor/static/* " ,*/vendor/assets/*
+set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/* " ,*/node_modules/*,*/dist/*
+" set wildignore+=*/vendor/gems/*,*/vendor/static/* " ,*/vendor/assets/*
 set wildignore+=public/*
 " set wildignore+=*/scripts/*,*/doc/*,*/bin/*
 set wildignore+=*/doc/*,*/bin/*
-" Отключил в пользу FZF
-"nnoremap <Leader>e :CtrlP<CR>
-"nnoremap <leader>. :CtrlPTag<cr>
+
 "
-"let g:ctrlp_cmd = 'CtrlPMRU'
-":CtrlPBuffer
-" ctrl-<f> - cicles between modes
-" the nearest ancestor that contains one of these directories or files: .git
+Plugin 'ctrlp.vim'
 let g:ctrlp_working_path_mode = 'ra'
 "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 "let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)|bin$',
+      \ 'dir':  '\v[\/]\.(git|hg|svn)|bin|node_modules$',
       \ 'file': '\v\.(exe|so|dll|bin/rake)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
@@ -382,7 +368,7 @@ Plugin 'yegappan/mru'
 "Plugin 'FuzzyFinder'
 " non github repos
 "Plugin 'git://git.wincent.com/command-t.git'
-
+" Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " cs{( to change { on (
 " ysiw] обернуть слово в ]
@@ -408,6 +394,9 @@ Plugin 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" let g:loaded_syntastic_vim_vimlint_checker = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_debug=1
 "let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 "let g:syntastic_ruby_checkers = ['mri', 'reek']
 let g:syntastic_aggregate_errors = 1
@@ -426,7 +415,10 @@ let g:syntastic_check_on_wq = 0
 " :Errors
 " :lclose
 " next/prev errors :lnext, :lprev
-" let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint --quiet']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'   
+
+nnoremap <leader>f mF:%!yarn run --silent eslint_d --stdin --fix-to-stdout<CR>`F
 
 Plugin 'othree/html5.vim'
 Plugin 'othree/xml.vim'
@@ -513,7 +505,7 @@ syntax on
 "set t_Co=256
 "
 " С такой настройкой нормльно работает фон в tmux на vagrant-е
-set term=screen-256color
+" set term=screen-256color
 "set term=xterm-256color
 "set list lcs=tab:' '
 "http://andrew.stwrt.ca/posts/vim-ctags
@@ -521,7 +513,6 @@ set term=screen-256color
 set tags+=gems.tags
 set fileformat=unix
 
-set colorcolumn=160
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>120v.\+/
 "match OverLength /\%81v.\+/
@@ -584,13 +575,15 @@ endif
 
 au BufRead,BufNewFile {Makefile} set filetype=make
 au BufRead,BufNewFile Makefile set filetype=make
-au BufReadPost,BufNewFile {Makefile} setlocal noexpandtab shiftwidth=8 softtabstop=0
+" au BufReadPost,BufNewFile {Makefile} setlocal noexpandtab shiftwidth=8 softtabstop=0
 
 au BufRead,BufNewFile *.hamlc set filetype=haml
-au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile} set ft=ruby
+au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile,config.ru} set ft=ruby
 au BufRead,BufNewFile *.sql setf pgsql
 au BufRead,BufNewFile *.cjsx set filetype=coffee
 au BufRead,BufNewFile *.md setlocal textwidth=80
+au BufRead,BufNewFile *.rb setlocal textwidth=160
+set colorcolumn=160
 au BufReadPost,BufNewFile *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
 au BufReadPost,BufNewFile *.cljx setfiletype clojure
 au BufReadPost,BufNewFile *.php setlocal tabstop=4 softtabstop=4 shiftwidth=4
@@ -601,9 +594,11 @@ au BufReadPost,BufNewFile *.php setlocal tabstop=4 softtabstop=4 shiftwidth=4
 autocmd FileType make 
       \ setlocal noexpandtab shiftwidth=4 softtabstop=0
 
+autocmd BufNewFile,BufRead *.axlsx set filetype=ruby
+ 
 " Remove trailing spaces
 " http://www.bestofvim.com/tip/trailing-whitespace/
-autocmd FileType ruby,javascript
+autocmd FileType ruby,javascript,css
       \ autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd FileType python
       \ setlocal ai si et sta sw=4
@@ -627,6 +622,7 @@ set pastetoggle=<F4>
 " vim-pasta
 let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'cjsx']
 
+setlocal spell spelllang=en_us
 set showmode
 
 " Отключаем подстветку найденных вариантов, и так всё видно.
@@ -653,21 +649,6 @@ map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
 
-" Allow to copy/paste between VIM instances
-" "copy the current visual selection to ~/.vbuf
-vmap <Leader>y :w! ~/.vbuf<CR>
-" "copy the current line to the buffer file if no visual selection
-nmap <Leader>y :.w! ~/.vbuf<CR>
-" "paste the contents of the buffer file
-nmap <Leader>p :r ~/.vbuf<CR>
-
-" CtrlP search
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#custom#source('file_rec/async','sorters','sorter_rank')
-" replacing unite with ctrl-p
-"nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
-
 set showbreak=↪ 
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
@@ -682,4 +663,12 @@ if has('persistent_undo')
   silent !mkdir ~/.vim/backups > /dev/null 2>&1
   set undodir=~/.vim/backups
   set undofile
+endif
+
+if !has('nvim')
+  set ttymouse=xterm2
+endif
+
+if has('nvim')
+  au VimLeave * set guicursor=a:ver10-blinkon1
 endif
