@@ -2,6 +2,9 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8 # Почему-то она не установлена в office
 
+## Deprecated in grep
+unset GREP_OPTIONS
+
 ## Path to your oh-my-zsh configuration.
 echo -n 'Start oh-my-zsh: '
 export ZSH=$HOME/.oh-my-zsh
