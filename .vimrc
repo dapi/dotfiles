@@ -25,10 +25,6 @@ set encoding=utf-8
 set nocompatible                " be iMproved
 filetype off                    " required!
 
-" https://github.com/junegunn/fzf
-set rtp+=~/.fzf
-nnoremap <silent> <C-p> :FZF<cr>
-
 set rtp+=~/.vim/bundle/vundle/
 
 call vundle#begin()
@@ -44,6 +40,9 @@ au BufReadPost,BufNewFile playbook.yml set filetype=ansible
 " let g:ansible_unindent_after_newline = 0
 
 Plugin 'editorconfig/editorconfig-vim'
+
+Plugin 'fatih/vim-go'
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 Plugin 'chr4/nginx.vim'
 
@@ -323,52 +322,25 @@ set wildignore+=public/*
 " set wildignore+=*/scripts/*,*/doc/*,*/bin/*
 set wildignore+=*/doc/*,*/bin/*
 
-"
-Plugin 'ctrlp.vim'
-let g:ctrlp_working_path_mode = 'ra'
-"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
-"let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)|bin|node_modules$',
-      \ 'file': '\v\.(exe|so|dll|bin/rake)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
-
-" Plugin 'sgur/ctrlp-extensions.vim'
-" CtrlPCmdline
-" CtrlPYankring
-" CtrlPMenu
-
-" Plugin 'mhinz/vim-startify'
-":SLoad    load a session
-":SSave    save a session
-":SDelete  delete a session
-
 " Plugin 'flazz/vim-colorschemes'
 " # after downloading; unpacking; cd'ing
 " cp colors/* ~/.vim/colors
-
-
-
-" Plugin 'mileszs/ack.vim'
-"if executable('ag')
-" let g:ackprg = 'ag --nogroup --nocolor --column'
-"let g:ackprg = 'ag --vimgrep'
-"endif
-"
-" Plugin 'rking/ag.vim'
 
 " The Most Recently Used (MRU) plugin provides an easy access to a list of 
 " recently opened/edited files in Vim. This plugin automatically stores the 
 " file names as you open/edit them in Vim. 
 Plugin 'yegappan/mru'
 
-" vim-scripts repos
-"Plugin 'L9'
-"Plugin 'FuzzyFinder'
-" non github repos
-"Plugin 'git://git.wincent.com/command-t.git'
-" Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+
+"""""""""""""""""""
+" Fuzzy finders section
+"""""""""""""""""""
+"
+" CTRL-T, CTRL-X or CTRL-V to open selected files in the current window, 
+" in new tabs, in horizontal splits, or in vertical splits respectively.
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+nnoremap <silent> <C-p> :FZF<cr>
 
 " cs{( to change { on (
 " ysiw] обернуть слово в ]
