@@ -2,6 +2,9 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8 # Почему-то она не установлена в office
 
+## Deprecated in grep
+unset GREP_OPTIONS
+
 ## Path to your oh-my-zsh configuration.
 echo -n 'Start oh-my-zsh: '
 export ZSH=$HOME/.oh-my-zsh
@@ -10,15 +13,7 @@ export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 #export ZSH_THEME="agnoster"
 export ZSH_THEME="dapi-maran"
 eval "$(direnv hook zsh)"
-source $ZSH/oh-my-zsh.sh
 test -f ~/.local.zsh && source ~/.local.zsh
-echo 'Done'
-
-
-## NVM
-echo -n 'Start nvm: '
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
 echo 'Done'
 
 # Custom theme
@@ -30,6 +25,8 @@ export PGOPTIONS='--client-min-messages=warning'
 export TERM=xterm-256color #screen-256color
 
 # На mac-е не зачем устанавливать PATH, а вот на ubuntu нужно
+# export PATH=~/bin:~/.rbenv/bin:$PATH
+export GOPATH=~/go
 export PATH=~/bin:$PATH
 
 unsetopt correct_all
@@ -44,20 +41,20 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
 if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
-  plugins=(ssh-agent nvm lein git git-extras rbenv vagrant capistrano brew brew-cask vundle rake-fast)
+  plugins=(ssh-agent go nvm lein git git-extras rbenv capistrano brew brew-cask vundle rake-fast)
 else
-  plugins=(ssh-agent rails bundle nvm git git-extras rbenv vagrant capistrano ruby rake vundle emacs rake-fast)
+  plugins=(ssh-agent go nvm bundle git git-extras rbenv capistrano ruby rake vundle emacs rake-fast)
 fi
 
+# Должен вызываться после plugins
+source $ZSH/oh-my-zsh.sh
+
+
+# ###########
+# TMUX section
+# ###########
+
 alias tmux='direnv exec / tmux'
-alias rails='bundle exec rails'
-alias rspec='bundle exec rspec'
-alias rake='bundle exec rake'
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ag -g ""'
-
-alias v='vim $(fzf)'
 
 if test -f ~/.tmux_auto; then
   if test -z "$TMUX" ; then
@@ -65,6 +62,44 @@ if test -f ~/.tmux_auto; then
   fi
 fi
 
-# export RBENV_ROOT=/usr/local/var/rbenv
-eval "$(rbenv init -)"
+# ###########
+# FZF section
+# ###########
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
+alias v='vim $(fzf-tmux)'
+
+
+# ###########
+# NVM section
+# ###########
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Calling nvm use automatically in a directory with a .nvmrc file
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc

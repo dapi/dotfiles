@@ -11,9 +11,6 @@ tags
 *.csv
 *.tsv
 *.tmp*
-*.js
-*.css
-*.scss
 *.old
 *.json
 *.xml
@@ -23,3 +20,7 @@ tags
 *.md
 *.log
 *.map
+/tmp/*
+/public/*
+*.bz2
+*.sql

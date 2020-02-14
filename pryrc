@@ -6,6 +6,14 @@
 # https://gist.github.com/941174 - rails and pry
 Pry.config.editor = "vim --nofork"
 
-Pry.commands.alias_command 'c', 'continue'
-Pry.commands.alias_command 's', 'step'
-Pry.commands.alias_command 'n', 'next'
+if defined?(PryRails::RAILS_PROMPT)
+  Pry.config.prompt = PryRails::RAILS_PROMPT
+end
+
+# Был pry-nag, заменили его на pry-byebug
+if defined?(PryByebug)
+  Pry.commands.alias_command 'c', 'continue'
+  Pry.commands.alias_command 's', 'step'
+  Pry.commands.alias_command 'n', 'next'
+  Pry.commands.alias_command 'f', 'finish'
+end
