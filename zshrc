@@ -37,19 +37,21 @@ export CASE_SENSITIVE="true"
 # Comment this out to disable weekly auto-update checks
 export DISABLE_AUTO_UPDATE="true"
 
+BUNDLED_COMMANDS=(rubocop cap rake rails rspec)
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
+plugins=(ssh-agent nvm bundler git git-extras rbenv capistrano rake)
+
 if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
-  plugins=(ssh-agent go nvm lein git git-extras rbenv capistrano brew brew-cask vundle rake-fast)
+  plugins+=(brew brew-cask)
 else
-  plugins=(ssh-agent go nvm bundle git git-extras rbenv capistrano ruby rake vundle emacs rake-fast)
+  # Add nothing
+  # plugins+=()
 fi
 
 # Должен вызываться после plugins
 source $ZSH/oh-my-zsh.sh
-
-
 # ###########
 # TMUX section
 # ###########
