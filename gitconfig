@@ -1,7 +1,7 @@
 # Put it in ~/.gitconfig
 
 [user]
-	name = Danil Pismenny
+  name = Danil Pismenny
   email = danil@brandymint.ru
 
 [github]
