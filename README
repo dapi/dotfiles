@@ -1,9 +1,10 @@
-Мои любимые настройчки
-Don't forget fonts https://github.com/powerline/fonts
+Мои любимые настроечки
 
-Используем шрифт: Inconsolata-g
+## Установка
 
-ccmenu teamcity: http://danil@teamcity.brandymint.ru/httpAuth/app/rest/cctray/projects.xml
-
-https://gist.github.com/dapi/2a5e404fdf9a3d218f39521ee321e23f
+```zsh
+git clone git@github.com:dapi/dotfiles.git
+cd dotfiles
+make
+```
 
