@@ -1,2 +1,10 @@
 .emacs.*
 .\#*
+.envrc
+gems.tags
+tags
+.byebug_history
+tags.lock
+tags.temp
+config.bak
+config.modern
