@@ -3,6 +3,9 @@
 " :PluginInstall
 " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
+" Install gem-ctags
+" https://github.com/tpope/gem-ctags
+"
 " :so ~/.vimrc
 
 " jumps in edit mode
@@ -31,6 +34,8 @@ call vundle#begin()
 " let Vundle manage Vundle
 " required! 
 
+Plugin 'tpope/vim-pathogen'
+
 " set tabstop=2 shiftwidth=2 expandtab
 " retab
 Plugin 'pearofducks/ansible-vim'
@@ -55,6 +60,7 @@ Plugin 'stephpy/vim-yaml'
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-sensible'
 Plugin 'kien/rainbow_parentheses.vim'
+
 
 " classpath.vim: Set 'path' from the Java class path
 " Plugin 'tpope/vim-classpath'
@@ -111,8 +117,9 @@ autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
 " YAJS.vim: Yet Another JavaScript Syntax for Vim
 
-Plugin 'Quramy/tsuquyomi'
-Plugin 'leafgarland/typescript-vim'
+" Plugin 'Quramy/tsuquyomi'
+" Plugin 'leafgarland/typescript-vim'
+Plugin 'HerringtonDarkholme/yats.vim'
 
 " Plugin 'randunel/vim-javascript'
 "
@@ -131,6 +138,7 @@ let g:used_javascript_libs = 'react'
 
 " Vim plugin for managing ctags files
 Plugin 'grassdog/tagman.vim'
+Plugin 'ludovicchabant/vim-gutentags'
 
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mtscout6/vim-cjsx'
@@ -170,9 +178,9 @@ Plugin 'tpope/vim-liquid'
 
 " Vim 'goto file' on steroids!
 " uses ctags and the_silver_searcher
-Plugin 'gorkunov/smartgf.vim'
+" Plugin 'gorkunov/smartgf.vim'
 " gF smart find file at cursor definition
-map <F5> :SmargfRefreshTags<CR>
+" map <F5> :SmargfRefreshTags<CR>
 
 "
 " Plugin 'majutsushi/tagbar'
@@ -238,6 +246,9 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 "aM      "a class", select from "class" until matching "end"
 "iM      "inner class", select contents of "class"/"end" "block, excluding the "class" and "end" themselves.
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rbenv'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-bundler'
 
 " Plugin 'ngmy/vim-rubocop'
 
@@ -286,7 +297,6 @@ Plugin 'AndrewRadev/splitjoin.vim'
 let g:splitjoin_ruby_hanging_args = 1
 let g:splitjoin_ruby_curly_braces = 0
 
-Plugin 'tpope/vim-rails'
 " :A - Alternative file
 " :R - Related
 " gf - goto file
@@ -547,6 +557,7 @@ endif
 
 au BufRead,BufNewFile {Makefile} set filetype=make
 au BufRead,BufNewFile Makefile set filetype=make
+au BufRead,BufNewFile *.tsx set filetype=typescript
 " au BufReadPost,BufNewFile {Makefile} setlocal noexpandtab shiftwidth=8 softtabstop=0
 
 au BufRead,BufNewFile *.hamlc set filetype=haml
@@ -555,6 +566,7 @@ au BufRead,BufNewFile *.sql setf pgsql
 au BufRead,BufNewFile *.cjsx set filetype=coffee
 au BufRead,BufNewFile *.md setlocal textwidth=80
 au BufRead,BufNewFile *.rb setlocal textwidth=160
+au BufRead,BufNewFile *.axlsx set filetype=ruby
 set colorcolumn=160
 au BufReadPost,BufNewFile *.coffee setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
 au BufReadPost,BufNewFile *.cljx setfiletype clojure
@@ -575,6 +587,7 @@ autocmd FileType ruby,javascript,css
 autocmd FileType python
       \ setlocal ai si et sta sw=4
       \ textwidth=80 backspace=indent,eol,start fo=croql
+
 
 " Автодополнение как в bash
 set wildmode=longest,list,full
