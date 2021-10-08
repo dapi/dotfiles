@@ -27,8 +27,11 @@ export TERM=xterm-256color #screen-256color
 # На mac-е не зачем устанавливать PATH, а вот на ubuntu нужно
 # export PATH=~/bin:~/.rbenv/bin:$PATH
 export GOPATH=~/go
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
 export PATH=~/bin:$PATH
-
+# export ANDROID_SDK_ROOT=/opt/android-sdk-linux/
+eval "$(goenv init -)"
 unsetopt correct_all
 
 # Set to this to use case-sensitive completion
@@ -41,7 +44,7 @@ BUNDLED_COMMANDS=(rubocop cap rake rails rspec)
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
-plugins=(ssh-agent nvm bundler git git-extras rbenv capistrano rake)
+plugins=(ssh-agent nvm bundler git git-extras rbenv capistrano rake rails rake-fast)
 
 if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
   plugins+=(brew brew-cask)
@@ -73,6 +76,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 
 alias v='vim $(fzf-tmux)'
 
+alias bitcoin-cli='docker exec -it bitcoind-node bitcoin-cli'
 
 # ###########
 # NVM section
