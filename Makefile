@@ -1,4 +1,4 @@
-all: submodules git zsh terminal
+all: submodules git zsh terminal vim
 
 submodules:
 	git submodule init
@@ -22,3 +22,6 @@ zsh: ~/.oh-my-zsh ~/.zshrc
 
 terminal:
 	open ./dapi.terminal
+
+vim:
+	test -f ~/.vimrc || ln -s ~/dotfiles/.vimrc ~/.vimrc
