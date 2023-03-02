@@ -61,6 +61,11 @@ Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-sensible'
 Plugin 'kien/rainbow_parentheses.vim'
 
+# Plugin 'tomlion/vim-solidity'
+
+Plugin 'othree/html5.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'evanleck/vim-svelte', {'branch': 'main'}
 
 " classpath.vim: Set 'path' from the Java class path
 " Plugin 'tpope/vim-classpath'
@@ -402,7 +407,6 @@ let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 nnoremap <leader>f mF:%!yarn run --silent eslint_d --stdin --fix-to-stdout<CR>`F
 
-Plugin 'othree/html5.vim'
 Plugin 'othree/xml.vim'
 Plugin 'slim-template/vim-slim'
 
