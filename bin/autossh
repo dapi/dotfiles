@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-while ! ssh $*
-do
-  echo 'reconnect ssh'
-  sleep 3
-done

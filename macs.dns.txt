@@ -1,2 +1,0 @@
-dns-sd -E
-hostname.NUMBER.members.btmm.icloud.com
