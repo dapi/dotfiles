@@ -61,7 +61,7 @@ Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-sensible'
 Plugin 'kien/rainbow_parentheses.vim'
 
-# Plugin 'tomlion/vim-solidity'
+" Plugin 'tomlion/vim-solidity'
 
 Plugin 'othree/html5.vim'
 Plugin 'pangloss/vim-javascript'

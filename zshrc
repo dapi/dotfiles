@@ -46,8 +46,9 @@ BUNDLED_COMMANDS=(rubocop cap rake rails rspec)
 # linux
 plugins=(ssh-agent nvm bundler git git-extras rbenv capistrano rake rails rake-fast)
 
+# Running on MacOS?
 if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
-  plugins+=(brew brew-cask)
+  plugins+=(brew)
 else
   # Add nothing
   # plugins+=()
