@@ -1,4 +1,4 @@
-all: submodules git zsh terminal vim vundle nvm rbenv goenv direnv ctags etc nvim
+all: submodules git zsh terminal vim vundle nvm rbenv goenv direnv ctags etc nvim ag
 
 submodules:
 	git submodule init
@@ -8,7 +8,7 @@ fonts:
 	cd fonts
 	./install.sh
 
-ctags:
+ctags: ~/.ctags
 	which ctags || brew install ctags
 
 git: ~/.gitconfig ~/.gitignore_global
@@ -81,4 +81,16 @@ direnv:
 ~/.tmux.conf:
 	ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 
-etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.ctags ~/.pryrc ~/.tmux.conf
+~/.psqlrc:
+	ln -s ~/dotfiles/psqlrc ~/.psqlrc
+
+~/.gemrc:
+	ln -s ~/dotfiles/gemrc ~/.gemrc
+
+~/.agignore:
+	ln -s ~/dotfiles/agignore ~/.agignore
+
+etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.pryrc ~/.tmux.conf ~/.psqlrc ~/.gemrc
+
+ag: ~/.agignore
+	which ag || brew insall ag
