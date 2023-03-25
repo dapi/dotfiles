@@ -3,8 +3,7 @@
 ## Установка
 
 ```zsh
-git clone git@github.com:dapi/dotfiles.git
-cd dotfiles
-make
+git clone git@github.com:dapi/dotfiles.git; cd dotfiles; make
+make fonts
 ```
 
