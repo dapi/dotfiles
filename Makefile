@@ -1,4 +1,4 @@
-all: submodules git zsh terminal vim vundle nvm rbenv goenv direnv ctags etc
+all: submodules git zsh terminal vim vundle nvm rbenv goenv direnv ctags etc nvim
 
 submodules:
 	git submodule init
@@ -29,14 +29,14 @@ zsh: ~/.oh-my-zsh ~/.zshrc
 	ln -s ~/dotfiles/zshrc ~/.zshrc
 
 terminal:
-	open ./dapi.terminal
+	@echo "open ./dapi.terminal"
 
 goenv: ~/.goenv
 ~/.goenv:
 	git clone https://github.com/syndbg/goenv.git ~/.goenv
 
 ~/.rbenv/plugins/ruby-build:
-	git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+	git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 rbenv: ~/.rbenv ~/.rbenv/plugins/ruby-build
 ~/.rbenv:
@@ -46,10 +46,16 @@ nvm: ~/.nvm
 ~/.nvm:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
+~/.config/nvim/init.vim:
+	ln -s ~/dotfiles/.vimrc ~/.config/nvim/init.vim
 ~/.vimrc:
 	ln -s ~/dotfiles/.vimrc ~/.vimrc
 
-vim: ~/.vimrc
+vim: ~/.vimrc ~/.vim/bundle/vundle
+	which vim || (brew install vim && vim -R +PluginInstall +qall)
+
+nvim: ~/.config/nvim/init.vim ~/.vim/bundle/vundle
+	which nvim || (brew install neovim && nvim -R +PluginInstall +qall)
 
 vundle: ~/.vim/bundle/vundle
 ~/.vim/bundle/vundle:

@@ -1,4 +1,0 @@
-export rvm_path="/home/danil/.rvm"
-export rvm_pretty_print_flag=1
-export rvm_trust_rvmrcs_flag=1
-rvm_auto_reload_flag=1
