@@ -44,7 +44,7 @@ nvm: ~/.nvm
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 ~/.config/nvim/init.vim:
-	ln -s ~/dotfiles/.vimrc ~/.config/nvim/init.vim
+	ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
 ~/.vimrc:
 	ln -s ~/dotfiles/.vimrc ~/.vimrc
 
