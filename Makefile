@@ -1,12 +1,8 @@
-all: submodules git zsh terminal vim vundle nvm rbenv goenv direnv ctags etc nvim ag
-
-submodules:
-	git submodule init
-	git submodule update
+all: fonts git zsh terminal vim vundle nvm rbenv goenv direnv ctags etc nvim ag
 
 fonts:
-	cd fonts
-	./install.sh
+	git clone https://github.com/powerline/fonts.git
+	(cd fonts; ./install.sh)
 
 ctags: ~/.ctags
 	which ctags || brew install ctags
@@ -14,11 +10,12 @@ ctags: ~/.ctags
 git: ~/.gitconfig ~/.gitignore_global
 	which git || brew install git
 
+# Copy to safe customize
 ~/.gitconfig:
-	ln -s ~/dotfiles/gitconfig ~/.gitconfig
+	cp ~/dotfiles/.gitconfig ~/.gitconfig
 
 ~/.gitignore_global:
-	ln -s ~/dotfiles/gitignore_global ~/.gitignore_global
+	ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global
 
 zsh: ~/.oh-my-zsh ~/.zshrc
 
@@ -26,7 +23,7 @@ zsh: ~/.oh-my-zsh ~/.zshrc
 	curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 ~/.zshrc:
-	ln -s ~/dotfiles/zshrc ~/.zshrc
+	ln -s ~/dotfiles/.zshrc ~/.zshrc
 
 terminal:
 	@echo "open ./dapi.terminal"
@@ -65,30 +62,30 @@ direnv:
 	which direnv || brew install direnv
 
 ~/.irbrc:
-	ln -s ~/dotfiles/irbrc ~/.irbrc
+	ln -s ~/dotfiles/.irbrc ~/.irbrc
 ~/.rdebugrc:
-	ln -s ~/dotfiles/rdebugrc ~/.rdebugrc
+	ln -s ~/dotfiles/.rdebugrc ~/.rdebugrc
 
 ~/.ackrc:
-	ln -s ~/dotfiles/ackrc ~/.ackrc
+	ln -s ~/dotfiles/.ackrc ~/.ackrc
 
 ~/.ctags:
-	ln -s ~/dotfiles/ctags ~/.ctags
+	ln -s ~/dotfiles/.ctags ~/.ctags
 
 ~/.pryrc:
-	ln -s ~/dotfiles/pryrc ~/.pryrc
+	ln -s ~/dotfiles/.pryrc ~/.pryrc
 
 ~/.tmux.conf:
-	ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
+	ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 
 ~/.psqlrc:
-	ln -s ~/dotfiles/psqlrc ~/.psqlrc
+	ln -s ~/dotfiles/.psqlrc ~/.psqlrc
 
 ~/.gemrc:
-	ln -s ~/dotfiles/gemrc ~/.gemrc
+	ln -s ~/dotfiles/.gemrc ~/.gemrc
 
 ~/.agignore:
-	ln -s ~/dotfiles/agignore ~/.agignore
+	ln -s ~/dotfiles/.agignore ~/.agignore
 
 etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.pryrc ~/.tmux.conf ~/.psqlrc ~/.gemrc
 
