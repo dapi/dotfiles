@@ -90,4 +90,4 @@ direnv:
 etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.pryrc ~/.tmux.conf ~/.psqlrc ~/.gemrc
 
 ag: ~/.agignore
-	which ag || brew insall ag
+	which ag || brew install ag
