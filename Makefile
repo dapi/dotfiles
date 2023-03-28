@@ -15,7 +15,7 @@ git: ~/.gitconfig ~/.gitignore_global
 	cp ~/dotfiles/.gitconfig ~/.gitconfig
 
 ~/.gitignore_global:
-	ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global
+	ln -fs ~/dotfiles/.gitignore_global ~/.gitignore_global
 
 zsh: ~/.oh-my-zsh ~/.zshrc
 
@@ -23,7 +23,7 @@ zsh: ~/.oh-my-zsh ~/.zshrc
 	curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 ~/.zshrc:
-	ln -s ~/dotfiles/.zshrc ~/.zshrc
+	ln -fs ~/dotfiles/.zshrc ~/.zshrc
 
 terminal:
 	@echo "open ./dapi.terminal"
@@ -44,9 +44,9 @@ nvm: ~/.nvm
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 ~/.config/nvim/init.vim:
-	ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
+	ln -fs ~/dotfiles/init.vim ~/.config/nvim/init.vim
 ~/.vimrc:
-	ln -s ~/dotfiles/.vimrc ~/.vimrc
+	ln -fs ~/dotfiles/.vimrc ~/.vimrc
 
 vim: ~/.vimrc ~/.vim/bundle/vundle
 	which vim || (brew install vim && vim -R +PluginInstall +qall)
@@ -62,30 +62,30 @@ direnv:
 	which direnv || brew install direnv
 
 ~/.irbrc:
-	ln -s ~/dotfiles/.irbrc ~/.irbrc
+	ln -fs ~/dotfiles/.irbrc ~/.irbrc
 ~/.rdebugrc:
-	ln -s ~/dotfiles/.rdebugrc ~/.rdebugrc
+	ln -fs ~/dotfiles/.rdebugrc ~/.rdebugrc
 
 ~/.ackrc:
-	ln -s ~/dotfiles/.ackrc ~/.ackrc
+	ln -fs ~/dotfiles/.ackrc ~/.ackrc
 
 ~/.ctags:
-	ln -s ~/dotfiles/.ctags ~/.ctags
+	ln -fs ~/dotfiles/.ctags ~/.ctags
 
 ~/.pryrc:
-	ln -s ~/dotfiles/.pryrc ~/.pryrc
+	ln -fs ~/dotfiles/.pryrc ~/.pryrc
 
 ~/.tmux.conf:
-	ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+	ln -fs ~/dotfiles/.tmux.conf ~/.tmux.conf
 
 ~/.psqlrc:
-	ln -s ~/dotfiles/.psqlrc ~/.psqlrc
+	ln -fs ~/dotfiles/.psqlrc ~/.psqlrc
 
 ~/.gemrc:
-	ln -s ~/dotfiles/.gemrc ~/.gemrc
+	ln -fs ~/dotfiles/.gemrc ~/.gemrc
 
 ~/.agignore:
-	ln -s ~/dotfiles/.agignore ~/.agignore
+	ln -fs ~/dotfiles/.agignore ~/.agignore
 
 etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.pryrc ~/.tmux.conf ~/.psqlrc ~/.gemrc
 
