@@ -34,7 +34,13 @@ call vundle#begin()
 " let Vundle manage Vundle
 " required! 
 
+Plugin 'editorconfig/editorconfig-vim' " Respect .editorconfig
+
+Plugin 'mfussenegger/nvim-dap' " DAP (Debug Adapter Protocol)
+Plugin 'mxsdev/nvim-dap-vscode-js'
+
 Plugin 'tpope/vim-pathogen'
+Plugin 'towolf/vim-helm'
 
 
 
@@ -54,6 +60,8 @@ Plugin 'editorconfig/editorconfig-vim'
 
 " Plugin 'fatih/vim-go'
 " set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+Plugin 'fatih/vim-go'
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 Plugin 'chr4/nginx.vim'
 
@@ -88,49 +96,14 @@ Plugin 'pangloss/vim-javascript'
 " Plugin 'Rename'
 
 " Evaluate Clojure buffers on load
-autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
-autocmd Syntax clojure EnableSyntaxExtension
-autocmd VimEnter *       RainbowParenthesesToggle
-autocmd Syntax   clojure RainbowParenthesesLoadRound
-autocmd Syntax   clojure RainbowParenthesesLoadSquare
-autocmd Syntax   clojure RainbowParenthesesLoadBraces
+"autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
+"autocmd Syntax clojure EnableSyntaxExtension
+"autocmd VimEnter *       RainbowParenthesesToggle
+"autocmd Syntax   clojure RainbowParenthesesLoadRound
+"autocmd Syntax   clojure RainbowParenthesesLoadSquare
+"autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
-" https://github.com/clojuredocs/guides/blob/master/articles/tutorials/vim_fireplace.md
-"
-" `cpr` (my mnemonic: clojure please require) takes the content from the active buffer and requires it inside the REPL.
-" `cpp` (my mnemonic: clojure please print) evaluates the outermost form under the cursor and prints it at the bottom of the screen.
-" `cqp` (my mnemonic: clojure quick print) gives you a one-line REPL prompt at the bottom of the screen (for quick one-liner evals).
-" cqc to bring up a command-line window similar to what you'd get with q: in normal Vim
-" `[` jumps to the definition for the symbol under your cursor, even if it’s inside the Clojure source!
-" `K` gives you documentation for symbol under cursor.
-" `:A` takes you to the test (if you’re in the implementation) or vice-versa,
-" and `:AS` or `:AV` gives it to you in a horizontal or vertical split.
-"
-" Hit % to jump to the matching paren.
-" Hit d% to delete the parens and everything they contain.
-" Hit y% to "yank"/copy the parens and everything in them.
-" Hit c% to delete the parens and the text they contain and start editing.
-" Hit v% to select the parens and the text they contain visually.
-"
-" Hit dab ("delete all block") to delete the entire form.
-" Hit cab ("change all block") to delete the entire form and enter insert mode.
-" Hit yab ("yank all block") to copy the entire form including parens.
-"
-" fireplace.vim: Clojure REPL support
-" Plugin 'tpope/vim-fireplace'
-
-" Sparkup lets you write HTML code faster. 
-" div#header expands to:   <div id="header"></div>
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" Legacy. Не используется из-за слабой поддержки ES6
-" Plugin 'jelera/vim-javascript-syntax'
-
-" YAJS.vim: Yet Another JavaScript Syntax for Vim
-
-" Plugin 'Quramy/tsuquyomi'
-" Plugin 'leafgarland/typescript-vim'
-Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'HerringtonDarkholme/yats.vim' " YATS: Yet Another TypeScript Syntax
 
 " Plugin 'randunel/vim-javascript'
 "
@@ -140,16 +113,20 @@ Plugin 'HerringtonDarkholme/yats.vim'
 "
 " Syntax file for JavaScript libraries. 
 Plugin 'isRuslan/vim-es6'
-" Plugin 'pangloss/vim-javascript'
 Plugin 'othree/yajs.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
-" Plugin 'othree/es.next.syntax.vim'
+
+" Make your Vim/Neovim as smart as VS Code
+" Не получилось с зависимостями, добить позже
+" Plugin 'neoclide/coc.nvim'
 
 let g:used_javascript_libs = 'react'
 
-" Vim plugin for managing ctags files
+" Tagman will only build tag files if a tag file already exists. You can enable tags for a project by running :BuildTags!.
 Plugin 'grassdog/tagman.vim'
-Plugin 'ludovicchabant/vim-gutentags'
+
+" Gutentags is a plugin that takes care of the much needed management of tags files in Vim. It will (re)generate tag files as you work while staying completely out of your way. It will even do its best to keep those tag files out of your way too. It has no dependencies and just works.
+Plugin 'ludovicchabant/vim-gutentags' " Automatic ctags management for Vim
 
 " Plugin 'kchmck/vim-coffee-script'
 " Plugin 'mtscout6/vim-cjsx'
@@ -508,9 +485,7 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>120v.\+/
 "match OverLength /\%81v.\+/
 
-" Show line numbers
-set nu
-
+set number " Shows the line numbers
 set list lcs=tab:\|\ 
 
 Plugin 'Yggdroot/indentLine'
@@ -671,4 +646,27 @@ endif
 
 if has('nvim')
   au VimLeave * set guicursor=a:ver10-blinkon1
+  set completeopt=noinsert,menuone,noselect " Modifies the auto-complete menu to behave more like an IDE.
+  set cursorline " Highlights the current line in the editor
+  set hidden " Hide unused buffers
+  set autoindent " Indent a new line
+  set inccommand=split " Show replacements in a split screen
+  set mouse=a " Allow to use the mouse in the editor
+  set splitbelow splitright " Change the split screen behavior
+  set title " Show file title
+  set wildmenu " Show a more advance menu
+  set cc=120 " Show at 80 column a border for good code style
+  filetype plugin indent on   " Allow auto-indenting depending on file type
+  syntax on
+  set spell " enable spell check (may need to download language package)
+  set ttyfast " Speed up scrolling in Vim
 endif
+
+" Вставляем символ TAB через Shift-TAB
+inoremap <S-Tab> <C-V><Tab>
+
+"
+autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml set ft=helm
+" Use {{/* */}} as comments
+autocmd FileType helm setlocal commentstring={{/*\ %s\ */}}
+
