@@ -10,10 +10,10 @@ if defined?(PryRails::RAILS_PROMPT)
   Pry.config.prompt = PryRails::RAILS_PROMPT
 end
 
-# Был pry-nav, заменили его на pry-byebug
-if defined?(PryByebug) || degined?(PryNav)
+# Был pry-nag, заменили его на pry-byebug
+if defined?(PryByebug) || defined?(PryNav)
   Pry.commands.alias_command 'c', 'continue'
   Pry.commands.alias_command 's', 'step'
   Pry.commands.alias_command 'n', 'next'
-  Pry.commands.alias_command 'f', 'finish'
+  # Pry.commands.alias_command 'f', 'finish'
 end
