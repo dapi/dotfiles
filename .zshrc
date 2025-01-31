@@ -19,7 +19,7 @@ echo 'Done'
 # Custom theme
 test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
 
-export EDITOR=vim
+export EDITOR=nvim
 export PGOPTIONS='--client-min-messages=warning'
 
 export TERM=xterm-256color #screen-256color
@@ -29,7 +29,7 @@ export TERM=xterm-256color #screen-256color
 export GOPATH=~/go
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
-export PATH=~/bin:$PATH
+export PATH=~/bin:~/.local/bin:$PATH
 # export ANDROID_SDK_ROOT=/opt/android-sdk-linux/
 eval "$(goenv init -)"
 unsetopt correct_all
@@ -110,3 +110,30 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+# The next line updates PATH for Yandex Cloud CLI.
+if [ -f '/home/danil/yandex-cloud/path.bash.inc' ]; then source '/home/danil/yandex-cloud/path.bash.inc'; fi
+
+# The next line enables shell command completion for yc.
+if [ -f '/home/danil/yandex-cloud/completion.zsh.inc' ]; then source '/home/danil/yandex-cloud/completion.zsh.inc'; fi
+
+export PATH=~/yandex-cloud/bin/:$PATH
+export HELM_EXPERIMENTAL_OCI=1
+
+# alias svpn="sudo openfortivpn -c ~/.forti"
+source <(helm completion zsh)
+
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+[[ -s "/home/danil/.gvm/scripts/gvm" ]] && source "/home/danil/.gvm/scripts/gvm"
+
+# bun completions
+[ -s "/home/danil/.bun/_bun" ] && source "/home/danil/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
+alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
