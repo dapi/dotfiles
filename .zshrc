@@ -44,7 +44,7 @@ BUNDLED_COMMANDS=(rubocop cap rake rails rspec)
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # linux
-plugins=(ssh-agent nvm bundler git git-extras rbenv capistrano rake rails rake-fast)
+plugins=(ssh-agent nvm bundler git git-extras rbenv capistrano rake rails rake-fast docker-compose docker kubectl)
 
 # Running on MacOS?
 if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
@@ -74,8 +74,6 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
-
-alias v='vim $(fzf-tmux)'
 
 alias bitcoin-cli='docker exec -it bitcoind-node bitcoin-cli'
 
@@ -129,6 +127,25 @@ source <(helm completion zsh)
 
 # bun completions
 [ -s "/home/danil/.bun/_bun" ] && source "/home/danil/.bun/_bun"
+export PATH=/Users/danil/.meteor:$PATH
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
+# export CONTEXT_NAME=your-context; export CLUSTER_NAME=your-cluster; kubectl config set-context ${CONTEXT_NAME} --cluster ${CLUSTER_NAME} --user dpismennyy
+# export KUBECONFIG=~/.kube/prod-config
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# eval "$(pyenv virtualenv-init -)"
+#
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# bun completions
+[ -s "/Users/danil/.bun/_bun" ] && source "/Users/danil/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -137,3 +154,27 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
+=======
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+
+alias v='nvim $(fzf-tmux)'
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="vim"
+alias vimdiff='nvim -d'
+
+test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
+
+export EDITOR=nvim
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+source <(stern --completion=zsh)
+
+alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${HOME}/.ssh:/root/.ssh" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
+
+# BEGIN SNIPPET: OVHcloud Web PaaS CLI configuration
+HOME=${HOME:-'/Users/danil'}
+export PATH="$HOME/"'.webpaas-cli/bin':"$PATH"
+if [ -f "$HOME/"'.webpaas-cli/shell-config.rc' ]; then . "$HOME/"'.webpaas-cli/shell-config.rc'; fi # END SNIPPET
+>>>>>>> 5275179 (Update .zshrc)
