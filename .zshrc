@@ -1,7 +1,3 @@
-# export LANG=ru_RU.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8 # Почему-то она не установлена в office
-
 ## Deprecated in grep
 unset GREP_OPTIONS
 
@@ -12,169 +8,29 @@ export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 # Nice default theme
 #export ZSH_THEME="agnoster"
 export ZSH_THEME="dapi-maran"
-eval "$(direnv hook zsh)"
-test -f ~/.local.zsh && source ~/.local.zsh
-echo 'Done'
-
 # Custom theme
-test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
+# test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
+
+test -f ~/.zsh.local && source ~/.zsh.local
 
 export EDITOR=nvim
 export PGOPTIONS='--client-min-messages=warning'
 
-export TERM=xterm-256color #screen-256color
+# eval "$(direnv hook zsh)"
+# eval "$(goenv init -)"
 
-# На mac-е не зачем устанавливать PATH, а вот на ubuntu нужно
-# export PATH=~/bin:~/.rbenv/bin:$PATH
-export GOPATH=~/go
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-export PATH=~/bin:~/.local/bin:$PATH
-# export ANDROID_SDK_ROOT=/opt/android-sdk-linux/
-eval "$(goenv init -)"
-unsetopt correct_all
+source "${ZDOTDIR:-${HOME}}/dotfiles/.zshrc-`uname`"
 
-# Set to this to use case-sensitive completion
-export CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
-export DISABLE_AUTO_UPDATE="true"
-
-BUNDLED_COMMANDS=(rubocop cap rake rails rspec)
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# linux
-plugins=(ssh-agent nvm bundler git git-extras rbenv capistrano rake rails rake-fast docker-compose docker kubectl)
-
-# Running on MacOS?
-if echo "$TERM_PROGRAM" | grep "Apple_Terminal\|iTerm.app" > /dev/null; then
-  plugins+=(brew)
-else
-  # Add nothing
-  # plugins+=()
-fi
+plugins=(autoupdate ssh-agent nvm bundler git git-extras rbenv capistrano direnv rake rails rake-fast docker-compose docker kubectl)
 
 # Должен вызываться после plugins
 source $ZSH/oh-my-zsh.sh
-# ###########
-# TMUX section
-# ###########
-
-alias tmux='direnv exec / tmux'
-
-if test -f ~/.tmux_auto; then
-  if test -z "$TMUX" ; then
-    /usr/local/bin/tmux attach && /usr/local/bin/tmux && echo "tmux failed to start"
-  fi
-fi
-
-# ###########
-# FZF section
-# ###########
+echo 'Plugins'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
-alias bitcoin-cli='docker exec -it bitcoind-node bitcoin-cli'
+echo 'Done'
 
-# ###########
-# NVM section
-# ###########
+unsetopt correct_all
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Calling nvm use automatically in a directory with a .nvmrc file
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
-# The next line updates PATH for Yandex Cloud CLI.
-if [ -f '/home/danil/yandex-cloud/path.bash.inc' ]; then source '/home/danil/yandex-cloud/path.bash.inc'; fi
-
-# The next line enables shell command completion for yc.
-if [ -f '/home/danil/yandex-cloud/completion.zsh.inc' ]; then source '/home/danil/yandex-cloud/completion.zsh.inc'; fi
-
-export PATH=~/yandex-cloud/bin/:$PATH
-export HELM_EXPERIMENTAL_OCI=1
-
-# alias svpn="sudo openfortivpn -c ~/.forti"
-source <(helm completion zsh)
-
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-
-[[ -s "/home/danil/.gvm/scripts/gvm" ]] && source "/home/danil/.gvm/scripts/gvm"
-
-# bun completions
-[ -s "/home/danil/.bun/_bun" ] && source "/home/danil/.bun/_bun"
-export PATH=/Users/danil/.meteor:$PATH
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-
-# export CONTEXT_NAME=your-context; export CLUSTER_NAME=your-cluster; kubectl config set-context ${CONTEXT_NAME} --cluster ${CLUSTER_NAME} --user dpismennyy
-# export KUBECONFIG=~/.kube/prod-config
-
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# eval "$(pyenv virtualenv-init -)"
-#
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-# bun completions
-[ -s "/Users/danil/.bun/_bun" ] && source "/Users/danil/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-export PATH="$PATH:/opt/nvim-linux64/bin"
-
-alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
-=======
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
-
-alias v='nvim $(fzf-tmux)'
-alias vim="nvim"
-alias vi="nvim"
-alias oldvim="vim"
-alias vimdiff='nvim -d'
-
-test -f ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh && ~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
-
-export EDITOR=nvim
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-
-source <(stern --completion=zsh)
-
-alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${HOME}/.ssh:/root/.ssh" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
-
-# BEGIN SNIPPET: OVHcloud Web PaaS CLI configuration
-HOME=${HOME:-'/Users/danil'}
-export PATH="$HOME/"'.webpaas-cli/bin':"$PATH"
-if [ -f "$HOME/"'.webpaas-cli/shell-config.rc' ]; then . "$HOME/"'.webpaas-cli/shell-config.rc'; fi # END SNIPPET
->>>>>>> 5275179 (Update .zshrc)
