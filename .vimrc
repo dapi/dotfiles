@@ -36,6 +36,12 @@ call vundle#begin()
 
 Plugin 'tpope/vim-pathogen'
 
+
+
+" :BenchVimrc
+" Plugin 'mattn/benchvimrc-vim'
+
+Plugin 'erikzaadi/vim-ansible-yaml'
 " set tabstop=2 shiftwidth=2 expandtab
 " retab
 Plugin 'pearofducks/ansible-vim'
@@ -46,8 +52,8 @@ au BufReadPost,BufNewFile playbook.yml set filetype=ansible
 
 Plugin 'editorconfig/editorconfig-vim'
 
-Plugin 'fatih/vim-go'
-set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+" Plugin 'fatih/vim-go'
+" set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 Plugin 'chr4/nginx.vim'
 
@@ -65,7 +71,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 
 Plugin 'othree/html5.vim'
 Plugin 'pangloss/vim-javascript'
-Plugin 'evanleck/vim-svelte', {'branch': 'main'}
+" Plugin 'evanleck/vim-svelte', {'branch': 'main'}
 
 " classpath.vim: Set 'path' from the Java class path
 " Plugin 'tpope/vim-classpath'
@@ -145,13 +151,13 @@ let g:used_javascript_libs = 'react'
 Plugin 'grassdog/tagman.vim'
 Plugin 'ludovicchabant/vim-gutentags'
 
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'mtscout6/vim-cjsx'
+" Plugin 'kchmck/vim-coffee-script'
+" Plugin 'mtscout6/vim-cjsx'
 
 " vim syntax for LESS (dynamic CSS)
 Plugin 'groenewege/vim-less'
 
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 Plugin 'elzr/vim-json'
@@ -179,7 +185,7 @@ Plugin 'tpope/vim-liquid'
 "<Leader>lg  - Opens buffer grep. - самая фишка
 "Plugin 'techlivezheng/vim-plugin-minibufexpl'
 
-"Plugin 'bling/vim-bufferline'
+Plugin 'bling/vim-bufferline'
 
 " Vim 'goto file' on steroids!
 " uses ctags and the_silver_searcher
@@ -211,7 +217,6 @@ Plugin 'tpope/vim-liquid'
       "\ }
 
 " My Plugins here:
-"
 " original repos on github
 Plugin 'altercation/vim-colors-solarized'
 let g:solarized_termcolors=256
@@ -267,7 +272,7 @@ Plugin 'tpope/vim-bundler'
 " Repeat.vim remaps . in a way that plugins can tap into it.
 "
 " Должен быть ДО easyclip
-" Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 
 " не подключился
 "Plugin 'svermeulen/vim-easyclip'
@@ -276,7 +281,7 @@ Plugin 'tpope/vim-bundler'
 " Plugin 'tpope/vim-fugitive'
 
 " Heuristically set buffer options
-" tpope/vim-sleuth
+Plugin 'tpope/vim-sleuth'
 
 " Want to turn fooBar into 
 " foo_bar? Press crs (coerce to snake_case).
@@ -645,16 +650,23 @@ set nobackup
 set nowb
 set noswapfile
 
+if has('persistent_undo')
+
+  if has('nvim')
+    silent !mkdir ~/.nvim/backups > /dev/null 2>&1
+    set undodir=~/.nvim/backups
+  else
+    silent !mkdir ~/.vim/backups > /dev/null 2>&1
+    set undodir=~/.vim/backups
+  endif
+  set undofile
+endif
+
 if !has('nvim')
   set ttymouse=xterm2
   " ================ Persistent Undo ==================
   " Keep undo history across sessions, by storing in file.
   " Only works all the time.
-  if has('persistent_undo')
-    silent !mkdir ~/.vim/backups > /dev/null 2>&1
-    set undodir=~/.vim/backups
-    set undofile
-  endif
 endif
 
 if has('nvim')
