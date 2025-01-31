@@ -253,7 +253,7 @@ Plug 'tpope/vim-bundler'
 " Plug 'tpope/vim-fugitive'
 
 " Heuristically set buffer options
-Plugin 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth'
 
 " Want to turn fooBar into 
 " foo_bar? Press crs (coerce to snake_case).
