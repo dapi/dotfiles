@@ -12,13 +12,6 @@ set clipboard=unnamed
 
 set encoding=utf-8
 
-"imap jk <Esc>
-"imap kj <Esc>
-"imap ;; <Esc>
-
-" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
-"imap ;; <Esc>
-
 set nocompatible                " be iMproved
 filetype off                    " required!
 
@@ -26,18 +19,8 @@ call plug#begin()
 
 Plug 'editorconfig/editorconfig-vim' " Respect .editorconfig
 
-if has('nvim')
-  Plug 'mfussenegger/nvim-dap' " DAP (Debug Adapter Protocol)
-  " Plug 'mxsdev/nvim-dap-vscode-js'
-endif
-
 Plug 'tpope/vim-pathogen'
 Plug 'towolf/vim-helm'
-
-
-
-" :BenchVimrc
-" Plugin 'mattn/benchvimrc-vim'
 
 Plug 'erikzaadi/vim-ansible-yaml'
 " set tabstop=2 shiftwidth=2 expandtab
@@ -51,8 +34,6 @@ au BufReadPost,BufNewFile */playbooks/*.yml,*/ansible*/*.yml,playbook.yml set fi
 "augroup END
 " au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
 " let g:ansible_unindent_after_newline = 0
-
-Plug 'editorconfig/editorconfig-vim'
 
 " Plugin 'fatih/vim-go'
 " set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
@@ -632,39 +613,10 @@ set nobackup
 set nowb
 set noswapfile
 
-if has('persistent_undo')
-  if has('nvim')
-    silent !mkdir ~/.nvim/backups > /dev/null 2>&1
-    set undodir=~/.nvim/backups
-  else
-    silent !mkdir ~/.vim/backups > /dev/null 2>&1
-    set undodir=~/.vim/backups
-  endif
-  set undofile
-endif
-
-if !has('nvim')
-  set ttymouse=xterm2
-  " ================ Persistent Undo ==================
-  " Keep undo history across sessions, by storing in file.
-  " Only works all the time.
-endif
-
 if has('nvim')
-  au VimLeave * set guicursor=a:ver10-blinkon1
-  set completeopt=noinsert,menuone,noselect " Modifies the auto-complete menu to behave more like an IDE.
-  set cursorline " Highlights the current line in the editor
-  set hidden " Hide unused buffers
-  set autoindent " Indent a new line
-  set inccommand=split " Show replacements in a split screen
-  set mouse=a " Allow to use the mouse in the editor
-  set splitbelow splitright " Change the split screen behavior
-  set title " Show file title
-  set wildmenu " Show a more advance menu
-  filetype plugin indent on   " Allow auto-indenting depending on file type
-  syntax on
-  set spell " enable spell check (may need to download language package)
-  set ttyfast " Speed up scrolling in Vim
+  source ~/dotfiles/vim/neovim.vim
+else
+  source ~/dotfiels/vim/classic.vim
 endif
 
 " Вставляем символ TAB через Shift-TAB
@@ -676,53 +628,7 @@ autocmd FileType yaml execute  ':silent! %s#^\t\+#\=repeat(" ", len(submatch(0))
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab nocindent smartindent
 "Plug 'stephpy/vim-yaml'
 autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
+autocmd BufNewFile,BufRead .envrc set ft=sh
 
 " Use {{/* */}} as comments
 autocmd FileType helm setlocal commentstring={{/*\ %s\ */}}
-
-lua <<EOF
-local dap = require('dap');
-dap.adapters["pwa-node"] = {
-  type = "server",
-  host = "localhost",
-  port = "${port}",
-  executable = {
-    command = "node",
-    -- 💀 Make sure to update this path to point to your installation
-    args = {os.getenv('HOME') .. "/code/js-debug/src/dapDebugServer.js", "${port}"},
-  }
-}
-dap.adapters.node2 = {
-  type = 'executable',
-  command = 'node',
-  args = {os.getenv('HOME') .. '/code/vscode-node-debug2/out/src/nodeDebug.js'},
-}
-dap.configurations.typescript = {
-  {
-    type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
-  },
-}
-dap.configurations.javascript = {
-  {
-    name = 'Launch',
-    type = 'node2',
-    request = 'launch',
-    program = '${file}',
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = 'inspector',
-    console = 'integratedTerminal',
-  },
-  {
-    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-    name = 'Attach to process',
-    type = 'node2',
-    request = 'attach',
-    processId = require'dap.utils'.pick_process,
-  },
-}
-EOF
