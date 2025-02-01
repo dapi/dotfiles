@@ -1,6 +1,7 @@
 all: fonts git zsh terminal vim vundle nvm rbenv goenv ctags etc nvim ag
 
 fonts:
+	brew install font-hack-nerd-font
 	git clone https://github.com/powerline/fonts.git
 	(cd fonts; ./install.sh)
 
@@ -102,3 +103,14 @@ etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.pryrc ~/.tmux.conf ~/.psqlrc ~/.gemrc
 
 ag: ~/.agignore
 	which ag || brew install ag
+
+fisher: fisher-install
+	fisher install jorgebucaran/autopair.fish
+	fisher install jorgebucaran/spark.fish
+	fisher install rbenv/fish-rbenv
+	fisher install jorgebucaran/nvm.fish
+	fisher install IlanCosman/tide 
+
+fisher-install:
+	which fisher || \
+		curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
