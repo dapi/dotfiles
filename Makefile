@@ -1,13 +1,17 @@
-all: fonts git zsh terminal vim vundle nvm rbenv goenv direnv ctags etc nvim ag
+all: fonts git zsh terminal vim vundle nvm rbenv goenv ctags etc nvim ag
 
 fonts:
 	git clone https://github.com/powerline/fonts.git
 	(cd fonts; ./install.sh)
 
-ctags: ~/.ctags
+ctags: ctags-install ~/.ctags
+
+ctags-install:
 	which ctags || brew install ctags
 
-git: ~/.gitconfig ~/.gitignore_global
+git: git-install ~/.gitconfig ~/.gitignore_global
+
+git-install:
 	which git || brew install git
 
 # Copy to safe customize
@@ -25,9 +29,6 @@ zsh: ~/.oh-my-zsh ~/.zshrc
 ~/.zshrc:
 	ln -fs ~/dotfiles/.zshrc ~/.zshrc
 
-terminal:
-	@echo "open ./dapi.terminal"
-
 goenv: ~/.goenv
 ~/.goenv:
 	git clone https://github.com/syndbg/goenv.git ~/.goenv
@@ -43,23 +44,33 @@ nvm: ~/.nvm
 ~/.nvm:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
-~/.config/nvim/init.vim:
-	ln -fs ~/dotfiles/init.vim ~/.config/nvim/init.vim
+~/.config/nvim:
+	ln -fs ~/dotfiles/nvim ~/.config/nvim
+
 ~/.vimrc:
 	ln -fs ~/dotfiles/.vimrc ~/.vimrc
 
-vim: ~/.vimrc ~/.vim/bundle/vundle
+vim: vim-install ~/.vimrc ~/.vim/bundle/vundle
+vim-install:
 	which vim || (brew install vim && vim -R +PluginInstall +qall)
 
-nvim: ~/.config/nvim/init.vim ~/.vim/bundle/vundle
-	which nvim || (brew install neovim && nvim -R +PluginInstall +qall)
+nvim: nvim-install nvim-config nvim-plugins
 
-vundle: ~/.vim/bundle/vundle
-~/.vim/bundle/vundle:
-	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+nvim-reinstall: nvim-clean nvim
 
-direnv:
-	which direnv || brew install direnv
+vim-colors:
+	test -f ~/.vim/colors && cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
+
+nvim-plugins:
+	nvim -R +PluginInstall +qall
+
+nvim-clean:
+	test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
+	
+nvim-config: vim-colors ~/.config/nvim ~/.vim/bundle/vundle
+
+nvim-install:
+	which nvim || brew install neovim
 
 ~/.irbrc:
 	ln -fs ~/dotfiles/.irbrc ~/.irbrc

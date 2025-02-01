@@ -4,14 +4,28 @@
 
 call plug#begin()
 
-" Plug 'ellisonleao/gruvbox.nvim'
+" Theme and visual
+"
 Plug 'dapi/gruvbox', { 'do': 'cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors' } 
+Plug 'bling/vim-airline'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-rooter'
+Plug 'folke/which-key.nvim'
+
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible' " a universal set of default
-Plug 'altercation/vim-colors-solarized'
-Plug 'bling/vim-airline'
 Plug 'sickill/vim-pasta' " This plugin remaps p and P (put command) in normal and visual mode to do context aware pasting
 Plug 'tpope/vim-sleuth' " Heuristically set buffer options ('shiftwidth' and 'expandtab')
+
+" Text manipulation
+Plug 'scrooloose/nerdcommenter' " Ctrl-C
+Plug 'mg979/vim-visual-multi' " Ctrl-N
+Plug 'tpope/vim-abolish' " Smart substitution :%s/Facility/Building/g
+Plug 'junegunn/vim-easy-align' " Enter to realign
+
+" Plug 'gorkunov/smartpairs.vim'
+" Plug 'Lokaltog/vim-easymotion'
+" Plug 'tpope/vim-repeat' Должен быть ДО easyclip
 
 
 " System adminstration
@@ -22,28 +36,12 @@ Plug 'towolf/vim-helm'
 Plug 'erikzaadi/vim-ansible-yaml'
 Plug 'pearofducks/ansible-vim'
 
-"""""""""""""""""""""
-" Motion helpers (TODO
-"
-
 """"""""""""""""""""""
 " Software Development
 "
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'yegappan/mru'
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/syntastic'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-abolish'
-Plug 'Shougo/vimproc.vim'
-Plug 'Yggdroot/indentLine'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-commentary'
-" Plug 'gorkunov/smartpairs.vim'
-" Plug 'Lokaltog/vim-easymotion'
-" Plug 'tpope/vim-repeat' Должен быть ДО easyclip
+Plug 'tpope/vim-surround' " Chanse surround by cs keystroke
+Plug 'scrooloose/syntastic' " Syntax highlighing
 
 
 """"""""""""""""""""""""
@@ -54,6 +52,11 @@ Plug 'ludovicchabant/vim-gutentags' " Automatic ctags management for Vim
 Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-calc'
+" Plug 'hrsh7th/cmp-spell'
 
 """""""""""""""""""""""""""
 " Ruby Development
@@ -76,7 +79,7 @@ Plug 'HerringtonDarkholme/yats.vim' " YATS: Yet Another TypeScript Syntax
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'othree/xml.vim'
 Plug 'slim-template/vim-slim'
-Plug 'prettier/vim-prettier'
+" Plug 'prettier/vim-prettier'
 " Plug 'jbgutierrez/vim-babel'
  
 " Syntax file for JavaScript libraries. 
@@ -97,4 +100,7 @@ Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-liquid'
 Plug 'fatih/vim-go'
 Plug 'elzr/vim-json'
+
+"""""""""""""""""""""
+
 call plug#end()

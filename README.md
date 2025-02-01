@@ -63,3 +63,8 @@ sed ':a; /\\$/N; s/\\\n//; ta'
 ```sh
 sed 's/[ \t]*$//'
 ```
+
+Организация файлов в .vimrc
+* https://smarttech101.com/organizing-neovim-configuration-files
+* https://tuckerchapman.com/posts/vimrc_organization/
+

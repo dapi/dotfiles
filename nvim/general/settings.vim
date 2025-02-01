@@ -1,140 +1,104 @@
-if !has("gui_running")
-  let g:gruvbox_italic=0
-endif
-colorscheme gruvbox
+set completeopt=noinsert,menuone,noselect " Modifies the auto-complete menu to behave more like an IDE.
+set cursorline " Highlights the current line in the editor
+set hidden " Hide unused buffers
+set smartindent
+set autoindent " Indent a new line
+set inccommand=split " Show replacements in a split screen
+set mouse=a " Allow to use the mouse in the editor
+set splitbelow splitright " Change the split screen behavior
+set title " Show file title
+set ttyfast " Speed up scrolling in Vim
+
+
+syntax enable       " Enable syntax highlighting
+set number " Shows the line numbers
+set list lcs=tab:\|\ 
+set clipboard=unnamed
+
+" Allow auto-indenting depending on file type
+filetype on         " Enable filetype detection
+filetype indent on  " Enable filetype-specific indenting
+filetype plugin on  " Enable filetype-specific plugins
+
+set showmode
+
+" Автодополнение как в bash
+set wildmode=longest,list,full
+set wildmenu
+
+
+" airline
+set laststatus=2
+set autowrite                  " automatically write a file when leaving a modified buffer
+set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
+
+set encoding=utf-8
+set nocompatible                " be iMproved
+set pumheight=10 " Popup menu
+
+set iskeyword+=-
+
+" Отключаем подстветку найденных вариантов, и так всё видно.
+set nohlsearch
+
+" case insensitive search
+set smartcase
+set ignorecase
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+set tags+=gems.tags
+set fileformat=unix
+
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+" Show extra spaces
+" set list listchars+=eol:↴,tab:>·,trail:-,extends:>,precedes:<,space:␣
+
+
 
 set wildignore+=*.log,*.o,*.obj,.git,*.rbc,*.class,.svn,.sass-cache/*,solr/*,*tags,*.lock
 set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/* " ,*/node_modules/*,*/dist/*
-" set wildignore+=*/vendor/gems/*,*/vendor/static/* " ,*/vendor/assets/*
 set wildignore+=public/*
-" set wildignore+=*/scripts/*,*/doc/*,*/bin/*
 set wildignore+=*/doc/*,*/bin/*
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-au BufReadPost,BufNewFile */playbooks/*.yml,*/ansible*/*.yml,playbook.yml set filetype=yaml.ansible
-"augroup ansible_vim_fthosts
-  "autocmd!
-  "autocmd BufNewFile,BufRead hosts setfiletype yaml.ansible
-"augroup END
-" au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
-" let g:ansible_unindent_after_newline = 0
+set autochdir
 
-
-
-" From 'fatih/vim-go'
-set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
-
-nnoremap <silent> <C-p> :FZF<cr>
-
-"let g:airline_enable_syntastic = 1
-"let g:airline#extensions#syntastic#enabled = 1
-" only on mac
-let g:airline_powerline_fonts = 1
-let g:airline_exclude_preview = 1
-
-let g:used_javascript_libs = 'react'
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-
-let g:solarized_termcolors=256
-let g:indentLine_color_term = 239
-let g:indentLine_char = '|' " ¦, ┆
-
-" Plug 'AndrewRadev/splitjoin.vim'
-let g:splitjoin_ruby_hanging_args = 1
-let g:splitjoin_ruby_curly_braces = 0
-
-" Включить <Leader>ig
-" Из Plug 'nathanaelkane/vim-indent-guides'
-hi IndentGuidesOdd  ctermbg=235 
-hi IndentGuidesEven ctermbg=4
-
-vmap <Enter> :EasyAlign<CR>
-nmap ga :EasyAlign<CR>
-" vip<Enter>=
-" gaip=
-
-" Plug 'godlygeek/tabular'
-" nmap <Leader>a= :Tabularize /=<CR>
-" vmap <Leader>a= :Tabularize /=<CR>
-" nmap <Leader>a: :Tabularize /:\zs<CR>
-" vmap <Leader>a: :Tabularize /:\zs<CR>
-
-" Ему нужен tabular
-" Plug 'plasticboy/vim-markdown'
-
-" Plug 'mbbill/undotree'
-
-" Vim Workspace Controller
-" Это та самая штука, которая выводит количество файлов табе буффера
-" Plug 'szw/vim-ctrlspace'
-" :ls - список буферов
-" o Jump to File List (aka Open List)
-" O Jump to File List (aka Open List) in Search Mode
-" l Jump to Tab List
-" L Jump to Tab List in Search Mode
-"
-"
-" Противная опция держит файл открытым,
-" в то время когда ты его уже не редактируешь
-" set hidden
-
-"https://github.com/majutsushi/tagbar/wiki#coffeescript
-let g:tlist_coffee_settings = 'coffee;f:function;v:variable'
-"let g:CoffeeAutoTagFile=<filename>       " Name of the generated tag file (Default: ./tags)
-"let g:CoffeeAutoTagIncludeVars=<0 or 1>  " Includes variables (Default: 0 [false])
-"let g:CoffeeAutoTagTagRelative=<0 or 1>  " Sets file names to the relative path from the tag file location to the tag file location (Default: 1 [true])
-
-syntax on
-"set t_Co=256
-"
-" С такой настройкой нормльно работает фон в tmux на vagrant-е
-" set term=screen-256color
-"set term=xterm-256color
-"set list lcs=tab:' '
-"http://andrew.stwrt.ca/posts/vim-ctags
-":CtrlPTag
-set tags+=gems.tags
-set fileformat=unix
+set spelllang=en_us
+set spell " enable spell check (may need to download language package)
+set complete+=kspell
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>120v.\+/
 "match OverLength /\%81v.\+/
 
-set number " Shows the line numbers
-set list lcs=tab:\|\ 
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
-" Plug 'michaeljsmith/vim-indent-object'
-" <count>ai         (A)n (I)ndentation level and line above.
-" <count>ii         (I)nner (I)ndentation level (no line above).
-" <count>aI         (A)n (I)ndentation level and lines above/below.
-" <count>iI         (I)nner (I)ndentation level (no lines above/below).
+" highlight yank
+" source: https://smarttech101.com/how-to-configure-neovim#treat-dash-separated-words-as-a-word-text-object
+"
+lua << EOF
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+EOF
 
-" Plug 'tpope/vim-markdown'
-
-" let g:loaded_syntastic_vim_vimlint_checker = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_debug=1
-"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-"let g:syntastic_ruby_checkers = ['mri', 'reek']
-let g:syntastic_aggregate_errors = 1
-" If you have installed Tim Pope’s unimpaired plugin, you can jump between
-" errors using ]l and [l.
-" /uni
-" setup Syntastic to automatically load errors into the location list
-" нужно чтобы :lnext сразу работало после отрытия
-let g:syntastic_always_populate_loc_list = 1
-" Read :h location-list for a complete list of commands.
-"let g:syntastic_auto_loc_list = 1
-"check for errors when a file is loaded into Vim
-let g:syntastic_check_on_open = 1
-" check on writing
-let g:syntastic_check_on_wq = 0
-" :Errors
-" :lclose
-" next/prev errors :lnext, :lprev
-let g:syntastic_javascript_checkers = ['eslint --quiet']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'   
-
+" Window title
+let &titlestring = expand('%:~') . ' — nvim'
+autocmd FileType man let &titlestring = expand('%:t') . ' — nvim'
+set title
