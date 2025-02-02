@@ -30,16 +30,21 @@
   status = auto
   ui = auto
   pager = true
-
+[color "status"]
+  added = green
+  changed = red bold
+  untracked = magenta bold
+[color "branch"]
+  remote = yellow
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
 [status]
   submoduleSummary = true
   renames = true
-
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+[init]
+  defaultBranch = master
+[color "diff"]
+  meta = blue
+  old = black red strike
+  new = black green italic
+  context = yellow bold
