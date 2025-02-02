@@ -115,6 +115,7 @@ fisher-plugins:
 	fisher install rbenv/fish-rbenv
 	fisher install jorgebucaran/nvm.fish
 	fisher install IlanCosman/tide 
+	fisher install danhper/fish-ssh-agent
 
 fisher-install:
 	which fisher || \
