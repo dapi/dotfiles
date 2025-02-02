@@ -1,4 +1,7 @@
 
+autocmd FileType gitcommit set textwidth=72
+autocmd FileType gitcommit set colorcolumn=73
+
 au VimLeave * set guicursor=a:ver10-blinkon1
 "
 " autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml set ft=helm

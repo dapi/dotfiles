@@ -1,11 +1,3 @@
-" let g:airline_theme='tomorrow'
-let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
-
-let g:airline_enable_syntastic = 1
-" only on mac
-let g:airline_powerline_fonts = 1
-let g:airline_exclude_preview = 1
-
 let g:used_javascript_libs = 'react'
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 

@@ -7,7 +7,11 @@ call plug#begin()
 " Theme and visual
 "
 Plug 'dapi/gruvbox', { 'do': 'cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors' } 
-Plug 'bling/vim-airline'
+
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'nvim-tree/nvim-web-devicons'
+
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-rooter'
 Plug 'folke/which-key.nvim'
@@ -104,3 +108,9 @@ Plug 'elzr/vim-json'
 """""""""""""""""""""
 
 call plug#end()
+
+lua << END
+require('lualine').setup {
+  options = { theme = 'gruvbox' }
+}
+END
