@@ -9,7 +9,6 @@ set splitbelow splitright " Change the split screen behavior
 set title " Show file title
 set ttyfast " Speed up scrolling in Vim
 
-
 syntax enable       " Enable syntax highlighting
 set number " Shows the line numbers
 set list lcs=tab:\|\ 
@@ -31,6 +30,9 @@ set wildmenu
 set laststatus=2
 set autowrite                  " automatically write a file when leaving a modified buffer
 set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 set encoding=utf-8
 set nocompatible                " be iMproved
@@ -60,17 +62,12 @@ set tabstop=2
 
 " Show extra spaces
 " set list listchars+=eol:↴,tab:>·,trail:-,extends:>,precedes:<,space:␣
-
-
+set list listchars+=tab:>·,trail:-,extends:>,precedes:<
 
 set wildignore+=*.log,*.o,*.obj,.git,*.rbc,*.class,.svn,.sass-cache/*,solr/*,*tags,*.lock
 set wildignore+=*/images/*,*/tmp/*,*/coverage/*,*/uploads/* " ,*/node_modules/*,*/dist/*
 set wildignore+=public/*
 set wildignore+=*/doc/*,*/bin/*
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 set autochdir
 
@@ -78,11 +75,10 @@ set spelllang=en_us
 set spell " enable spell check (may need to download language package)
 set complete+=kspell
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%>120v.\+/
-"match OverLength /\%81v.\+/
+" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" match OverLength /\%>120v.\+/
 
-set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+"set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 " highlight yank
 " source: https://smarttech101.com/how-to-configure-neovim#treat-dash-separated-words-as-a-word-text-object
