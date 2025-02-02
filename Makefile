@@ -68,7 +68,7 @@ nvim-plugins:
 nvim-clean:
 	test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
 	
-nvim-config: vim-colors ~/.config/nvim ~/.vim/bundle/vundle
+nvim-config: ~/.config/nvim ~/.vim/bundle/vundle
 
 nvim-install:
 	which nvim || brew install neovim
@@ -107,6 +107,9 @@ ag: ~/.agignore
 tide-configure:
 	tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
 
+fish-config:
+	ln -s ~/dotfiles/fish/conf.d/ ~/.config/fish
+	ln -s ~/dotfiles/fish/fish_variables ~/.config/fish
 fisher: fisher-install fisher-plugins
 
 fisher-plugins:
@@ -116,6 +119,7 @@ fisher-plugins:
 	fisher install jorgebucaran/nvm.fish
 	fisher install IlanCosman/tide 
 	fisher install danhper/fish-ssh-agent
+	fisher install halostatue/fish-direnv
 
 fisher-install:
 	which fisher || \
