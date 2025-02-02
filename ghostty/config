@@ -2,10 +2,23 @@ keybind = super+shift+r=reload_config
 keybind = cmd+shift+left=previous_tab
 keybind = cmd+shift+right=next_tab
 
-theme = Broadcast
+font-family = Driod Sans Mono Dotted for Powerline
+font-size = 17
+
+# theme = Broadcast
+# theme = dapi
+theme = GruvboxDark
+background = #121800
+foreground = #c4dc00
+
+cursor-color = #f2d5cf
+cursor-text = #FEFF00
+
+selection-background = #2F3800
+selection-foreground = #FEFF00
 
 # Appearance and Tabs
-# macos-titlebar-style = tabs
+# macos-titlebarZstyle = tabs
 macos-titlebar-style = transparent
 macos-option-as-alt = true
 
@@ -13,9 +26,10 @@ mouse-hide-while-typing = true
 
 window-padding-balance = true
 window-save-state = always
-window-decoration = false
 
 shell-integration = fish
 shell-integration-features = cursor,sudo,title
+
+quit-after-last-window-closed=true
 
 # copy-on-select = clipboard
