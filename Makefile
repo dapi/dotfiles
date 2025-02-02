@@ -15,6 +15,9 @@ brew:
 
 git: git-install ~/.gitconfig ~/.gitignore_global
 
+ghostty-copy-terminfo:
+	infocmp -x | ssh office.brandymint.ru -- tic -x -
+
 git-install:
 	which git || brew install git
 

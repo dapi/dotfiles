@@ -7,3 +7,4 @@ export PAGER=/opt/homebrew/bin/nvimpager
 export MANPAGER=/opt/homebrew/bin/nvimpager
 
 alias less=$PAGER
+alias office="ssh office.brandymint.ru"
