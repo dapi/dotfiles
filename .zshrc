@@ -29,3 +29,6 @@ export PGOPTIONS='--client-min-messages=warning'
 unset GREP_OPTIONS
 
 export TERM=xterm-256color
+
+# Created by `pipx` on 2025-02-02 18:43:53
+export PATH="$PATH:/home/danil/.local/bin"
