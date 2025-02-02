@@ -1,4 +1,4 @@
-set -x PATH $PATH ~/.rbenv/bin
+# set -x PATH $PATH ~/.rbenv/bin
 if not command -s rbenv > /dev/null
     echo "rbenv: command not found. See https://github.com/rbenv/rbenv"
     exit 1

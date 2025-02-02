@@ -1,5 +1,6 @@
 set -gx LESS -eiRMX
 set -x KUBECONFIG ~/.kube/config:~/.kube/ovh-kubeconfig.yml
+set -x PATH $PATH ~/.local/bin
 
 # nvimpager не умеет переходить в редактор по v как это делает less
 #
