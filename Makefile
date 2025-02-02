@@ -108,8 +108,9 @@ tide-configure:
 	tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
 
 fish-config:
-	ln -s ~/dotfiles/fish/conf.d/ ~/.config/fish
-	ln -s ~/dotfiles/fish/fish_variables ~/.config/fish
+	ln -s ~/dotfiles/fish/conf.d/ ~/.config/fish/
+	ln -s ~/dotfiles/fish/config.fish ~/.config/fish/
+
 fisher: fisher-install fisher-plugins
 
 fisher-plugins:
