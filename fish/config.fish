@@ -3,8 +3,11 @@ if status is-interactive
 end
 set -g fish_greeting
 
-export PAGER=/opt/homebrew/bin/nvimpager
-export MANPAGER=/opt/homebrew/bin/nvimpager
+if [ `uname` = "Darwin" ]; then
+    export PAGER=/opt/homebrew/bin/nvimpager
+    export MANPAGER=/opt/homebrew/bin/nvimpager
+end
+
 export TERM=xterm-256color
 export KUBECONFIG=~/.kube/config:~/.kube/ovh-kubeconfig.yml
 
