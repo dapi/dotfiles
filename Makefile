@@ -107,7 +107,9 @@ ag: ~/.agignore
 tide-configure:
 	tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
 
-fisher: fisher-install
+fisher: fisher-install fisher-plugins
+
+fisher-plugins:
 	fisher install jorgebucaran/autopair.fish
 	fisher install jorgebucaran/spark.fish
 	fisher install rbenv/fish-rbenv
@@ -116,4 +118,4 @@ fisher: fisher-install
 
 fisher-install:
 	which fisher || \
-		curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+		(curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher)
