@@ -60,7 +60,7 @@ nvim: nvim-install nvim-config nvim-plugins
 nvim-reinstall: nvim-clean nvim
 
 vim-colors:
-	test -f ~/.vim/colors && cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors
+	test -f ~/.vim/colors || (mkdir ~/.vim/colors && cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors)
 
 nvim-plugins:
 	nvim -R +PluginInstall +qall
