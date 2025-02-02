@@ -10,6 +10,9 @@ ctags: ctags-install ~/.ctags
 ctags-install:
 	which ctags || brew install ctags
 
+brew:
+	brew install nvimpager
+
 git: git-install ~/.gitconfig ~/.gitignore_global
 
 git-install:
@@ -29,6 +32,9 @@ zsh: ~/.oh-my-zsh ~/.zshrc
 
 ~/.zshrc:
 	ln -fs ~/dotfiles/.zshrc ~/.zshrc
+
+ghostty-configure:
+	ghostty +show-config --default --docs | nvim
 
 goenv: ~/.goenv
 ~/.goenv:
