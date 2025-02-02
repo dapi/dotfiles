@@ -104,6 +104,9 @@ etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.pryrc ~/.tmux.conf ~/.psqlrc ~/.gemrc
 ag: ~/.agignore
 	which ag || brew install ag
 
+tide-configure:
+	tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
+
 fisher: fisher-install
 	fisher install jorgebucaran/autopair.fish
 	fisher install jorgebucaran/spark.fish
