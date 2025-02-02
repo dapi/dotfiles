@@ -1,0 +1,21 @@
+keybind = super+shift+r=reload_config
+keybind = cmd+shift+left=previous_tab
+keybind = cmd+shift+right=next_tab
+
+theme = Broadcast
+
+# Appearance and Tabs
+# macos-titlebar-style = tabs
+macos-titlebar-style = transparent
+macos-option-as-alt = true
+
+mouse-hide-while-typing = true
+
+window-padding-balance = true
+window-save-state = always
+window-decoration = false
+
+shell-integration = fish
+shell-integration-features = cursor,sudo,title
+
+# copy-on-select = clipboard

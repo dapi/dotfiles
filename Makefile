@@ -120,6 +120,9 @@ fish-config:
 	ln -s ~/dotfiles/fish/conf.d/ ~/.config/fish/
 	ln -s ~/dotfiles/fish/config.fish ~/.config/fish/
 
+ghostty-config:
+	ln -s ~/dotfiles/ghostty ~/.config/
+
 fisher: fisher-install fisher-plugins
 
 fisher-plugins:
