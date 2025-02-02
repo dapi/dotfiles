@@ -37,7 +37,6 @@ Plug 'junegunn/vim-easy-align' " Enter to realign
 """""""""""""""""""
 Plug 'chr4/nginx.vim'
 Plug 'towolf/vim-helm'
-Plug 'erikzaadi/vim-ansible-yaml'
 Plug 'pearofducks/ansible-vim'
 
 """"""""""""""""""""""
