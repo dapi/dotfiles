@@ -27,3 +27,5 @@ export PGOPTIONS='--client-min-messages=warning'
 
 ## Deprecated in grep
 unset GREP_OPTIONS
+
+export TERM=xterm-256color
