@@ -40,6 +40,8 @@ mouse-hide-while-typing = true
 
 window-padding-balance = true
 window-save-state = always
+fullscreen = true
+# macos-non-native-fullscreen = true
 
 shell-integration = fish
 shell-integration-features = cursor,sudo,title
