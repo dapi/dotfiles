@@ -1,3 +1,4 @@
+set -x PATH $PATH ~/.rbenv/bin
 if not command -s rbenv > /dev/null
     echo "rbenv: command not found. See https://github.com/rbenv/rbenv"
     exit 1
@@ -16,3 +17,5 @@ set -x RBENV_SHELL fish
 if test ! -d "$rbenv_root/shims"; or test ! -d "$rbenv_root/versions"
     command mkdir -p $rbenv_root/{shims,versions}
 end
+
+eval "$(rbenv init - --no-rehash fish)"
