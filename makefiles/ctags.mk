@@ -1,4 +1,4 @@
-ctags: ctags-install ~/.ctags
+ctags: ctags-install .ctags
 
 ctags-install:
-	${MAKE} install-tool ctags
+	${MAKE} install-tool TOOL=ctags

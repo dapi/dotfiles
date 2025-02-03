@@ -11,8 +11,9 @@ link-config: backup-config
 	@test ! -e ${CONFIG_PATH} && ln -s ${MY_CONFIG_PATH} ${CONFIG_PATH} || true
 
 link-home-config: 
-	@echo "Link home config ${FILE}"
-	@test ! -e ~/${FILE} && ln -s ~/dotfiles/${FILE} ~/
+	@echo "Link home config ~/${FILE}"
+	@$(MAKE) backup-config CONFIG_PATH=~/${FILE} MY_CONFIG_PATH=~/dotfiles/${FILE}
+	@test ! -e ~/${FILE} && ln -s ~/dotfiles/${FILE} ~/ || true
 
 install-tool:
 	@echo "Install ${TOOL}"

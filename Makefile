@@ -1,11 +1,12 @@
 TEMP_DATE:=$(shell date "+%F-%T")
 HOMEBREW_NO_AUTO_UPDATE=1
 
-include makefiles/shared.mk makefiles/ghostty.mk makefiles/nvim.mk makefiles/vim.mk makefiles/fish.mk makefiles/fonts.mk makefiles/zsh.mk makefiles/git.mk
+include makefiles/*.mk
 
-all: fonts git zsh terminal vim vundle nvm rbenv goenv ctags etc nvim ag dotfiles fish
+.DEFAULT_GOAL := all
+all: fonts git zsh vim nvm rbenv goenv ctags nvim ag dotfiles fish ghostty
 
-update: git-pull fonts fish nvim ghostty
+update: git-pull all
 
 sshbg:
 	curl https://github.com/fboender/sshbg/blob/855ade6b3c4f9f54ffb739aaf71a2e9baa8cf170/sshbg > ~/.bin/sshbg
