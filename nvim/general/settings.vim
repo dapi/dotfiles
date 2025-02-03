@@ -71,9 +71,10 @@ set wildignore+=*/doc/*,*/bin/*
 
 set autochdir
 
-set spelllang=en_us
-set spell " enable spell check (may need to download language package)
-set complete+=kspell
+" set spelllang=en_us
+" set spell " enable spell check (may need to download language package)
+" set complete+=kspell
+" autocmd FileType yaml,json setlocal nospell
 
 " highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " match OverLength /\%>120v.\+/
