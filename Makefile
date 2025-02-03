@@ -1,4 +1,5 @@
 TEMP_DATE:=$(shell date "+%F-%T")
+MAKEFLAGS += --no-print-directory
 HOMEBREW_NO_AUTO_UPDATE=1
 
 include makefiles/*.mk

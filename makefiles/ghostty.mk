@@ -1,4 +1,9 @@
-ghostty: ghostty-install ghostty-config
+ghostty:
+	ifeq ($(UNAME_S),Darwin)
+	@$(MAKE) ghostty-macos
+	endif
+
+ghostty-macos: ghostty-install ghostty-config
 
 ghostty-install:
 	@$(MAKE) install-tool TOOL=ghostty
