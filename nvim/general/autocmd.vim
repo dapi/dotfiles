@@ -10,16 +10,19 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab nocindent smartindent
 "Plug 'stephpy/vim-yaml'
 autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
 autocmd BufNewFile,BufRead .envrc set ft=sh
+au BufReadPost,BufNewFile *.yml.gotmpl set filetype=yaml
+au BufReadPost,BufNewFile *.yaml.gotmpl set filetype=yaml
 
 " Use {{/* */}} as comments
 autocmd FileType helm setlocal commentstring={{/*\ %s\ */}}
 
 au BufRead,BufNewFile {Makefile} set filetype=make
 au BufRead,BufNewFile Makefile set filetype=make
-au BufRead,BufNewFile *.tsx set filetype=typescript
+au BufRead,BufNewFile *.tsx set filetype=typescript noet ci pi sts=0 sw=2 ts=2
 " au BufReadPost,BufNewFile {Makefile} setlocal noexpandtab shiftwidth=8 softtabstop=0
 
-au BufRead,BufNewFile *.hamlc set filetype=haml
+au BufRead,BufNewFile *.hamlc setlocal filetype=haml
+au BufRead,BufNewFile *.env.* setlocal filetype=sh
 au BufRead,BufNewFile {Guardfile,Gemfile.lock,Procfile,config.ru} set ft=ruby
 au BufRead,BufNewFile *.sql setf pgsql
 au BufRead,BufNewFile *.cjsx set filetype=coffee

@@ -37,6 +37,7 @@ Plug 'junegunn/vim-easy-align' " Enter to realign
 """""""""""""""""""
 Plug 'chr4/nginx.vim'
 Plug 'towolf/vim-helm'
+Plug 'mattn/vim-gotmpl' " ДОбавляет au! BufRead,BufNewFile *.tmpl setlocal filetype=gohtmltmpl, не факт что нужен
 Plug 'pearofducks/ansible-vim'
 
 """"""""""""""""""""""
