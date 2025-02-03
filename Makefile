@@ -1,6 +1,11 @@
+TEMP_DATE:=$(shell date "+%F-%T")
+
 all: fonts git zsh terminal vim vundle nvm rbenv goenv ctags etc nvim ag
 
-update: fonts fish nvim ghostty
+update: git-pull fonts fish nvim ghostty
+
+git-pull:
+	git pull
 
 fonts: hack-nerd-font
 
@@ -80,8 +85,6 @@ nvim-plug-install:
 	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim-plugins-install:
 	nvim -R +PlugInstall +qall
-
-TEMP_DATE:=$(shell date "+%F-%T")
 
 # If there is ~./config/nvim not linked to ~/dotfiles - backup it
 nvim-check-and-backup:
@@ -166,7 +169,7 @@ fish-backup-config:
 fisher: fisher-install fisher-plugins
 
 fisher-plugins:
-	./install-fish-plugins.fish
+	./scripts/install-fish-plugins.fish
 
 fisher-install:
-	./install-fisher.fish
+	./scripts/install-fisher.fish

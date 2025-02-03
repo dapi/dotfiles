@@ -1,76 +1,50 @@
-# Любимые настроечки для MacOS
+# Настроечки для разоработчки и администрирования под MacOS/Linux
 
-Используются, в основном, для консольной разработки.
+Меня зовут Данил и я занимаюсь веб-разработкой и администрированием. У меня много компьютеров с операционной системой MacOS/Linux между которыми я
+перемещаюсь в течении недели. Некоторые компьютеры это сервера без GUI, которым, например не требуется терминал типа `ghostty`. 
+
+Я стараюсь держать на всех компьютерах держать идентичный набор настроек и
+плагинов для:
+
+* `nvim/vim`
+* `fish/zsh`
+* `goenv/rbenv/nvm`
+* `tmux`
+* `git`
+* Разработка под ruby: `.gemrc, .pryrc, .irbrc, .rdebugrc`
+*** `ag`
+* Шрифты для macos
+
+Для этого я склонировал этот репозиторий на все свои компьютеры. Когда необходимо
+что-то изменить, я меняю на том компьютере на котормо нахожусь, комичу и пушаю в
+репозиторий, а затем на остальных компах делаю `make update`.
+
+# Первоначальная устновка
+
+У Вас должен уже стоять `make` и `git`
 
 ## Установка
 
-У Вас должен уже стоять `make` и `git`, а затем:
-
-```zsh
-curl -o- https://raw.githubusercontent.com/dapi/dotfiles/v0.1.1/install.sh | bash
-```
-
-или почти руками:
-
-```zsh
-cd ~
-git clone git@github.com:dapi/dotfiles.git
-cd ~/dotfiles
-make
-```
-
-## Подсказки
-
-
-Суммирование значений столбца:
+Вариант #1
 
 ```sh
-awk '{ total+=$9;} END { print total }'
+curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/install.sh | bash
 ```
 
-Массовое изменение текста в файлах:
+Вариант #2
 
 ```sh
-perl -i.bak -p -e 's/xyz\.rice\.edu/abc.rice.edu/ig' *.html
+cd ~; git clone git@github.com:dapi/dotfiles.git; cd ~/dotfiles; make
 ```
 
-Выполнение команды раз в сек. и перерисовка результата:
+# Использование
 
-```sh
-watch -n1 "cat /proc/interrupts"
-```
+# TODO
 
-Из десятичного в шестнадцатеричный вид:
+* Сделать `make` по умолчанию и для установки и для обновления
 
-```sh
-echo "obase=16;ibase=10;123" | bc
-```
+## Управление фоном терминала в зависимости от ssh-сессии
 
-Удаление комментариев и пустых строк:
-
-```sh
-sed '/ *#/d; /^ *$/d'
-```
-
-Объединение строк разделенных символом \
-
-```sh
-sed ':a; /\\$/N; s/\\\n//; ta'
-```
-
-Удаление граничных пробелов и табуляций:
-
-```sh
-sed 's/[ \t]*$//'
-```
-
-Организация файлов в .vimrc
-* https://smarttech101.com/organizing-neovim-configuration-files
-* https://tuckerchapman.com/posts/vimrc_organization/
-
-
-# управление фоном терминала в зависимости от ssh-сессии
-
-https://github.com/fboender/sshbg
-https://askubuntu.com/questions/310498/change-terminal-colour-based-on-ssh-session
-https://superuser.com/questions/603909/how-to-change-terminal-colors-when-connecting-to-ssh-hosts
+* https://github.com/fboender/sshbg
+* https://askubuntu.com/questions/310498/change-terminal-colour-based-on-ssh-session
+* https://superuser.com/questions/603909/how-to-change-terminal-colors-when-connecting-to-ssh-hosts
