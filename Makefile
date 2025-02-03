@@ -1,4 +1,5 @@
 TEMP_DATE:=$(shell date "+%F-%T")
+HOMEBREW_NO_AUTO_UPDATE=1
 
 all: fonts git zsh terminal vim vundle nvm rbenv goenv ctags etc nvim ag
 
