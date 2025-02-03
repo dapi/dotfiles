@@ -1,1 +1,1 @@
-runtime ~/dotfiles/nvim/init.vim
+" runtime ~/dotfiles/nvim/init.vim

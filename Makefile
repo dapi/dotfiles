@@ -1,7 +1,7 @@
 TEMP_DATE:=$(shell date "+%F-%T")
 HOMEBREW_NO_AUTO_UPDATE=1
 
-include makefiles/shared.mk makefiles/ghostty.mk makefiles/nvim.mk makefiles/vim.mk makefiles/fish.mk makefiles/fonts.mk makefiles/zsh.mk
+include makefiles/shared.mk makefiles/ghostty.mk makefiles/nvim.mk makefiles/vim.mk makefiles/fish.mk makefiles/fonts.mk makefiles/zsh.mk makefiles/git.mk
 
 all: fonts git zsh terminal vim vundle nvm rbenv goenv ctags etc nvim ag dotfiles
 

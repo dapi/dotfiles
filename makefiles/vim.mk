@@ -1,7 +1,10 @@
 vim: vim-install vim-colors vim-config vim-plug-install
 
-vim-config:
-	$(MAKE) link-config CONFIG_PATH=~/.vimrc MY_CONFIG_PATH=~/dotfiles/.vimrc
+vim-config: ~/.vimrc
+
+.PHONY:
+~/.vimrc:
+	$(MAKE) link-home-config FILE=~/.vimrc
 
 vim-install:
 	$(MAKE) install-tool TOOL=vim
