@@ -1,13 +1,13 @@
 ## Path to your oh-my-zsh configuration.
 echo -n 'Start oh-my-zsh: '
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
+export ZSH_CUSTOM=$HOME/dotfiles/zsh/custom
 
 export ZSH_THEME="dapi-maran"
 
 test -f ~/.zsh.local && source ~/.zsh.local
 
-source "${ZDOTDIR:-${HOME}}/dotfiles/.zshrc-`uname`"
+source "${ZDOTDIR:-${HOME}}/dotfiles/zsh/.zshrc-`uname`"
 
 plugins=(ssh-agent nvm git rbenv direnv rails docker-compose docker kubectl)
 
