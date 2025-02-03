@@ -81,11 +81,13 @@ nvim-plug-install:
 nvim-plugins-install:
 	nvim -R +PlugInstall +qall
 
+TEMP_DATE:=$(shell date "+%F-%T")
+
 # If there is ~./config/nvim not linked to ~/dotfiles - backup it
 nvim-check-and-backup:
 	test ! -d ~/.config/nvim || \
 		((ls -1l ~/.config/nvim | grep ~/dotfiles/nvim/init.vim) || \
-		mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T"))
+		mv ~/.config/nvim ~/.config/nvim-$(TEMP_DATE))
 
 nvim-clean:
 	test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
@@ -129,9 +131,18 @@ ag: ~/.agignore
 tide-configure:
 	tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
 
+fish: fish-install fish-backup-config fish-config fisher
+
+fish-install:
+	which fish || sudo apt-get install fish
+
 fish-config:
-	ln -s ~/dotfiles/fish/conf.d/ ~/.config/fish/
+	ln -s ~/dotfiles/fish/conf.d ~/.config/fish/
 	ln -s ~/dotfiles/fish/config.fish ~/.config/fish/
+
+fish-backup-config:
+	test ! -d ~/.config/fish/conf.d || mv ~/.config/fish/conf.d ~/.config/fish/conf.d-$(TEMP_DATE)
+	test ! -f ~/.config/fish/config.fish || mv ~/.config/fish/config.fish ~/.config/fish/config.fish-$(TEMP_DATE)
 
 ghostty-config:
 	ln -s ~/dotfiles/ghostty ~/.config/
@@ -139,14 +150,7 @@ ghostty-config:
 fisher: fisher-install fisher-plugins
 
 fisher-plugins:
-	fisher install jorgebucaran/autopair.fish
-	fisher install jorgebucaran/spark.fish
-	fisher install rbenv/fish-rbenv
-	fisher install jorgebucaran/nvm.fish
-	fisher install IlanCosman/tide 
-	fisher install danhper/fish-ssh-agent
-	fisher install halostatue/fish-direnv
+	./install-fish-plugins.fish
 
 fisher-install:
-	which fisher || \
-		(curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher)
+	./install-fisher.fish
