@@ -7,13 +7,13 @@ fish-install:
 	@$(MAKE) install-tool TOOL=fish
 
 fish-config:
-	$(MAKE) link-config CONFIG_PATH=~/.config/fish/conf.d MY_CONFIG_PATH=~/dotfiles/fish/conf.d
-	$(MAKE) link-config CONFIG_PATH=~/.config/fish/config.fish MY_CONFIG_PATH=~/dotfiles/fish/config.fish
+	@$(MAKE) link-config CONFIG_PATH=~/.config/fish/conf.d MY_CONFIG_PATH=~/dotfiles/fish/conf.d
+	@$(MAKE) link-config CONFIG_PATH=~/.config/fish/config.fish MY_CONFIG_PATH=~/dotfiles/fish/config.fish
 
 fisher: fisher-install fisher-plugins
 
 fisher-plugins:
-	./scripts/install-fish-plugins.fish
+	@./scripts/install-fish-plugins.fish
 
 fisher-install:
-	./scripts/install-fisher.fish
+	@./scripts/install-fisher.fish

@@ -22,5 +22,5 @@ nvm: ~/.nvm
 	# TODO Update version
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-ag: ~/.agignore
-	which ag || brew install ag
+ag: .agignore
+	@$(MAKE) install-tool TOOL=ag

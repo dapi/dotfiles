@@ -5,4 +5,4 @@ zsh: ~/.oh-my-zsh zsh-config
 	curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 zsh-config:
-	$(MAKE) link-home-config FILE=.zshrc 
+	@$(MAKE) link-home-config FILE=.zshrc 

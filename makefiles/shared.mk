@@ -7,7 +7,7 @@ backup-config:
 		true
 
 link-config: backup-config
-	@echo "Link config ${MY_CONFIG_PATH} -> ${CONFIG_PATH} (${LINK_DIR})"
+	@echo "Link config ${MY_CONFIG_PATH} -> ${CONFIG_PATH}"
 	@test ! -e ${CONFIG_PATH} && ln -s ${MY_CONFIG_PATH} ${CONFIG_PATH} || true
 
 link-home-config: 

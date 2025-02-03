@@ -4,6 +4,6 @@ git-pull:
 	git pull
 
 git-install:
-	${MAKE} install-tool TOOL=git
+	@${MAKE} install-tool TOOL=git
 
 git-config: ~/.gitconfig ~/.gitignore_global
