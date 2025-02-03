@@ -3,6 +3,5 @@ if test -z "$SSH_ENV"
 end
 
 if not __ssh_agent_is_started
-    echo "Start ssh agent"
     __ssh_agent_start
 end
