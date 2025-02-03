@@ -1,9 +1,15 @@
 all: fonts git zsh terminal vim vundle nvm rbenv goenv ctags etc nvim ag
 
-fonts:
+update: fonts fish nvim ghostty
+
+fonts: hack-nerd-font
+
+hack-nerd-font:
 	brew install font-hack-nerd-font
-	git clone https://github.com/powerline/fonts.git
-	(cd fonts; ./install.sh)
+
+powerline-fonts:
+	git clone https://github.com/powerline/fonts.git ./powerline-fonts
+	(cd powerline-fonts; ./install.sh)
 
 sshbg:
 	curl https://github.com/fboender/sshbg/blob/855ade6b3c4f9f54ffb739aaf71a2e9baa8cf170/sshbg > ~/.bin/sshbg
@@ -13,9 +19,6 @@ ctags: ctags-install ~/.ctags
 
 ctags-install:
 	which ctags || brew install ctags
-
-brew:
-	brew install nvimpager
 
 git: git-install ~/.gitconfig ~/.gitignore_global
 
@@ -39,9 +42,6 @@ zsh: ~/.oh-my-zsh ~/.zshrc
 
 ~/.zshrc:
 	ln -fs ~/dotfiles/.zshrc ~/.zshrc
-
-ghostty-configure:
-	ghostty +show-config --default --docs | nvim
 
 goenv: ~/.goenv
 ~/.goenv:
@@ -128,6 +128,25 @@ etc: ~/.irbrc ~/.rdebugrc ~/.ackrc ~/.pryrc ~/.tmux.conf ~/.psqlrc ~/.gemrc
 ag: ~/.agignore
 	which ag || brew install ag
 
+ghostty-configure:
+	ghostty +show-config --default --docs | nvim
+
+ghostty: ghostty-install ghostty-config
+
+ghostty-install:
+	which ghostty || brew install ghostty
+
+backup-config:
+	test -d ${CONFIG_PATH} && \
+		(test -L ${CONFIG_PATH} && test -e ${MY_CONFIG_PATH} || mv ${CONFIG_PATH} ${CONFIG_PATH}-$(TEMP_DATE)) || \
+		/bin/true
+
+link-config: backup-config
+	test ! -d ${CONFIG_PATH} && ln -s ${MY_CONFIG_PATH} ~/.config/
+
+ghostty-config:
+	$(MAKE) link-config CONFIG_PATH=~/.config/ghostty MY_CONFIG_PATH=~/dotfiles/ghostty
+
 tide-configure:
 	tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
 
@@ -143,9 +162,6 @@ fish-config:
 fish-backup-config:
 	test ! -d ~/.config/fish/conf.d || mv ~/.config/fish/conf.d ~/.config/fish/conf.d-$(TEMP_DATE)
 	test ! -f ~/.config/fish/config.fish || mv ~/.config/fish/config.fish ~/.config/fish/config.fish-$(TEMP_DATE)
-
-ghostty-config:
-	ln -s ~/dotfiles/ghostty ~/.config/
 
 fisher: fisher-install fisher-plugins
 

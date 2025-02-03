@@ -1,9 +1,13 @@
 #!/usr/bin/env fish
 
-fisher install jorgebucaran/autopair.fish
-fisher install jorgebucaran/spark.fish
-fisher install rbenv/fish-rbenv
-fisher install jorgebucaran/nvm.fish
-fisher install IlanCosman/tide 
-fisher install danhper/fish-ssh-agent
-fisher install halostatue/fish-direnv
+function install
+  fisher list | grep -i $argv || fisher install $argv
+end
+
+install jorgebucaran/autopair.fish
+install jorgebucaran/spark.fish
+install rbenv/fish-rbenv
+install jorgebucaran/nvm.fish
+install IlanCosman/tide 
+install danhper/fish-ssh-agent
+install halostatue/fish-direnv
