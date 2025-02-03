@@ -14,6 +14,7 @@
 * Разработка под ruby: `.gemrc, .pryrc, .irbrc, .rdebugrc`
 *** `ag`
 * Шрифты для macos
+* Темы для fish, nvim/vim, ghostty
 
 Для этого я склонировал этот репозиторий на все свои компьютеры. Когда необходимо
 что-то изменить, я меняю на том компьютере на котормо нахожусь, комичу и пушаю в
@@ -28,7 +29,7 @@
 Вариант #1
 
 ```sh
-curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/install.sh | bash
+curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/scripts/install.sh | bash
 ```
 
 Вариант #2
