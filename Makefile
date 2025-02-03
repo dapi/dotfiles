@@ -58,9 +58,6 @@ nvm: ~/.nvm
 ~/.nvm:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
-~/.config/nvim:
-	ln -fs ~/dotfiles/nvim ~/.config/nvim
-
 ~/.vimrc:
 	ln -fs ~/dotfiles/.vimrc ~/.vimrc
 
@@ -68,20 +65,32 @@ vim: vim-install ~/.vimrc ~/.vim/bundle/vundle
 vim-install:
 	which vim || (brew install vim && vim -R +PluginInstall +qall)
 
-nvim: nvim-install nvim-config nvim-plugins
-
-nvim-reinstall: nvim-clean nvim
-
 vim-colors:
 	test -f ~/.vim/colors || (mkdir ~/.vim/colors && cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors)
 
-nvim-plugins:
-	nvim -R +PluginInstall +qall
+~/.config/nvim:
+	ln -fs ~/dotfiles/nvim ~/.config/nvim
+
+nvim: nvim-install nvim-plug-install nvim-check-and-backup nvim-config nvim-plugins-install
+
+nvim-reinstall: nvim-clean nvim
+
+nvim-plug-install:
+	sh -c 'curl -fLo "$${XDG_DATA_HOME:-$$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+nvim-plugins-install:
+	nvim -R +PlugInstall +qall
+
+# If there is ~./config/nvim not linked to ~/dotfiles - backup it
+nvim-check-and-backup:
+	test ! -d ~/.config/nvim || \
+		((ls -1l ~/.config/nvim | grep ~/dotfiles/nvim/init.vim) || \
+		mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T"))
 
 nvim-clean:
 	test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
 	
-nvim-config: ~/.config/nvim ~/.vim/bundle/vundle
+nvim-config: ~/.config/nvim # ~/.vim/bundle/vundle
 
 nvim-install:
 	which nvim || brew install neovim
