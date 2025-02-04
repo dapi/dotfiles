@@ -13,7 +13,9 @@ fish-config:
 fisher: fisher-install fisher-plugins
 
 fisher-plugins:
+	@echo 'Install fisher plugins'
 	@./scripts/install-fish-plugins.fish
 
 fisher-install:
+	@echo 'Install fisher'
 	@./scripts/install-fisher.fish
