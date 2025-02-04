@@ -10,10 +10,10 @@ ssh-config:
 servers:
 	@echo $(SERVERS)
 
-import-ssh-hosts-from-server:
+import-hosts-from-server:
 	scp "${SERVER}:${REMOTE_SERVER_HOME_DIR}/dotfiles/.ssh/hosts/*" .ssh/hosts/
 
 .PHONY: $(DSH_HOSTS)
-import-ssh-hosts: $(DSH_HOSTS)
+import-hosts: $(DSH_HOSTS)
 $(DSH_HOSTS): $(DSH_PREFIX)%:
 	@$(MAKE) import-ssh-hosts-from-server SERVER=$*
