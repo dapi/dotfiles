@@ -25,10 +25,3 @@ nvm: ~/.nvm
 
 ag: .agignore
 	@$(MAKE) install-tool TOOL=ag
-
-ssh-config:
-	@$(MAKE) link-config CONFIG_PATH=~/.ssh/config MY_CONFIG_PATH=~/dotfiles/.ssh/config
-
-SERVERS:=$(shell cat .ssh/hosts/*.conf | grep "Host " | cut -d " " -f 2 | sort)
-servers:
-	@echo $(SERVERS)
