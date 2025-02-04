@@ -15,6 +15,8 @@
 * `ghostty`
 * Моноширинные шрифты поддерживающие statusline в fish, tmux, neovim для MacOS.
 
+# Как это выглядит?
+
 <img width="1330" alt="Screenshot 2025-02-04 at 11 28 00" src="https://github.com/user-attachments/assets/075d788b-28af-4fbb-9739-5f29cff6866e" />
 <img width="1330" alt="Screenshot 2025-02-04 at 11 28 13" src="https://github.com/user-attachments/assets/66933ac1-f9fa-4ca9-908e-826362e561f6" />
 
