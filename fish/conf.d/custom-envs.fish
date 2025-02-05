@@ -1,5 +1,4 @@
 set -gx LESS -eiRMX
-set -x KUBECONFIG ~/.kube/config:~/.kube/ovh-kubeconfig.yml
 set -x PATH $PATH ~/.local/bin
 set -x PGOPTIONS '--client-min-messages=warning'
 set -x EDITOR nvim
