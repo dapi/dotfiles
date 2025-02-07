@@ -33,6 +33,7 @@ set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set colorcolumn=160
 
 set encoding=utf-8
 set nocompatible                " be iMproved

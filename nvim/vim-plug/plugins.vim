@@ -11,15 +11,16 @@ Plug 'dapi/gruvbox', { 'do': 'cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'nvim-tree/nvim-web-devicons'
-
-Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-rooter'
+Plug 'Yggdroot/indentLine'
 Plug 'folke/which-key.nvim'
 
+" портит табы в e2e-tests/Makefile
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible' " a universal set of default
 Plug 'sickill/vim-pasta' " This plugin remaps p and P (put command) in normal and visual mode to do context aware pasting
 Plug 'tpope/vim-sleuth' " Heuristically set buffer options ('shiftwidth' and 'expandtab')
+Plug 'zhimsel/vim-stay' " Restore cursor position
 
 " Text manipulation
 Plug 'scrooloose/nerdcommenter' " Ctrl-C
@@ -38,6 +39,7 @@ Plug 'junegunn/vim-easy-align' " Enter to realign
 Plug 'chr4/nginx.vim'
 Plug 'towolf/vim-helm'
 Plug 'mattn/vim-gotmpl' " ДОбавляет au! BufRead,BufNewFile *.tmpl setlocal filetype=gohtmltmpl, не факт что нужен
+Plug 'gotgenes/golang-template.vim'
 Plug 'pearofducks/ansible-vim'
 
 """"""""""""""""""""""
@@ -46,6 +48,8 @@ Plug 'pearofducks/ansible-vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround' " Chanse surround by cs keystroke
 Plug 'scrooloose/syntastic' " Syntax highlighing
+" не знаю почему не включил
+"Plug 'stephpy/vim-yaml'
 
 
 """"""""""""""""""""""""
