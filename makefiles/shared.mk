@@ -10,10 +10,12 @@ link-config: backup-config
 	@echo "Link config ${MY_CONFIG_PATH} -> ${CONFIG_PATH}"
 	@test ! -e ${CONFIG_PATH} && ln -s ${MY_CONFIG_PATH} ${CONFIG_PATH} || true
 
+FILE_TO_LINK=$(shell echo "$(FILE)"  | sed -e 's/~\///g')
 link-home-config: 
-	@echo "Link home config ~/${FILE}"
-	@$(MAKE) backup-config CONFIG_PATH=~/${FILE} MY_CONFIG_PATH=~/dotfiles/${FILE}
-	@test ! -e ~/${FILE} && ln -s ~/dotfiles/${FILE} ~/ || true
+
+	@echo "Link home config ~/${FILE_TO_LINK}"
+	@$(MAKE) backup-config CONFIG_PATH=~/${FILE_TO_LINK} MY_CONFIG_PATH=~/dotfiles/${FILE_TO_LINK}
+	@test ! -e ~/${FILE_TO_LINK} && ln -s ~/dotfiles/${FILE_TO_LINK} ~/ || true
 
 install-tool:
 	@echo "Install ${TOOL}"

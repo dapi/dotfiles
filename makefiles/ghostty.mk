@@ -1,3 +1,4 @@
+.PHONY: ghostty
 ghostty:
 	ifeq ($(UNAME_S),Darwin)
 	@$(MAKE) ghostty-macos

@@ -5,7 +5,7 @@ HOMEBREW_NO_AUTO_UPDATE=1
 include makefiles/*.mk
 
 .DEFAULT_GOAL := all
-all: fonts git zsh vim nvm rbenv goenv ctags nvim ag dotfiles fish ghostty ssh-config
+all: dotfiles brew fonts git zsh vim nvim nvm rbenv goenv ctags ag fish ghostty ssh-config
 
 update: git-pull all
 

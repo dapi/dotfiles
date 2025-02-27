@@ -1,4 +1,4 @@
-nvim: nvim-install nvim-plug-install nvim-config nvim-plugins-install
+nvim: nvim-config nvim-install nvim-plug-install nvim-plugins-install
 
 nvim-reinstall: nvim-clean nvim
 
@@ -16,7 +16,7 @@ nvim-plugins-install:
 nvim-clean:
 	@test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
 	
-nvim-config: ~/.config/nvim
+nvim-config: 
 	@$(MAKE) link-config CONFIG_PATH=~/.config/nvim MY_CONFIG_PATH=~/dotfiles/nvim
 
 nvim-install:
