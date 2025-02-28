@@ -1,3 +1,5 @@
+APPLIES:=$(APPLIES) fonts
+
 fonts: hack-nerd-font
 
 hack-nerd-font:

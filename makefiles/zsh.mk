@@ -1,3 +1,6 @@
+APPLIES:=$(APPLIES) zsh
+DOTFILES:=$(DOTFILES) ~/.zshrc
+
 zsh: ~/.oh-my-zsh
 
 ~/.oh-my-zsh:

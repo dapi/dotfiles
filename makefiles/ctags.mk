@@ -1,5 +1,3 @@
+# Add ctags
 DOTFILES:=${DOTFILES} ~/.ctags
-ctags: ctags-install
-
-ctags-install:
-	@${MAKE} install-tool TOOL=ctags
+PACKAGES:=$(PACKAGES) ctags

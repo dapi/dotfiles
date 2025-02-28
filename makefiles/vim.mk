@@ -1,8 +1,8 @@
- DOTFILES:=${DOTFILES} ~/.vimrc
-vim: vim-install vim-colors vim-plug-install
+DOTFILES:=${DOTFILES} ~/.vimrc
+APPLIES:=$(APPLIES) vim-install
+PACKAGES:=$(PACKAGES) vim
 
-vim-install:
-	@$(MAKE) install-tool TOOL=vim
+vim-install: vim-colors vim-plug-install
 
 vim-plug-install:
 	@vim -R +PlugInstall +qall

@@ -1,9 +1,5 @@
-git: git-install git-config
+PACKAGES:=$(PACKAGES) git
+DOTFILES:=$(DOTFILES) ~/.gitconfig ~/.gitignore_global 
 
 git-pull:
 	git pull
-
-git-install:
-	@${MAKE} install-tool TOOL=git
-
-git-config: ~/.gitconfig ~/.gitignore_global

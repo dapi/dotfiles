@@ -1,8 +1,10 @@
 DOTFILES:=${DOTFILES} ~/.config/nvim
+PACKAGES:=${PACKAGES} nvim
+APPLIES:=${APPLIES} nvim-install
 
-nvim: nvim-install nvim-plug-install nvim-plugins-install
+nvim-install: nvim-plug-install nvim-plugins-install
 
-nvim-reinstall: nvim-clean nvim
+nvim-reinstall: nvim-clean nvim-install
 
 NVIM_PLUG_DIR:=$(shell echo $${XDG_DATA_HOME:-$$HOME/.local/share})
 NVIM_PLUG_FILE=${NVIM_PLUG_DIR}/nvim/site/autoload/plug.vim
@@ -17,6 +19,3 @@ nvim-plugins-install:
 
 nvim-clean:
 	@test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
-	
-nvim-install:
-	@$(MAKE) install-tool TOOL=nvim

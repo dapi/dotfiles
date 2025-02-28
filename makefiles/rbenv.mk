@@ -1,3 +1,6 @@
+DOTFILES:=${DOTFILES} ~/.irbrc ~/.rdebugrc ~/.pryrc ~/.gemrc 
+APPLIES:=$(APPLIES) rbenv
+
 rbenv: ~/.rbenv ~/.rbenv/plugins/ruby-build
 
 ~/.rbenv:
