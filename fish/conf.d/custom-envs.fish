@@ -2,6 +2,7 @@ set -gx LESS -eiRMX
 set -x PATH $PATH ~/.local/bin
 set -x PGOPTIONS '--client-min-messages=warning'
 set -x EDITOR nvim
+set -gx PATH $PATH $HOME/.krew/bin
 
 # nvimpager не умеет переходить в редактор по v как это делает less
 #
