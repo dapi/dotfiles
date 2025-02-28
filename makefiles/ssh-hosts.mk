@@ -1,11 +1,10 @@
+DOTFILES:=${DOTFILES} ~/.ssh/config
+
 SERVERS:=$(shell cat .ssh/hosts/*.conf | grep "Host " | cut -d " " -f 2 | sort)
 REMOTE_SERVER_HOME_DIR:="/home/${USER}"
 
 DSH_PREFIX=dsh_
 DSH_HOSTS := $(addprefix $(DSH_PREFIX),$(SERVERS))
-
-ssh-config:
-	@$(MAKE) link-config CONFIG_PATH=~/.ssh/config MY_CONFIG_PATH=~/dotfiles/.ssh/config
 
 servers:
 	@echo $(SERVERS)

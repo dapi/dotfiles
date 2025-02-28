@@ -1,10 +1,5 @@
-vim: vim-config vim-install vim-colors vim-plug-install
-
-vim-config: ~/.vimrc
-
-.PHONY:
-~/.vimrc:
-	@$(MAKE) link-home-config FILE=.vimrc
+ DOTFILES:=${DOTFILES} ~/.vimrc
+vim: vim-install vim-colors vim-plug-install
 
 vim-install:
 	@$(MAKE) install-tool TOOL=vim

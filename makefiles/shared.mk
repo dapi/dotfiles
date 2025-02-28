@@ -16,16 +16,12 @@ backup-config:
 		) || \
 		(rm -f ${DST} && echo "No need to backup") 
 
-link-config: backup-config
-	@echo "Link config ${DST} -> ${REFERENCE}"
-	@test ! -e ${DST} && ln -s ${REFERENCE} ${DST} || echo "File exixts ${DST}"
-
 # REFERENCE_FILE=$(shell echo "$(DST)"  | sed -e 's/~\///g')
-REFERENCE_FILE=$(shell echo $(DST) | sed -e 's/.*\///g')
-link-home-config: 
-	@echo "Link ~/${REFERENCE_FILE}"
-	@$(MAKE) backup-config REFERENCE=~/dotfiles/${REFERENCE_FILE}
-	 @test -e ${DST} || ln -s ${REAL_REFERENCE} ${DST}
+REFERENCE_FILE=$(shell echo $(DST) | sed -e 's:$(HOME)/::g')
+REFERENCE=~/dotfiles/${REFERENCE_FILE}
+link-home-config: backup-config 
+	@echo "Link ~/${REFERENCE_FILE} to ${REFERENCE}"
+	@test -e ${DST} || ln -s ${REAL_REFERENCE} ${DST}
 
 install-tool:
 	@echo "Install ${TOOL}"

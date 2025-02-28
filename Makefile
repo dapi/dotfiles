@@ -4,8 +4,13 @@ HOMEBREW_NO_AUTO_UPDATE=1
 
 include makefiles/*.mk
 
+dotfiles: $(DOTFILES)
+.PHONY: $(DOTFILES)
+$(DOTFILES):
+	@$(MAKE) link-home-config DST=$@
+
 .DEFAULT_GOAL := all
-all: dotfiles brew fonts git zsh vim nvim nvm rbenv goenv ctags ag fish ghostty ssh-config
+all: dotfiles brew fonts git zsh vim nvim nvm rbenv goenv ctags ag fish ghostty
 
 update: git-pull all
 
