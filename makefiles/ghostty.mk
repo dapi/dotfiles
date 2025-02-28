@@ -1,3 +1,5 @@
+UNAME_S=$(shell uname)
+
 .PHONY: ghostty
 ghostty:
 	ifeq ($(UNAME_S),Darwin)
