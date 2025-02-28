@@ -1,21 +1,31 @@
 #
 # Shared tasks
 #
+DST_REFERENCE=$(shell readlink $(DST))
+BACKUP_FILE=${DST}-${TEMP_DATE}
+REAL_REFERENCE=$(shell realpath $(REFERENCE))
+# skip backup if destination file does not exits
+# skip backup if link content is targed readlink
+# backup destination if does not skipped
+#
 backup-config:
-	@test -e ${CONFIG_PATH} && \
-		(test -L ${CONFIG_PATH} && test -e ${MY_CONFIG_PATH} || mv ${CONFIG_PATH} ${CONFIG_PATH}-$(TEMP_DATE)) || \
-		true
+	@test -e ${DST} || \
+		( \
+			( test -L ${DST} && test "${DST_REFERENCE}" = "${REAL_REFERENCE}" && echo "Target value" ) || \
+			( mv ${DST} ${BACKUP_FILE} && echo "Backup ${DST} to ${BACKUP_FILE}" ) \
+		) || \
+		(rm -f ${DST} && echo "No need to backup") 
 
 link-config: backup-config
-	@echo "Link config ${MY_CONFIG_PATH} -> ${CONFIG_PATH}"
-	@test ! -e ${CONFIG_PATH} && ln -s ${MY_CONFIG_PATH} ${CONFIG_PATH} || true
+	@echo "Link config ${DST} -> ${REFERENCE}"
+	@test ! -e ${DST} && ln -s ${REFERENCE} ${DST} || echo "File exixts ${DST}"
 
-FILE_TO_LINK=$(shell echo "$(FILE)"  | sed -e 's/~\///g')
+# REFERENCE_FILE=$(shell echo "$(DST)"  | sed -e 's/~\///g')
+REFERENCE_FILE=$(shell echo $(DST) | sed -e 's/.*\///g')
 link-home-config: 
-
-	@echo "Link home config ~/${FILE_TO_LINK}"
-	@$(MAKE) backup-config CONFIG_PATH=~/${FILE_TO_LINK} MY_CONFIG_PATH=~/dotfiles/${FILE_TO_LINK}
-	@test ! -e ~/${FILE_TO_LINK} && ln -s ~/dotfiles/${FILE_TO_LINK} ~/ || true
+	@echo "Link ~/${REFERENCE_FILE}"
+	@$(MAKE) backup-config REFERENCE=~/dotfiles/${REFERENCE_FILE}
+	 @test -e ${DST} || ln -s ${REAL_REFERENCE} ${DST}
 
 install-tool:
 	@echo "Install ${TOOL}"
