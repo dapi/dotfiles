@@ -56,6 +56,7 @@ Plug 'scrooloose/syntastic' " Syntax highlighing
 " Tags management, autocomplete, searches
 "
 Plug 'grassdog/tagman.vim'
+" Using linrongbin16/gentags.nvim instead
 Plug 'ludovicchabant/vim-gutentags' " Automatic ctags management for Vim
 Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
