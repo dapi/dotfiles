@@ -6,8 +6,11 @@ end
 
 install jorgebucaran/autopair.fish
 install jorgebucaran/spark.fish
-install rbenv/fish-rbenv
-install jorgebucaran/nvm.fish
+
+#  Invalid plugin name or host unavailable: "rbenv/fish-rbenv"
+# install rbenv/fish-rbenv
+#
+install edc/bass
 install IlanCosman/tide 
 install danhper/fish-ssh-agent
 install halostatue/fish-direnv

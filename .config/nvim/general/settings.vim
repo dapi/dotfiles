@@ -31,7 +31,9 @@ set laststatus=2
 set autowrite                  " automatically write a file when leaving a modified buffer
 set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+
+" Его не находит nvim-овские плагины
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set colorcolumn=160
 
