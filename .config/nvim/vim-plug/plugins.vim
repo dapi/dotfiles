@@ -112,6 +112,7 @@ Plug 'elzr/vim-json'
 """""""""""""""""""""
 
 call plug#end()
+" require'lspconfig'.ruby_lsp.setup{}
 
 lua << END
 require('lualine').setup {

@@ -19,3 +19,7 @@ nvim-plugins-install:
 
 nvim-clean:
 	@test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
+
+nvim-lsponfig:
+	git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
+

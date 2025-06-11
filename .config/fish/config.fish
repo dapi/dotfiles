@@ -1,6 +1,3 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
 set -g fish_greeting
 
 fish_add_path ~/bin
@@ -10,3 +7,13 @@ status --is-interactive; and rbenv init - --no-rehash fish | source
 
 # You must call it on initialization or listening to directory switching won't work
 load_nvm > /dev/stderr
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
+
+set -Ux PYENV_ROOT $HOME/.pyenv
+set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+
+# pyenv
+pyenv init - fish | source
