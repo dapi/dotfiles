@@ -9,7 +9,7 @@ test -f ~/.zsh.local && source ~/.zsh.local
 
 source "${ZDOTDIR:-${HOME}}/dotfiles/zsh/.zshrc-`uname`"
 
-plugins=(ssh-agent nvm git rbenv direnv rails docker-compose docker kubectl)
+plugins=(ssh-agent nvm git direnv rails docker-compose docker kubectl)
 
 # Должен вызываться после plugins
 source $ZSH/oh-my-zsh.sh
@@ -36,3 +36,4 @@ export PATH="$PATH:/home/danil/.local/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export TAVILY_API_KEY="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"

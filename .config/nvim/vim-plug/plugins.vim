@@ -15,18 +15,22 @@ Plug 'airblade/vim-rooter'
 Plug 'Yggdroot/indentLine'
 Plug 'folke/which-key.nvim'
 
-" портит табы в e2e-tests/Makefile
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-sensible' " a universal set of default
+" портит табы в e2e-tests/Makefile - ОТКЛЮЧЕН для производительности
+" Plug 'editorconfig/editorconfig-vim'
+" vim-sensible - ОТКЛЮЧЕН для производительности, т.к. используется современная конфигурация
+" Plug 'tpope/vim-sensible' " a universal set of default
 Plug 'sickill/vim-pasta' " This plugin remaps p and P (put command) in normal and visual mode to do context aware pasting
 Plug 'tpope/vim-sleuth' " Heuristically set buffer options ('shiftwidth' and 'expandtab')
-Plug 'zhimsel/vim-stay' " Restore cursor position
+" vim-stay - ОТКЛЮЧЕН для производительности, т.к. редко используется fold функциональность
+" Plug 'zhimsel/vim-stay' " Restore cursor position
 
 " Text manipulation
-Plug 'scrooloose/nerdcommenter' " Ctrl-C
-Plug 'mg979/vim-visual-multi' " Ctrl-N
-Plug 'tpope/vim-abolish' " Smart substitution :%s/Facility/Building/g
+" Plug 'scrooloose/nerdcommenter' " Ctrl-C - ОТКЛЮЧЕН для производительности
+" Plug 'mg979/vim-visual-multi' " Ctrl-N - ОТКЛЮЧЕН для производительности
+" Plug 'tpope/vim-abolish' " Smart substitution - ОТКЛЮЧЕН для производительности
 Plug 'junegunn/vim-easy-align' " Enter to realign
+" NerdCommenter альтернатива - встроенная команда gc (если nvim >= 0.6)
+" vim-visual-multi заменяем на встроенный мультикурсор или просто без него
 
 " Plug 'gorkunov/smartpairs.vim'
 " Plug 'Lokaltog/vim-easymotion'
@@ -45,9 +49,10 @@ Plug 'pearofducks/ansible-vim'
 """"""""""""""""""""""
 " Software Development
 "
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'tpope/vim-surround' " Chanse surround by cs keystroke
-Plug 'scrooloose/syntastic' " Syntax highlighing
+" Plug 'AndrewRadev/splitjoin.vim' " ОТКЛЮЧЕН для производительности
+" Plug 'tpope/vim-surround' " Chanse surround - ОТКЛЮЧЕН для производительности
+" Plug 'scrooloose/syntastic' " Syntax highlighting - ОТКЛЮЧЕН для производительности
+" Syntastic - главный тормоз! Заменяем на встроенную подсветку синтаксиса илиtreesitter
 " не знаю почему не включил
 "Plug 'stephpy/vim-yaml'
 
@@ -70,7 +75,6 @@ Plug 'hrsh7th/cmp-calc'
 " Ruby Development
 "
 Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rbenv'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 " Plug 'noprompt/vim-yardoc'
@@ -116,6 +120,28 @@ call plug#end()
 
 lua << END
 require('lualine').setup {
-  options = { theme = 'gruvbox' }
+  options = {
+    theme = 'gruvbox',
+    -- Минимальная конфигурация для производительности
+    icons_enabled = false,
+    component_separators = '',
+    section_separators = ''
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'filetype'},
+    lualine_y = {},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  }
 }
 END

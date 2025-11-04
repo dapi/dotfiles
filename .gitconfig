@@ -48,3 +48,8 @@
   old = black red strike
   new = black green italic
   context = yellow bold
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

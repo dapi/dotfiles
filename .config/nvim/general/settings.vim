@@ -55,6 +55,16 @@ set nobackup
 set nowb
 set noswapfile
 
+" Оптимизация производительности
+set lazyredraw          " Не перерисовывать макросы
+set updatetime=300      " Быстрее обновление swap файла (default 4000)
+set timeoutlen=500      " Быстрее таймауты для маппингов (default 1000)
+set ttimeoutlen=50      " Быстрее терминальные таймауты
+set synmaxcol=200       " Ограничить синтаксис до 200 колонок для больших файлов
+
+" Оптимизация shada (viminfo) - хранить меньше истории
+set shada=!,'100,<50,s10,h
+
 set tags+=gems.tags
 set fileformat=unix
 

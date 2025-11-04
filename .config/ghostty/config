@@ -16,10 +16,18 @@ minimum-contrast = 0
 
 # В ней нормальный diff
 # theme = Japanesque
+
+# MY
 theme = Pnevma
+
 # theme = Monokai Pro
-# theme = Monokai Soda
+
+# theme = Catppuccin Latte
+
+# MY
 background = #121800
+
+
 # Мой оригинальный
 # foreground = #c4dc00
 foreground = #b8bb26
@@ -43,7 +51,7 @@ window-save-state = always
 fullscreen = true
 # macos-non-native-fullscreen = true
 
-shell-integration = fish
+shell-integration = zsh
 shell-integration-features = cursor,sudo,title
 
 quit-after-last-window-closed=true
@@ -52,3 +60,4 @@ clipboard-read=allow
 clipboard-write=allow
 copy-on-select=false
 # copy-on-select = clipboard
+keybind = shift+enter=text:\x1b\r
