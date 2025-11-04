@@ -10,7 +10,7 @@
 
 * `neovim`, `vim` с набором [плагинов](nvim/vim-plug/plugins.vim)
 * `fish`, `zsh`, `tmux`
-* `direnv`, `goenv`, `rbenv`, `nvm`
+* `direnv`
 * `git`, `ag`, `ctags`
 * `ghostty`
 * Моноширинные шрифты поддерживающие statusline в fish, tmux, neovim для MacOS.

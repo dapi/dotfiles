@@ -9,7 +9,7 @@ test -f ~/.zsh.local && source ~/.zsh.local
 
 source "${ZDOTDIR:-${HOME}}/dotfiles/zsh/.zshrc-`uname`"
 
-plugins=(ssh-agent nvm git direnv rails docker-compose docker kubectl)
+plugins=(ssh-agent git direnv rails docker-compose docker kubectl)
 
 # Должен вызываться после plugins
 source $ZSH/oh-my-zsh.sh
@@ -33,7 +33,4 @@ export TERM=xterm-256color
 # Created by `pipx` on 2025-02-02 18:43:53
 export PATH="$PATH:/home/danil/.local/bin"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export TAVILY_API_KEY="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"
+eval "$(/home/danil/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
