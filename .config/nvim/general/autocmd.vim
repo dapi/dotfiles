@@ -14,8 +14,11 @@ autocmd BufReadPost,BufNewFile *.yaml.gotmpl set filetype=yaml
 " Use {{/* */}} as comments
 autocmd FileType helm setlocal commentstring={{/*\ %s\ */}}
 
-autocmd BufReadPost,BufNewFile {Makefile,*.mk} setlocal filetype=make 
-autocmd! FileType make setlocal noexpandtab shiftwidth=2 softtabstop=2 tabstop=2
+augroup makefile_settings
+  autocmd!
+  autocmd FileType make setlocal noexpandtab shiftwidth=2 softtabstop=2 tabstop=2
+  autocmd BufReadPost,BufNewFile {Makefile,*.mk} setlocal filetype=make noexpandtab shiftwidth=2 softtabstop=2 tabstop=2
+augroup END
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript noet ci pi sts=0 sw=2 ts=2
 autocmd BufRead,BufNewFile *.hamlc setlocal filetype=haml
 autocmd BufRead,BufNewFile *.env.* setlocal filetype=sh
