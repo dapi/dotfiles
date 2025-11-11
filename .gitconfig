@@ -1,8 +1,8 @@
 # Put it in ~/.gitconfig
 
 [user]
-  name = Danil Pismenny
-  email = danil@brandymint.ru
+	name = Danil Pismenny
+	email = dapi@users.noreply.github.com
 
 [github]
   user = dapi
@@ -53,3 +53,19 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /private/var/folders/g5/9rjz5rbs76g0sjb2_y3208m40000gn/T/AppTranslocation/6B27EB9B-3335-46D4-BC24-2302F59797E9/d/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true

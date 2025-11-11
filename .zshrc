@@ -33,4 +33,4 @@ export TERM=xterm-256color
 # Created by `pipx` on 2025-02-02 18:43:53
 export PATH="$PATH:/home/danil/.local/bin"
 
-eval "$(/home/danil/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
+eval "$(${HOME}/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
