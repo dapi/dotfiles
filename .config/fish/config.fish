@@ -1,7 +1,7 @@
 # Skip heavy initialization for non-interactive sessions and --help
 if status --is-interactive
     # /opt/homebrew/opt/mise/bin/mise activate fish | source
-    /home/danil/.local/bin/mise activate fish | source # added by https://mise.run/fish
+    {$HOME}/.local/bin/mise activate fish | source # added by https://mise.run/fish
 else
     # For non-interactive sessions, skip version managers entirely
     set -g fish_greeting
