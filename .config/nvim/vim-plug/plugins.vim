@@ -22,12 +22,12 @@ Plug 'folke/which-key.nvim'
 Plug 'sickill/vim-pasta' " This plugin remaps p and P (put command) in normal and visual mode to do context aware pasting
 Plug 'tpope/vim-sleuth' " Heuristically set buffer options ('shiftwidth' and 'expandtab')
 " vim-stay - ОТКЛЮЧЕН для производительности, т.к. редко используется fold функциональность
-" Plug 'zhimsel/vim-stay' " Restore cursor position
+Plug 'zhimsel/vim-stay' " Restore cursor position
 
 " Text manipulation
-" Plug 'scrooloose/nerdcommenter' " Ctrl-C - ОТКЛЮЧЕН для производительности
-" Plug 'mg979/vim-visual-multi' " Ctrl-N - ОТКЛЮЧЕН для производительности
-" Plug 'tpope/vim-abolish' " Smart substitution - ОТКЛЮЧЕН для производительности
+Plug 'scrooloose/nerdcommenter' " Ctrl-C - ОТКЛЮЧЕН для производительности
+Plug 'mg979/vim-visual-multi' " Ctrl-N - ОТКЛЮЧЕН для производительности
+Plug 'tpope/vim-abolish' " Smart substitution - ОТКЛЮЧЕН для производительности
 Plug 'junegunn/vim-easy-align' " Enter to realign
 " NerdCommenter альтернатива - встроенная команда gc (если nvim >= 0.6)
 " vim-visual-multi заменяем на встроенный мультикурсор или просто без него
@@ -49,8 +49,8 @@ Plug 'pearofducks/ansible-vim'
 """"""""""""""""""""""
 " Software Development
 "
-" Plug 'AndrewRadev/splitjoin.vim' " ОТКЛЮЧЕН для производительности
-" Plug 'tpope/vim-surround' " Chanse surround - ОТКЛЮЧЕН для производительности
+Plug 'AndrewRadev/splitjoin.vim' " ОТКЛЮЧЕН для производительности
+Plug 'tpope/vim-surround' " Chanse surround - ОТКЛЮЧЕН для производительности
 " Plug 'scrooloose/syntastic' " Syntax highlighting - ОТКЛЮЧЕН для производительности
 " Syntastic - главный тормоз! Заменяем на встроенную подсветку синтаксиса илиtreesitter
 " не знаю почему не включил
