@@ -17,6 +17,7 @@ function zai
         ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.6" \
         ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.6" \
         ANTHROPIC_MODEL="glm-4.6" \
+        API_TIMEOUT_MS="3000000" \
         claude $argv
 end
 
