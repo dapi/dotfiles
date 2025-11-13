@@ -6,7 +6,7 @@ else
     # For non-interactive sessions, skip version managers entirely
     set -g fish_greeting
     fish_add_path ~/bin
-    fish_add_path /Users/danil/.opencode/bin
+    fish_add_path ~/.opencode/bin
     exit 0
 end
 
@@ -18,6 +18,14 @@ function zai
         ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.6" \
         ANTHROPIC_MODEL="glm-4.6" \
         claude $argv
+end
+
+function kimi
+	env ANTHROPIC_AUTH_TOKEN=$(pass show kimi) \
+	ANTHROPIC_BASE_URL=https://api.moonshot.ai/anthropic \
+	ANTHROPIC_MODEL=kimi-k2-thinking \
+	ANTHROPIC_SMALL_FAST_MODEL=kimi-latest \
+	claude $argv
 end
 
 # Add basic paths if not already present
