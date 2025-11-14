@@ -1,5 +1,5 @@
 APPLIES:=$(APPLIES) fisher
-DOTFILES:=${DOTFILES} ~/.config/fish/conf.d ~/.config/fish/config.fish
+DOTFILES:=${DOTFILES} ~/.config/fish/conf.d ~/.config/fish/config.fish ~/.config/fish/functions
 
 tide-configure:
 	tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No

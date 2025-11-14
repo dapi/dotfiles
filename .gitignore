@@ -4,3 +4,9 @@ tags
 fonts/
 tags.*
 .ssh/hosts/*
+.config/fish/functions/bass.fish
+.config/fish/functions/spark.fish
+.config/fish/functions/_*
+.config/fish/functions/tide*
+.config/fish/functions/tide/*
+.config/fish/functions/fish*
