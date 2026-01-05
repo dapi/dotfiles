@@ -2,6 +2,18 @@
 if status --is-interactive
     # /opt/homebrew/opt/mise/bin/mise activate fish | source
     ~/.local/bin/mise activate fish | source # added by https://mise.run/fish
+
+    # SSH keychain - reuse ssh-agent across sessions
+    if type -q keychain
+        keychain --eval --quiet -Q id_ed25519.priv 2>/dev/null | source
+    end
+
+    # Bugsnag proxy for Linux
+    if test (uname) = "Linux"
+        set -gx BUGSNAG_HTTP_PROXY (pass show proxy/current)
+    end
+
+    #eval (zellij setup --generate-auto-start fish | string collect)
 else
     # For non-interactive sessions, skip version managers entirely
     set -g fish_greeting
@@ -15,3 +27,4 @@ end
 fish_add_path ~/.local/bin
 fish_add_path ~/bin
 fish_add_path ~/.opencode/bin
+fish_add_path ~/.cargo/bin
