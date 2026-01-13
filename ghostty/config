@@ -1,0 +1,63 @@
+keybind = super+shift+r=reload_config
+keybind = cmd+shift+left=previous_tab
+keybind = cmd+shift+right=next_tab
+
+font-family = Driod Sans Mono Dotted for Powerline
+font-size = 17
+font-thicken = false
+
+minimum-contrast = 0
+
+# theme = Broadcast
+# theme = dapi
+# /Applications/Ghostty.app/Contents/Resources/ghostty/themes/GruvboxDark
+# /Applications/Ghostty.app/Contents/Resources/ghostty/themes/Hacktober
+# /Applications/Ghostty.app/Contents/Resources/ghostty/themes/Hybrid
+
+# В ней нормальный diff
+# theme = Japanesque
+
+# MY
+theme = Pnevma
+
+# theme = Monokai Pro
+
+# theme = Catppuccin Latte
+
+# MY
+background = #121800
+
+
+# Мой оригинальный
+# foreground = #c4dc00
+foreground = #b8bb26
+
+cursor-color = #02d5cf
+# cursor-color = #f2d5cf
+cursor-text = #FEFF00
+
+selection-background = #2F3800
+selection-foreground = #FEFF00
+
+# Appearance and Tabs
+# macos-titlebarZstyle = tabs
+macos-titlebar-style = transparent
+macos-option-as-alt = true
+
+mouse-hide-while-typing = true
+
+window-padding-balance = true
+window-save-state = always
+fullscreen = true
+# macos-non-native-fullscreen = true
+
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+quit-after-last-window-closed=true
+
+clipboard-read=allow
+clipboard-write=allow
+copy-on-select=false
+# copy-on-select = clipboard
+keybind = shift+enter=text:\x1b\r
