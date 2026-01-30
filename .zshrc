@@ -34,3 +34,9 @@ export TERM=xterm-256color
 export PATH="$PATH:/home/danil/.local/bin"
 
 eval "$(${HOME}/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
+
+# MySQL client for Rails development
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/mysql-client/lib/pkgconfig"

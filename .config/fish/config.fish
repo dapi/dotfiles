@@ -5,8 +5,6 @@ if status --is-interactive
 else
     # For non-interactive sessions, skip version managers entirely
     set -g fish_greeting
-    fish_add_path ~/bin
-    fish_add_path ~/.opencode/bin
     exit 0
 end
 
@@ -14,4 +12,6 @@ end
 #fish_add_path /opt/homebrew/bin /opt/homebrew/sbin /usr/local/bin /usr/bin /bin /usr/sbin /sbin
 
 # Add other paths
+fish_add_path ~/.local/bin
 fish_add_path ~/bin
+fish_add_path ~/.opencode/bin

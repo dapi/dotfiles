@@ -51,7 +51,7 @@ window-save-state = always
 fullscreen = true
 # macos-non-native-fullscreen = true
 
-shell-integration = zsh
+shell-integration = fish
 shell-integration-features = cursor,sudo,title
 
 quit-after-last-window-closed=true
@@ -61,3 +61,7 @@ clipboard-write=allow
 copy-on-select=false
 # copy-on-select = clipboard
 keybind = shift+enter=text:\x1b\r
+
+shell-integration-features = ssh-terminfo
+
+desktop-notifications = true
