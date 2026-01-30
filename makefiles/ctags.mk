@@ -1,3 +1,3 @@
 # Add ctags
 DOTFILES:=${DOTFILES} ~/.ctags
-PACKAGES:=$(PACKAGES) ctags
+PACKAGES:=$(PACKAGES) exuberant-ctags

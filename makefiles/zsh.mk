@@ -1,7 +1,8 @@
-APPLIES:=$(APPLIES) zsh
+APPLIES:=$(APPLIES) oh-my-zsh
 DOTFILES:=$(DOTFILES) ~/.zshrc
+PACKAGES:=$(PACKAGES) zsh
 
-zsh: ~/.oh-my-zsh
+oh-my-zsh: ~/.oh-my-zsh
 
 ~/.oh-my-zsh:
 	# TODO Обновлять oh-my-zsh если надо
