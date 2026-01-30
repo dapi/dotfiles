@@ -1,4 +1,4 @@
-PACKAGES:=$(PACKAGES) mise
+PACKAGES:=$(PACKAGES) mise jq bc
 
 package:
 	@echo "Install ${PACKAGE}"
