@@ -65,3 +65,24 @@ keybind = shift+enter=text:\x1b\r
 shell-integration-features = ssh-terminfo
 
 desktop-notifications = true
+
+# Ctrl combinations (physical keys - work with any keyboard layout)
+keybind = ctrl+key_a=text:\x01
+keybind = ctrl+key_e=text:\x05
+keybind = ctrl+key_c=text:\x03
+keybind = ctrl+key_d=text:\x04
+keybind = ctrl+key_w=text:\x17
+keybind = ctrl+key_u=text:\x15
+keybind = ctrl+key_k=text:\x0B
+keybind = ctrl+key_l=text:\x0C
+keybind = ctrl+key_r=text:\x12
+keybind = ctrl+key_z=text:\x1A
+keybind = ctrl+key_b=text:\x02
+keybind = ctrl+key_f=text:\x06
+keybind = ctrl+key_p=text:\x10
+keybind = ctrl+key_n=text:\x0E
+
+# Alt combinations
+keybind = alt+key_b=text:\x1bb
+keybind = alt+key_f=text:\x1bf
+keybind = alt+key_d=text:\x1bd
