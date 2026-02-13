@@ -1,6 +1,8 @@
 DOTFILES:=${DOTFILES} ~/.config/zellij
 APPLIES:=$(APPLIES) zellij-plugins
 
+zellij: ~/.config/zellij zellij-plugins
+
 ZELLIJ_PLUGINS_DIR=~/.config/zellij/plugins
 ZELLIJ_TAB_STATUS=$(ZELLIJ_PLUGINS_DIR)/zellij-tab-status.wasm
 
