@@ -60,9 +60,9 @@ layout {
                 datetime_format   "%a %d %H:%M"
                 datetime_timezone "Europe/Moscow"
 
-                // Hostname
-                command_hostname_command     "hostname -s"
-                command_hostname_format      "#[fg=#89B4FA] {stdout}"
+                // Hostname: "office" shown normally, others shown reversed (dark on light)
+                command_hostname_command     "h=$(hostname -s); if [ \"$h\" = \"office\" ]; then printf '#[fg=#89B4FA]  %s' \"$h\"; else printf '#[bg=#89B4FA,fg=#1e1e2e,bold]  %s ' \"$h\"; fi"
+                command_hostname_format      "{stdout}"
                 command_hostname_interval    "0"
                 command_hostname_rendermode  "static"
 
