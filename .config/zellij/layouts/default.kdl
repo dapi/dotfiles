@@ -1,0 +1,79 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+                format_left   "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
+                format_center ""
+                format_right  "{command_git_branch}{command_git_status}{pipe_status} {notifications} {datetime}{command_hostname}"
+                format_space  ""
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=#6C7086]{char}"
+                border_position "top"
+
+                hide_frame_for_single_pane "true"
+
+                // All 14 Zellij modes with color indicators
+                mode_normal        "#[bg=#89B4FA,fg=#1e1e2e,bold]  NORMAL "
+                mode_locked        "#[bg=#F38BA8,fg=#1e1e2e,bold] 󰌾 LOCKED "
+                mode_resize        "#[bg=#FAB387,fg=#1e1e2e,bold] 󰩨 RESIZE "
+                mode_pane          "#[bg=#A6E3A1,fg=#1e1e2e,bold] 󰓩 PANE "
+                mode_tab           "#[bg=#CBA6F7,fg=#1e1e2e,bold]  TAB "
+                mode_scroll        "#[bg=#F9E2AF,fg=#1e1e2e,bold] 󰍽 SCROLL "
+                mode_enter_search  "#[bg=#F9E2AF,fg=#1e1e2e,bold] 󰍉 SEARCH "
+                mode_search        "#[bg=#F9E2AF,fg=#1e1e2e,bold] 󰍉 SEARCH "
+                mode_rename_tab    "#[bg=#CBA6F7,fg=#1e1e2e,bold] 󰏫 RENAME "
+                mode_rename_pane   "#[bg=#A6E3A1,fg=#1e1e2e,bold] 󰏫 RENAME "
+                mode_session       "#[bg=#89DCEB,fg=#1e1e2e,bold] 󱂬 SESSION "
+                mode_move          "#[bg=#F5C2E7,fg=#1e1e2e,bold] 󰆾 MOVE "
+                mode_prompt        "#[bg=#CBA6F7,fg=#1e1e2e,bold]  PROMPT "
+                mode_tmux          "#[bg=#ffc387,fg=#1e1e2e,bold]  TMUX "
+
+                // Tabs with indicators (no indices)
+                tab_normal              "#[fg=#6C7086] {name} "
+                tab_normal_fullscreen   "#[fg=#6C7086] {name} 󰊓 "
+                tab_normal_sync         "#[fg=#6C7086] {name} 󰓦 "
+                tab_active              "#[fg=#89B4FA,bold] {name} "
+                tab_active_fullscreen   "#[fg=#89B4FA,bold] {name} 󰊓 "
+                tab_active_sync         "#[fg=#89B4FA,bold] {name} 󰓦 "
+                tab_separator           "#[fg=#45475a]│"
+                tab_floating_indicator  " 󰉈"
+                tab_fullscreen_indicator " 󰊓"
+                tab_sync_indicator       " 󰓦"
+
+                // Git branch
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD 2>/dev/null"
+                command_git_branch_format      "#[fg=#89B4FA]  {stdout}"
+                command_git_branch_interval    "5"
+                command_git_branch_rendermode  "static"
+
+                // Git status (dirty/clean indicator)
+                command_git_status_command     "git diff --quiet 2>/dev/null && echo '✓' || echo '●'"
+                command_git_status_format      "#[fg=#F9E2AF]{stdout} "
+                command_git_status_interval    "5"
+                command_git_status_rendermode  "static"
+
+                // DateTime with day of week
+                datetime          "#[fg=#6C7086,bold] {format} "
+                datetime_format   "%a %d %H:%M"
+                datetime_timezone "Europe/Moscow"
+
+                // Hostname
+                command_hostname_command     "hostname -s"
+                command_hostname_format      "#[fg=#89B4FA] {stdout}"
+                command_hostname_interval    "0"
+                command_hostname_rendermode  "static"
+
+                notifications_format_unread "#[fg=#89B4FA,bg=#181825] {message} "
+                notifications_format_no_notifications ""
+                notifications_show_interval "10"
+
+                // Claude activity + context status
+                pipe_status_format "#[fg=#6C7086]│ {output}"
+                pipe_status_rendermode "dynamic"
+            }
+        }
+    }
+}
