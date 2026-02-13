@@ -5,3 +5,4 @@ fonts/
 tags.*
 .ssh/hosts/*
 *.wasm
+.config/fish/fish_variables
