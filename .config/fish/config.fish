@@ -1,5 +1,14 @@
 # Skip heavy initialization for non-interactive sessions and --help
 if status --is-interactive
+
+    # Включить CSI u для Ghostty/Kitty/WezTerm через SSH
+    printf '\e[>1u'
+
+    # Выключить при выходе
+    function __cleanup_csi_u --on-event fish_exit
+        printf '\e[<u'
+    end
+
     # /opt/homebrew/opt/mise/bin/mise activate fish | source
     ~/.local/bin/mise activate fish | source # added by https://mise.run/fish
 
@@ -28,3 +37,4 @@ fish_add_path ~/.local/bin
 fish_add_path ~/bin
 fish_add_path ~/.opencode/bin
 fish_add_path ~/.cargo/bin
+fish_add_path ~/.bun/bin
