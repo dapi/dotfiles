@@ -7,3 +7,4 @@ tags.*
 *.wasm
 .config/fish/fish_variables
 .claude/settings.local.json
+.config/fish/fishd.tmp*
