@@ -5,7 +5,7 @@ layout {
             plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
                 format_left   "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
                 format_center ""
-                format_right  "{command_git_branch}{command_git_status}{pipe_status} {notifications} {datetime}{command_hostname}"
+                format_right  "{command_git_branch}{command_git_status} {notifications} {datetime}{command_hostname}"
                 format_space  ""
 
                 border_enabled  "false"
@@ -44,14 +44,14 @@ layout {
                 tab_sync_indicator       " 󰓦"
 
                 // Git branch
-                command_git_branch_command     "git rev-parse --abbrev-ref HEAD 2>/dev/null"
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
                 command_git_branch_format      "#[fg=#89B4FA]  {stdout}"
                 command_git_branch_interval    "5"
                 command_git_branch_rendermode  "static"
 
                 // Git status (dirty/clean indicator)
-                command_git_status_command     "git diff --quiet 2>/dev/null && echo '✓' || echo '●'"
-                command_git_status_format      "#[fg=#F9E2AF]{stdout} "
+                command_git_status_command     "git diff --quiet && echo clean || echo dirty"
+                command_git_status_format      "#[fg=#F9E2AF] {stdout} "
                 command_git_status_interval    "5"
                 command_git_status_rendermode  "static"
 
@@ -69,10 +69,6 @@ layout {
                 notifications_format_unread "#[fg=#89B4FA,bg=#181825] {message} "
                 notifications_format_no_notifications ""
                 notifications_show_interval "10"
-
-                // Claude activity + context status
-                pipe_status_format "#[fg=#6C7086]│ {output}"
-                pipe_status_rendermode "dynamic"
             }
         }
     }
