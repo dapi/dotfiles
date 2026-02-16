@@ -41,3 +41,6 @@ fish_add_path ~/bin
 fish_add_path ~/.opencode/bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/.bun/bin
+
+# Always run claude in dangerously-skip-permissions mode
+alias claude="command claude --dangerously-skip-permissions"
