@@ -17,6 +17,9 @@ if status --is-interactive
         keychain --eval --quiet -Q id_ed25519.priv 2>/dev/null | source
     end
 
+    # GPG: tell pinentry which terminal to use (needed for zellij panes)
+    set -gx GPG_TTY (tty)
+
     # Bugsnag proxy for Linux
     if test (uname) = "Linux"
         set -gx BUGSNAG_HTTP_PROXY (pass show proxy/current)
