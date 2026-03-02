@@ -44,3 +44,10 @@ fish_add_path ~/.bun/bin
 
 # Always run claude in dangerously-skip-permissions mode
 alias claude="command claude --dangerously-skip-permissions"
+
+
+
+# TODO сделать чтобы это было доступно только на macos
+# Mount office2 sshfs
+alias mount-office="~/bin/mount-office.sh"
+alias mount-office2="~/bin/mount-office2.sh"
