@@ -15,11 +15,11 @@ layout {
 
                 hide_frame_for_single_pane "true"
 
-                mode_normal        "#[bg=#89B4FA,fg=#1e1e2e,bold]  NORMAL "
+                mode_normal        "#[fg=#1e1e2e] 🤖 "
                 mode_locked        "#[bg=#F38BA8,fg=#1e1e2e,bold] 󰌾 LOCKED "
                 mode_resize        "#[bg=#FAB387,fg=#1e1e2e,bold] 󰩨 RESIZE "
                 mode_pane          "#[bg=#A6E3A1,fg=#1e1e2e,bold] 󰓩 PANE "
-                mode_tab           "#[bg=#CBA6F7,fg=#1e1e2e,bold]  TAB "
+                mode_tab           "#[bg=#CBA6F7,fg=#1e1e2e,bold] TAB "
                 mode_scroll        "#[bg=#F9E2AF,fg=#1e1e2e,bold] 󰍽 SCROLL "
                 mode_enter_search  "#[bg=#F9E2AF,fg=#1e1e2e,bold] 󰍉 SEARCH "
                 mode_search        "#[bg=#F9E2AF,fg=#1e1e2e,bold] 󰍉 SEARCH "
@@ -27,8 +27,8 @@ layout {
                 mode_rename_pane   "#[bg=#A6E3A1,fg=#1e1e2e,bold] 󰏫 RENAME "
                 mode_session       "#[bg=#89DCEB,fg=#1e1e2e,bold] 󱂬 SESSION "
                 mode_move          "#[bg=#F5C2E7,fg=#1e1e2e,bold] 󰆾 MOVE "
-                mode_prompt        "#[bg=#CBA6F7,fg=#1e1e2e,bold]  PROMPT "
-                mode_tmux          "#[bg=#ffc387,fg=#1e1e2e,bold]  TMUX "
+                mode_prompt        "#[bg=#CBA6F7,fg=#1e1e2e,bold] PROMPT "
+                mode_tmux          "#[bg=#ffc387,fg=#1e1e2e,bold] TMUX "
 
                 tab_normal              "#[fg=#6C7086] {status}{name} "
                 tab_normal_fullscreen   "#[fg=#6C7086] {status}{name} 󰊓 "

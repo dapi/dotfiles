@@ -277,17 +277,17 @@ plugins {
     tab-bar location="zellij:tab-bar"
     // tab-bar location="file:~/.config/zellij/plugins/tab-bar-indexed.wasm" { show_tab_indices true }
     welcome-screen location="zellij:session-manager" {
-        welcome_screen true
+        welcome_screen false
     }
-    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm"
+    // autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm"
 }
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
-load_plugins {
-    autolock
-}
+// load_plugins {
+//     autolock
+// }
 web_client {
     font "monospace"
 }
@@ -321,7 +321,7 @@ web_client {
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-// default_layout "compact"
+default_layout "ai-default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
