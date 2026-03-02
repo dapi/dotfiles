@@ -262,6 +262,8 @@ keybinds clear-defaults=true {
 plugins {
     about location="zellij:about"
     compact-bar location="zellij:compact-bar"
+    // compact-bar location="file:~/.config/zellij/plugins/zellij-cb.wasm"
+    // compact-bar location="file:~/.config/zellij/plugins/compact-bar-indexed.wasm" { show_tab_indices true }
     configuration location="zellij:configuration"
     filepicker location="zellij:strider" {
         cwd "/"
@@ -271,16 +273,18 @@ plugins {
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
+    // tab-bar location="file:~/.config/zellij/plugins/tab-bar-indexed.wasm" { show_tab_indices true }
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm"
 }
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
-    "file:/home/danil/.config/zellij/plugins/zellij-tab-status.wasm"
+    autolock
 }
 web_client {
     font "monospace"
@@ -367,7 +371,7 @@ pane_frames false
 // Valid values: positive integers
 // Default value: 10000
 // 
-// scroll_buffer_size 10000
+scroll_buffer_size 500
  
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
@@ -518,6 +522,24 @@ support_kitty_keyboard_protocol true
 // Default: true
 // 
 show_startup_tips false
+
+theme "gruvbox-light"
+
+themes {
+    gruvbox-light {
+        fg "#3c3836"
+        bg "#fbf1c7"
+        black "#fbf1c7"
+        red "#cc241d"
+        green "#98971a"
+        yellow "#d79921"
+        blue "#458588"
+        magenta "#b16286"
+        cyan "#689d6a"
+        white "#3c3836"
+        orange "#504945"
+    }
+}
  
 // Whether to show release notes on first version run
 // Default: true
