@@ -34,3 +34,16 @@ clipboard-write=allow
 copy-on-select=false
 # copy-on-select = clipboard
 keybind = shift+enter=text:\x1b\r
+
+# Fix ctrl+key shortcuts when Russian keyboard layout is active.
+# physical: binds to the physical key position regardless of layout.
+keybind = physical:ctrl+c=text:\x03
+keybind = physical:ctrl+d=text:\x04
+keybind = physical:ctrl+z=text:\x1a
+keybind = physical:ctrl+a=text:\x01
+keybind = physical:ctrl+e=text:\x05
+keybind = physical:ctrl+k=text:\x0b
+keybind = physical:ctrl+l=text:\x0c
+keybind = physical:ctrl+r=text:\x12
+keybind = physical:ctrl+u=text:\x15
+keybind = physical:ctrl+w=text:\x17
