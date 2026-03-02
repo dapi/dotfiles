@@ -8,7 +8,9 @@ font-thicken = false
 
 minimum-contrast = 0
 
-theme = Dapi
+# Light themes: Catppuccin Latte, Solarized Light, Tokyo Night Light,
+#   Rose Pine Dawn, GitHub Light, Gruvbox Light
+theme = light:Gruvbox Light,dark:Dapi
 
 # Appearance and Tabs
 # macos-titlebarZstyle = tabs
