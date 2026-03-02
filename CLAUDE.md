@@ -33,13 +33,124 @@ make fisher            # Установить fisher и плагины
 
 ## Архитектура
 
-### Makefile система
-- `Makefile` - точка входа, включает все `makefiles/*.mk`
-- `configuration.mk` - определяет `DOTFILES`, `PACKAGES`, `APPLIES`
-- `makefiles/linker.mk` - логика создания симлинков с автобекапом
+### Структура Репозитория
 
-### Как работают симлинки
-Файлы из `configuration.mk` (например `~/.tmux.conf`) создаются как симлинки на файлы в `~/dotfiles/`. При наличии существующего файла создаётся бекап с timestamp.
+```
+dotfiles/
+├── Makefile              # Точка входа, включает все makefiles/*.mk
+├── configuration.mk      # Определяет DOTFILES, PACKAGES, APPLIES
+├── makefiles/            # Модульные конфигурации
+│   ├── linker.mk        # ⭐ Логика симлинков с автобекапом
+│   ├── nvim.mk          # Neovim setup
+│   ├── fish.mk          # Fish shell setup
+│   ├── packages.mk      # Установка через brew/apt
+│   └── ...              # Другие инструменты
+├── .config/              # XDG конфиги (nvim, fish, zellij)
+├── .[tool]rc             # Root-level конфиги (.tmux.conf, .zshrc)
+└── scripts/              # Вспомогательные скрипты
+```
+
+### Три Уровня Конфигурации
+
+**1. DOTFILES** - Симлинкуемые файлы/директории
+```makefile
+# configuration.mk - базовый список
+DOTFILES=~/.ackrc ~/.tmux.conf ~/.psqlrc ~/.agignore
+
+# Модули расширяют список:
+# nvim.mk
+DOTFILES:=${DOTFILES} ~/.config/nvim
+
+# fish.mk
+DOTFILES:=${DOTFILES} ~/.config/fish/conf.d ~/.config/fish/config.fish
+```
+
+**2. PACKAGES** - Устанавливаемые пакеты
+```makefile
+# configuration.mk
+PACKAGES=ag direnv pass fzf
+
+# Модули добавляют свои:
+PACKAGES:=${PACKAGES} nvim fish mise
+```
+
+Установка: `which ${PACKAGE} || (brew install || apt-get install)`
+
+**3. APPLIES** - Пост-установочные действия
+```makefile
+# nvim.mk
+APPLIES:=${APPLIES} nvim-install
+nvim-install: nvim-plug-install nvim-plugins-install
+
+# fish.mk
+APPLIES:=$(APPLIES) fisher
+fisher: fisher-install fisher-plugins
+```
+
+### Механизм Симлинков (linker.mk)
+
+**Умная логика бекапов:**
+```makefile
+# Определяем пути
+DST_REFERENCE=$(readlink $(DST))              # Куда указывает текущий симлинк
+REAL_REFERENCE=$(realpath $(REFERENCE))       # Реальный путь в dotfiles
+BACKUP_FILE=${DST}-${TEMP_DATE}               # Бекап с timestamp
+
+backup-config:
+    # Пропускаем, если уже правильный симлинк (idempotent)
+    if [ симлинк на правильный путь ]; then skip
+    # Бекапим существующий файл/директорию/неправильный симлинк
+    elif [ существует ]; then mv $(DST) $(BACKUP_FILE)
+```
+
+**Создание симлинка:**
+```makefile
+# ~/.tmux.conf → .tmux.conf → ~/dotfiles/.tmux.conf
+REFERENCE_FILE=$(echo $(DST) | sed -e 's:$(HOME)/::g')
+REFERENCE=~/dotfiles/${REFERENCE_FILE}
+
+link-home-config: backup-config
+    ln -s ${REAL_REFERENCE} ${DST}
+```
+
+**Примеры сценариев:**
+
+1. **Файл не существует**: Создаётся симлинк без бекапа
+2. **Существующий файл**: `mv ~/.tmux.conf ~/.tmux.conf-2026-02-14-16:54:23` → симлинк
+3. **Правильный симлинк**: Ничего не делаем (idempotent)
+4. **Неправильный симлинк**: Бекапим старый симлинк → создаём новый
+
+### Workflow Выполнения
+
+```bash
+make  # = make all
+```
+
+**Последовательность:**
+1. `make packages` - Установка утилит (ag, nvim, fish, ...)
+2. `make dotfiles` - Создание симлинков с автобекапом
+3. `make apply` - Пост-установка (плагины, настройки)
+
+### Паттерны Организации Конфигов
+
+**Root-level файлы:**
+```
+~/dotfiles/.tmux.conf     → ~/.tmux.conf
+~/dotfiles/.zshrc         → ~/.zshrc
+~/dotfiles/.gitconfig     → ~/.gitconfig
+```
+
+**XDG директории:**
+```
+~/dotfiles/.config/nvim/    → ~/.config/nvim/
+~/dotfiles/.config/fish/    → ~/.config/fish/
+~/dotfiles/.config/zellij/  → ~/.config/zellij/
+```
+
+**Granular симлинки** (отдельные поддиректории):
+```makefile
+DOTFILES:=${DOTFILES} ~/.config/fish/conf.d ~/.config/fish/config.fish ~/.config/fish/functions
+```
 
 ### Neovim конфигурация
 ```
@@ -77,3 +188,111 @@ make fisher            # Установить fisher и плагины
 - Пакеты устанавливаются через homebrew (MacOS) или apt-get (Linux)
 - Поддержка mise для version management
 - keychain для переиспользования ssh-agent
+- Idempotent операции: повторный `make dotfiles` безопасен
+- Автоматические бекапы существующих конфигов с timestamp
+
+## Добавление Нового Конфига
+
+### Шаблон для создания модуля `makefiles/<tool>.mk`
+
+```makefile
+# Добавить конфиг в список симлинков
+DOTFILES:=${DOTFILES} ~/.<tool>rc          # для root-level
+# ИЛИ
+DOTFILES:=${DOTFILES} ~/.config/<tool>      # для XDG
+
+# Добавить пакет для установки (опционально)
+PACKAGES:=${PACKAGES} <tool>
+
+# Добавить пост-установочные действия (опционально)
+APPLIES:=$(APPLIES) <tool>-setup
+
+<tool>-setup:
+	@echo "Configure <tool>..."
+	# Команды настройки плагинов, тем и т.д.
+```
+
+### Процедура добавления
+
+**1. Создать модуль**
+```bash
+# Пример: добавить btop
+cat > makefiles/btop.mk << 'EOF'
+DOTFILES:=${DOTFILES} ~/.config/btop
+PACKAGES:=${PACKAGES} btop
+APPLIES:=$(APPLIES) btop-theme
+
+btop-theme:
+	@echo "Apply btop theme..."
+EOF
+```
+
+**2. Поместить конфиг в репозиторий**
+```bash
+# Для XDG конфигов
+mkdir -p ~/dotfiles/.config/<tool>
+cp -r ~/.config/<tool>/* ~/dotfiles/.config/<tool>/
+
+# Для root-level
+cp ~/.<tool>rc ~/dotfiles/.<tool>rc
+```
+
+**3. Применить изменения**
+```bash
+make dotfiles  # Создаст симлинки с автобекапом
+make packages  # Установит пакет если отсутствует
+make apply     # Выполнит пост-установку
+```
+
+**4. Проверить idempotent**
+```bash
+make dotfiles  # Повторный запуск не должен создавать дубликаты
+```
+
+### Примеры Специальных Модулей
+
+**С установкой плагинов (nvim.mk):**
+```makefile
+APPLIES:=${APPLIES} nvim-install
+
+nvim-install: nvim-plug-install nvim-plugins-install
+
+nvim-plug-install:
+	curl -fLo ${NVIM_PLUG_FILE} https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+nvim-plugins-install:
+	nvim -R +PlugInstall +qall
+```
+
+**С внешними скриптами (fish.mk):**
+```makefile
+fisher: fisher-install fisher-plugins
+
+fisher-install:
+	./scripts/install-fisher.fish
+
+fisher-plugins:
+	./scripts/install-fish-plugins.fish
+```
+
+**Со скачиванием бинарников (zellij.mk):**
+```makefile
+zellij-plugins: $(ZELLIJ_TAB_STATUS)
+
+$(ZELLIJ_TAB_STATUS):
+	mkdir -p $(ZELLIJ_PLUGINS_DIR)
+	curl -fL https://github.com/.../plugin.wasm -o $(ZELLIJ_TAB_STATUS)
+```
+
+### Чеклист для Агента
+
+При добавлении нового инструмента:
+
+- [ ] Создать модуль `makefiles/<tool>.mk`
+- [ ] Определить тип конфига: root-level (`~/.<tool>rc`) или XDG (`~/.config/<tool>`)
+- [ ] Добавить в `DOTFILES` (обязательно)
+- [ ] Добавить в `PACKAGES` (если требуется установка)
+- [ ] Добавить в `APPLIES` (если нужна пост-установка)
+- [ ] Скопировать конфиг в `~/dotfiles/`
+- [ ] Проверить idempotent: `make dotfiles` дважды
+- [ ] Обновить документацию в `CLAUDE.md` (при необходимости)
