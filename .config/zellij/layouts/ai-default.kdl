@@ -2,7 +2,7 @@ layout {
     default_tab_template {
         children
         pane size=1 borderless=true {
-            plugin location="file:/home/danil/code/zjstatus/target/wasm32-wasip1/release/zjstatus.wasm" {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
                 format_left   "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
                 format_center ""
                 format_right  "{command_git_branch}{command_git_status} {notifications} {datetime}{command_hostname}"
@@ -30,12 +30,12 @@ layout {
                 mode_prompt        "#[bg=#CBA6F7,fg=#1e1e2e,bold]  PROMPT "
                 mode_tmux          "#[bg=#ffc387,fg=#1e1e2e,bold]  TMUX "
 
-                tab_normal              "#[fg=#6C7086] {name} "
-                tab_normal_fullscreen   "#[fg=#6C7086] {name} 󰊓 "
-                tab_normal_sync         "#[fg=#6C7086] {name} 󰓦 "
-                tab_active              "#[fg=#89B4FA,bold] {name} "
-                tab_active_fullscreen   "#[fg=#89B4FA,bold] {name} 󰊓 "
-                tab_active_sync         "#[fg=#89B4FA,bold] {name} 󰓦 "
+                tab_normal              "#[fg=#6C7086] {status}{name} "
+                tab_normal_fullscreen   "#[fg=#6C7086] {status}{name} 󰊓 "
+                tab_normal_sync         "#[fg=#6C7086] {status}{name} 󰓦 "
+                tab_active              "#[fg=#89B4FA,bold] {status}{name} "
+                tab_active_fullscreen   "#[fg=#89B4FA,bold] {status}{name} 󰊓 "
+                tab_active_sync         "#[fg=#89B4FA,bold] {status}{name} 󰓦 "
                 tab_separator           "#[fg=#45475a]│"
                 tab_floating_indicator  " 󰉈"
                 tab_fullscreen_indicator " 󰊓"
