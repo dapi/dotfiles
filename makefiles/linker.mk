@@ -1,7 +1,7 @@
 TEMP_DATE:=$(shell date "+%F-%T")
 DST_REFERENCE=$(shell readlink $(DST))
 BACKUP_FILE=${DST}-${TEMP_DATE}
-REAL_REFERENCE=$(shell realpath $(REFERENCE))
+REAL_REFERENCE=$(shell realpath $(REFERENCE) 2>/dev/null || echo $(REFERENCE))
 
 #
 # skip backup if destination file does not exist
@@ -19,4 +19,4 @@ REFERENCE_FILE=$(shell echo $(DST) | sed -e 's:$(HOME)/::g')
 REFERENCE=~/dotfiles/${REFERENCE_FILE}
 link-home-config: backup-config
 	@echo "Link ~/${REFERENCE_FILE} to ${REFERENCE}"
-	@test -e ${DST} || ln -s ${REAL_REFERENCE} ${DST}
+	@test -e ${DST} || test -L ${DST} || ln -s ${REAL_REFERENCE} ${DST}
