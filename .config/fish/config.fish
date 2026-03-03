@@ -38,8 +38,26 @@ fish_add_path ~/.bun/bin
 alias claude="command claude --dangerously-skip-permissions"
 
 
-
 # TODO сделать чтобы это было доступно только на macos
 # Mount office2 sshfs
 alias mount-office="~/bin/mount-office.sh"
 alias mount-office2="~/bin/mount-office2.sh"
+# The following snippet is meant to be used like this in your fish config:
+#
+if status is-interactive
+#     # Configure auto-attach/exit to your likings (default is off).
+# set ZELLIJ_AUTO_ATTACH true
+#     # set ZELLIJ_AUTO_EXIT true
+#     eval (zellij setup --generate-auto-start fish | string collect)
+end
+if not set -q ZELLIJ
+    if test "$ZELLIJ_AUTO_ATTACH" = "true"
+        zellij attach -c --index 0
+    else
+        zellij
+    end
+
+    if test "$ZELLIJ_AUTO_EXIT" = "true"
+        kill $fish_pid
+    end
+end
