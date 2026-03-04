@@ -36,7 +36,7 @@ fish_add_path ~/.bun/bin
 
 # Always run claude in dangerously-skip-permissions mode
 alias claude="command claude --dangerously-skip-permissions"
-
+alias codex="codex --dangerously-bypass-approvals-and-sandbox --search"
 
 # TODO сделать чтобы это было доступно только на macos
 # Mount office2 sshfs
