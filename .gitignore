@@ -8,3 +8,6 @@ tags.*
 .config/fish/fish_variables
 .claude/settings.local.json
 .config/fish/fishd.tmp*
+
+# Claude Code ctags index
+.claude/tags
