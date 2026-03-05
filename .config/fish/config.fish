@@ -50,7 +50,7 @@ if status is-interactive
 #     # set ZELLIJ_AUTO_EXIT true
 #     eval (zellij setup --generate-auto-start fish | string collect)
 end
-if not set -q ZELLIJ
+if not set -q ZELLIJ; and test (uname) != "Darwin"
     if test "$ZELLIJ_AUTO_ATTACH" = "true"
         zellij attach -c --index 0
     else
