@@ -12,9 +12,24 @@ if status --is-interactive
     # GPG: tell pinentry which terminal to use (needed for zellij panes)
     set -gx GPG_TTY (tty)
 
-    # Bugsnag proxy for Linux
-    if test (uname) = "Linux"
-        set -gx BUGSNAG_HTTP_PROXY (pass show proxy/current)
+    # Lazy-load Bugsnag proxy only when a matching command is executed.
+    function __load_bugsnag_proxy_once --description 'Load BUGSNAG_HTTP_PROXY from pass once per shell'
+        if set -q __bugsnag_proxy_loaded
+            return
+        end
+        set -g __bugsnag_proxy_loaded 1
+
+        if test (uname) != "Linux"
+            return
+        end
+        if not type -q pass
+            return
+        end
+
+        set -l bugsnag_proxy (pass show proxy/current 2>/dev/null)
+        if test -n "$bugsnag_proxy"
+            set -gx BUGSNAG_HTTP_PROXY $bugsnag_proxy
+        end
     end
 
     #eval (zellij setup --generate-auto-start fish | string collect)
