@@ -2,10 +2,10 @@ DOTFILES:=${DOTFILES} ~/.vimrc
 APPLIES:=$(APPLIES) vim-install
 PACKAGES:=$(PACKAGES) vim
 
-vim-install: vim-colors vim-plug-install
+vim-install: vim-colors
 
 vim-plug-install:
-	@vim -R +PlugInstall +qall
+	@echo "Skip vim PlugInstall: plugins are managed via nvim-install"
 
 vim-colors:
 	#@test -e ~/.vim || mkdir ~/.vim

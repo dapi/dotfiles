@@ -3,6 +3,9 @@ APPLIES:=${APPLIES} kubectl
 kubectl: ~/bin/kubectl
 
 ~/bin/kubectl:
-	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-	mv ./kubectl ~/bin
+	@mkdir -p ~/bin
+	@version="$$(curl -fsSL https://dl.k8s.io/release/stable.txt)"; \
+	test -n "$$version"; \
+	echo "Install kubectl $$version"; \
+	curl -fL --retry 3 --retry-delay 1 -o ~/bin/kubectl "https://dl.k8s.io/release/$$version/bin/linux/amd64/kubectl"; \
 	chmod a+x ~/bin/kubectl

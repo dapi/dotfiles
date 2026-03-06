@@ -15,11 +15,10 @@ $(NVIM_PLUG_FILE):
 	@sh -c 'curl -fLo ${NVIM_PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 nvim-plugins-install:
-	@nvim -R +PlugInstall +qall
+	@nvim --headless "+PlugInstall --sync" +qa
 
 nvim-clean:
 	@test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
 
 nvim-lsponfig:
 	git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
-
