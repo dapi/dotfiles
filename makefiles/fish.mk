@@ -5,7 +5,7 @@ PACKAGES:=$(PACKAGES) fish
 DOTFILES:=${DOTFILES} ~/.config/fish/config.fish ~/.config/fish/fish_plugins
 DOTFILES:=${DOTFILES} ~/.config/fish/conf.d/aliases.fish ~/.config/fish/conf.d/brew.fish
 DOTFILES:=${DOTFILES} ~/.config/fish/conf.d/custom-envs.fish ~/.config/fish/conf.d/macos.fish
-DOTFILES:=${DOTFILES} ~/.config/fish/functions/kimi-claude.fish ~/.config/fish/functions/proxy.fish ~/.config/fish/functions/zai.fish
+DOTFILES:=${DOTFILES} ~/.config/fish/functions/kimi-claude.fish ~/.config/fish/functions/proxy.fish ~/.config/fish/functions/zai.fish ~/.config/fish/functions/ssh.fish
 
 # Migrate old directory-level symlinks to real dirs so fisher can manage plugins.
 # Also ensure fish files are linked even when running `make apply` without `make dotfiles`.
@@ -40,6 +40,7 @@ fish-layout:
 	@$(MAKE) link-home-config DST=$(HOME)/.config/fish/functions/kimi-claude.fish
 	@$(MAKE) link-home-config DST=$(HOME)/.config/fish/functions/proxy.fish
 	@$(MAKE) link-home-config DST=$(HOME)/.config/fish/functions/zai.fish
+	@$(MAKE) link-home-config DST=$(HOME)/.config/fish/functions/ssh.fish
 
 fisher: fish-layout fisher-install fisher-plugins tide-configure
 
