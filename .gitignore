@@ -6,6 +6,7 @@ tags.*
 .ssh/hosts/*
 *.wasm
 .config/fish/fish_variables
+.config/fish/conf.d/_tide_init.fish
 .claude/settings.local.json
 .config/fish/fishd.tmp*
 
