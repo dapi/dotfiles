@@ -49,6 +49,30 @@ cd ~; git clone git@github.com:dapi/dotfiles.git; cd ~/dotfiles; make
 curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/scripts/install.sh | bash
 ```
 
+# GnuPG в публичном репозитории
+
+В `.gnupg/` в этом репозитории храним только публично-безопасные настройки:
+
+* `gpg-agent.conf`
+* `common.conf`
+* (опционально) `gpg.conf`, `dirmngr.conf`, `scdaemon.conf`
+
+Секреты и state-файлы в git не кладем:
+
+* `private-keys-v1.d/`
+* `openpgp-revocs.d/`
+* `pubring.gpg`, `trustdb.gpg`, `tofu.db`, `random_seed`, `sshcontrol`
+
+Для защиты от случайного коммита добавлен whitelist-`gitignore` в `.gnupg/.gitignore`:
+по умолчанию игнорируется все, кроме явно разрешенных конфигов.
+
+Дополнительно есть `pre-commit` хук `.githooks/pre-commit`, который блокирует
+коммит любых других файлов из `.gnupg/`. Чтобы включить:
+
+```sh
+git config core.hooksPath .githooks
+```
+
 # TODO
 
 Добавить управление фоном терминала в зависимости от ssh-сессии

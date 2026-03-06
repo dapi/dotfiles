@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+allowed='^\.gnupg/(\.gitignore|common\.conf|gpg-agent\.conf|gpg\.conf|dirmngr\.conf|scdaemon\.conf)$'
+
+staged_paths="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+blocked=""
+while IFS= read -r path; do
+  [ -z "$path" ] && continue
+
+  case "$path" in
+    .gnupg/*)
+      if [[ ! "$path" =~ $allowed ]]; then
+        blocked+="$path"$'\n'
+      fi
+      ;;
+  esac
+done <<< "$staged_paths"
+
+if [ -n "$blocked" ]; then
+  echo "ERROR: refusing to commit sensitive .gnupg files:"
+  printf '%s' "$blocked"
+  echo
+  echo "Allowed .gnupg files:"
+  echo "  .gnupg/.gitignore"
+  echo "  .gnupg/common.conf"
+  echo "  .gnupg/gpg-agent.conf"
+  echo "  .gnupg/gpg.conf"
+  echo "  .gnupg/dirmngr.conf"
+  echo "  .gnupg/scdaemon.conf"
+  echo
+  echo "If this is intentional, move secrets out of git first."
+  exit 1
+fi
