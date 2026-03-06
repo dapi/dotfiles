@@ -1,3 +1,5 @@
+status --is-interactive; or return
+
 # Reuse ssh-agent keys across sessions.
 if type -q keychain
     keychain --eval --quiet -Q id_ed25519.priv 2>/dev/null | source

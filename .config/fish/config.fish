@@ -4,10 +4,4 @@ if not status --is-interactive
     exit 0
 end
 
-# Interactive snippets are loaded from config.d in lexical order.
-set -l user_configd ~/.config/fish/config.d
-if test -d $user_configd
-    for f in (find -L $user_configd -mindepth 1 -maxdepth 1 -type f -name '*.fish' | sort)
-        source $f
-    end
-end
+# User snippets are loaded by fish from conf.d/.

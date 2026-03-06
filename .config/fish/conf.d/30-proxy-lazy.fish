@@ -1,3 +1,5 @@
+status --is-interactive; or return
+
 # Load BUGSNAG_HTTP_PROXY lazily from pass, once per shell.
 function __load_bugsnag_proxy_once --description 'Load BUGSNAG_HTTP_PROXY from pass once per shell'
     if set -q __bugsnag_proxy_loaded

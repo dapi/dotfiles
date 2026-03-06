@@ -1,3 +1,5 @@
+status --is-interactive; or return
+
 # Additional user paths.
 fish_add_path ~/.local/bin
 fish_add_path ~/bin

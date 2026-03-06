@@ -1,3 +1,5 @@
+status --is-interactive; or return
+
 # Local command aliases.
 alias claude="command claude --dangerously-skip-permissions"
 alias codex="codex --dangerously-bypass-approvals-and-sandbox --search"
