@@ -5,3 +5,4 @@ if not status --is-interactive
 end
 
 # User snippets are loaded by fish from conf.d/.
+zoxide init fish | source
