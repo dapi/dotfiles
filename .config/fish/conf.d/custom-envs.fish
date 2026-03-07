@@ -1,4 +1,5 @@
 set -gx LESS -eiRMX
+set -gx ENABLE_CLAUDEAI_MCP_SERVERS false
 set -x PGOPTIONS '--client-min-messages=warning'
 set -x EDITOR nvim
 set -x PATH $PATH $HOME/.local/bin
