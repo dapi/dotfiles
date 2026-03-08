@@ -9,7 +9,7 @@ test -f ~/.zsh.local && source ~/.zsh.local
 
 source "${ZDOTDIR:-${HOME}}/dotfiles/zsh/.zshrc-`uname`"
 
-plugins=(ssh-agent git direnv rails docker-compose docker kubectl)
+plugins=(git direnv rails docker-compose docker kubectl)
 
 # Должен вызываться после plugins
 source $ZSH/oh-my-zsh.sh
