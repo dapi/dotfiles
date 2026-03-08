@@ -1,5 +1,5 @@
 APPLIES:=$(APPLIES) fish-layout fisher
-PACKAGES:=$(PACKAGES) fish
+PACKAGES:=$(PACKAGES) fish zoxide
 
 # conf.d/ symlinked as whole dir; fisher-managed files (.gitignore'd)
 # functions/ stays a real dir — fisher puts dozens of files there
