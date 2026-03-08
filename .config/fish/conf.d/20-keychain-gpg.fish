@@ -1,8 +1,8 @@
 status --is-interactive; or return
 
-# Reuse ssh-agent keys across sessions.
-if type -q keychain
-    keychain --eval --quiet -Q id_ed25519.priv 2>/dev/null | source
+# Use systemd-managed ssh-agent socket (Linux only).
+if test (uname) = Linux
+    set -gx SSH_AUTH_SOCK /run/user/(id -u)/openssh_agent
 end
 
 # Tell pinentry which terminal to use.
