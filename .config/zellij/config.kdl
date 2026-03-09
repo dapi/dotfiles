@@ -321,7 +321,7 @@ web_client {
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-default_layout "ai-default"
+default_layout "default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -529,17 +529,130 @@ theme "gruvbox-light"
 
 themes {
     gruvbox-light {
-        fg "#3c3836"
-        bg "#fbf1c7"
-        black "#fbf1c7"
-        red "#cc241d"
-        green "#98971a"
-        yellow "#d79921"
-        blue "#458588"
-        magenta "#b16286"
-        cyan "#689d6a"
-        white "#3c3836"
-        orange "#504945"
+        text_unselected {
+            base 60 56 54
+            background 251 241 199
+            emphasis_0 204 36 29
+            emphasis_1 152 151 26
+            emphasis_2 69 133 136
+            emphasis_3 177 98 134
+        }
+        text_selected {
+            base 251 241 199
+            background 80 73 69
+            emphasis_0 204 36 29
+            emphasis_1 152 151 26
+            emphasis_2 69 133 136
+            emphasis_3 177 98 134
+        }
+        ribbon_unselected {
+            base 60 56 54
+            background 213 196 161
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        ribbon_selected {
+            base 251 241 199
+            background 69 133 136
+            emphasis_0 251 241 199
+            emphasis_1 235 219 178
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        frame_unselected {
+            base 168 153 132
+            background 251 241 199
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        frame_selected {
+            base 69 133 136
+            background 251 241 199
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        frame_highlight {
+            base 215 153 33
+            background 251 241 199
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 177 98 134
+        }
+        exit_code_success {
+            base 152 151 26
+            background 251 241 199
+            emphasis_0 0 0 0
+            emphasis_1 0 0 0
+            emphasis_2 0 0 0
+            emphasis_3 0 0 0
+        }
+        exit_code_error {
+            base 204 36 29
+            background 251 241 199
+            emphasis_0 0 0 0
+            emphasis_1 0 0 0
+            emphasis_2 0 0 0
+            emphasis_3 0 0 0
+        }
+        table_title {
+            base 60 56 54
+            background 235 219 178
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        table_cell_unselected {
+            base 60 56 54
+            background 251 241 199
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        table_cell_selected {
+            base 251 241 199
+            background 80 73 69
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        list_unselected {
+            base 60 56 54
+            background 251 241 199
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        list_selected {
+            base 251 241 199
+            background 80 73 69
+            emphasis_0 204 36 29
+            emphasis_1 69 133 136
+            emphasis_2 152 151 26
+            emphasis_3 215 153 33
+        }
+        multiplayer_user_colors {
+            player_1 204 36 29
+            player_2 69 133 136
+            player_3 152 151 26
+            player_4 177 98 134
+            player_5 215 153 33
+            player_6 104 157 106
+            player_7 80 73 69
+            player_8 124 111 100
+            player_9 168 153 132
+            player_10 102 92 84
+        }
     }
 }
  
