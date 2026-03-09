@@ -1,4 +1,9 @@
 [tools]
+direnv = "latest"
+fzf = "latest"
+jq = "latest"
+kubectl = "latest"
+neovim = "latest"
 node = "latest"
 ruby = "3.4.8"
 yarn = "1"

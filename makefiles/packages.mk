@@ -1,4 +1,4 @@
-PACKAGES:=$(PACKAGES) mise jq bc
+PACKAGES:=$(PACKAGES) mise bc
 
 UNAME := $(shell uname)
 
