@@ -1,9 +1,9 @@
 status --is-interactive; or return
 
-# Optional zellij autostart on Linux.
-if not set -q ZELLIJ; and test (uname) != "Darwin"
-    if test "$ZELLIJ_AUTO_ATTACH" = "true"
-        zellij attach -c --index 0
+if not set -q ZELLIJ; and set -q SSH_TTY; and test (uname) != "Darwin"
+    set -l first_zellij_session (zellij list-sessions -s 2>/dev/null | head -n 1)
+    if test -n "$first_zellij_session"
+        zellij attach --index 0
     else
         zellij
     end

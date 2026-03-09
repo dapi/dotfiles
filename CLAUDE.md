@@ -166,10 +166,12 @@ DOTFILES:=${DOTFILES} ~/.config/fish/conf.d ~/.config/fish/config.fish ~/.config
 ### Fish конфигурация
 ```
 .config/fish/
-├── config.fish    # Основной конфиг (mise, keychain, paths)
-├── conf.d/        # Автозагружаемые конфиги
+├── config.fish    # Минимальный: только non-interactive guard
+├── conf.d/        # Автозагружаемые конфиги (вся логика здесь)
 └── functions/     # Пользовательские функции
 ```
+
+**Правило: config.fish должен быть минимальным.** Вся логика выносится в `conf.d/` как отдельные сниппеты с нумерованными префиксами (05-, 10-, 15-, ...). Каждый сниппет начинается с `status --is-interactive; or return`. Для опциональных зависимостей добавлять `test -f` проверку.
 
 Плагин менеджер: fisher. Prompt: tide.
 
