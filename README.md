@@ -66,8 +66,12 @@ curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/scrip
 Для защиты от случайного коммита добавлен whitelist-`gitignore` в `.gnupg/.gitignore`:
 по умолчанию игнорируется все, кроме явно разрешенных конфигов.
 
-Дополнительно есть `pre-commit` хук `.githooks/pre-commit`, который блокирует
-коммит любых других файлов из `.gnupg/`. Чтобы включить:
+Дополнительно есть `pre-commit` хук `.githooks/pre-commit`, который:
+
+* блокирует коммит любых других файлов из `.gnupg/`
+* прогоняет `gitleaks` по staged-изменениям и останавливает коммит при находке секрета
+
+Чтобы включить:
 
 ```sh
 git config core.hooksPath .githooks

@@ -2,6 +2,7 @@
 ag = "latest"
 direnv = "latest"
 fzf = "latest"
+gitleaks = "latest"
 jq = "latest"
 kubectl = "latest"
 neovim = "latest"

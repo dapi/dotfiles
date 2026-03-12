@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
 allowed='^\.gnupg/(\.gitignore|common\.conf|gpg-agent\.conf|gpg\.conf|dirmngr\.conf|scdaemon\.conf)$'
 
 staged_paths="$(git diff --cached --name-only --diff-filter=ACMR)"
@@ -33,3 +36,15 @@ if [ -n "$blocked" ]; then
   echo "If this is intentional, move secrets out of git first."
   exit 1
 fi
+
+if command -v mise >/dev/null 2>&1 && gitleaks_path="$(mise which gitleaks 2>/dev/null)"; then
+  gitleaks_cmd=("$gitleaks_path")
+elif command -v gitleaks >/dev/null 2>&1; then
+  gitleaks_cmd=(gitleaks)
+else
+  echo "ERROR: gitleaks is required for pre-commit secret scanning."
+  echo "Run 'make' or 'mise install gitleaks' and try again."
+  exit 1
+fi
+
+"${gitleaks_cmd[@]}" git --staged --no-banner --redact --log-level warn
