@@ -21,7 +21,22 @@ agents-cli:
 agents-skills:
 	npx skills add dapi/tgcli --skill tgcli --agent '*' -g -y
 	npx skills add dapi/docmost-cli --skill docmost --agent '*' -g -y
-	npx skills add googleworkspace/cli --skill google_workspace --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-docs --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-docs-write --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-calendar --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-calendar-agenda --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-calendar-insert --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-gmail --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-gmail-send --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-gmail-reply --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-gmail-reply-all --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-gmail-forward --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-gmail-triage --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-drive --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-drive-upload --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-sheets --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-tasks --agent '*' -g -y
+	npx skills add googleworkspace/cli --skill gws-meet --agent '*' -g -y
 
 # --- Claude Code plugins ---
 
