@@ -1,0 +1,75 @@
+{
+  "version": 3,
+  "skills": {
+    "playwright-cli": {
+      "source": "microsoft/playwright-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
+      "skillPath": "skills/playwright-cli/SKILL.md",
+      "skillFolderHash": "a5a8823e403adc13b2488aae9968d6d92adbd2d7",
+      "installedAt": "2026-03-06T09:51:04.340Z",
+      "updatedAt": "2026-03-06T09:51:04.340Z"
+    },
+    "tgcli": {
+      "source": "dapi/tgcli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dapi/tgcli.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "dcfb66eab1f1cc053d3c6957efe75ddbf150282d",
+      "installedAt": "2026-03-06T09:51:08.232Z",
+      "updatedAt": "2026-03-12T13:46:44.474Z"
+    },
+    "docmost": {
+      "source": "dapi/docmost-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dapi/docmost-cli.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "c019f559780b6b1fe9587bbb7be02173c871c93c",
+      "installedAt": "2026-03-06T09:51:11.980Z",
+      "updatedAt": "2026-03-06T12:28:04.381Z"
+    },
+    "gws-calendar": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/googleworkspace/cli.git",
+      "skillPath": "skills/gws-calendar/SKILL.md",
+      "skillFolderHash": "80c98ff8dcf0c96f5d22e9e34101968d42c47135",
+      "installedAt": "2026-03-12T14:47:45.616Z",
+      "updatedAt": "2026-03-12T14:47:45.616Z"
+    },
+    "gws-docs": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/googleworkspace/cli.git",
+      "skillPath": "skills/gws-docs/SKILL.md",
+      "skillFolderHash": "a7da40857bfbaf865a75d981257a7b9624827e79",
+      "installedAt": "2026-03-12T14:47:46.200Z",
+      "updatedAt": "2026-03-12T14:47:46.200Z"
+    },
+    "gws-docs-write": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/googleworkspace/cli.git",
+      "skillPath": "skills/gws-docs-write/SKILL.md",
+      "skillFolderHash": "39890a5584a66860b173ec3d1380eb8d7f347ef7",
+      "installedAt": "2026-03-12T14:47:46.766Z",
+      "updatedAt": "2026-03-12T14:47:46.766Z"
+    },
+    "gws-gmail": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/googleworkspace/cli.git",
+      "skillPath": "skills/gws-gmail/SKILL.md",
+      "skillFolderHash": "eb527723ac1ffb7edfda9e83b0e4e2a67b2b756b",
+      "installedAt": "2026-03-12T14:47:47.288Z",
+      "updatedAt": "2026-03-12T14:47:47.288Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "codex",
+    "claude-code"
+  ]
+}

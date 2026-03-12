@@ -13,6 +13,7 @@
 * `direnv`
 * `git`, `ag`, `ctags`
 * `ghostty`
+* AI agent skills via tracked manifest in `~/dotfiles/.skill-lock.json`
 * Моноширинные шрифты поддерживающие statusline в fish, tmux, neovim для MacOS.
 
 # Как это выглядит?
@@ -48,6 +49,31 @@ cd ~; git clone git@github.com:dapi/dotfiles.git; cd ~/dotfiles; make
 ```sh
 curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/scripts/install.sh | bash
 ```
+
+# AI Agent Skills
+
+Скиллы агентов теперь управляются из `dotfiles` так:
+
+```text
+~/dotfiles/.skill-lock.json  # tracked manifest in git
+npx skills global store      # managed outside the repo by the CLI itself
+```
+
+После первого `make` можно управлять skills так:
+
+```sh
+make                        # в том числе установит недостающие skills из lock-файла
+make agents-skills-install  # установить недостающие skills отдельно
+make agents-skills-update   # обновить установленные skills
+make agents-skills-list     # показать установленные skills
+make agents-skills-sync     # подготовить изменения в ~/dotfiles к коммиту
+make agents-skills-add SOURCE=owner/repo SKILL=name
+make agents-skills-import-lock
+```
+
+`npx skills` сам хранит установленное состояние и свой внутренний global lock вне репозитория. В `dotfiles` мы храним только tracked manifest.
+
+`agents-skills-add` с `SKILL=name` обновляет в tracked manifest только этот skill. Для полной замены tracked manifest текущим global lock есть отдельный `make agents-skills-import-lock`.
 
 # GnuPG в публичном репозитории
 

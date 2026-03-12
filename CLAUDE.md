@@ -19,6 +19,12 @@ make update
 make packages     # Установить пакеты (ag, direnv, pass, fzf, nvim)
 make dotfiles     # Создать симлинки конфигов
 make apply        # Применить (nvim плагины, fisher)
+make agents-skills-install  # Установить недостающие agent skills из lock-файла
+make agents-skills-update   # Обновить установленные agent skills
+make agents-skills-list     # Показать установленные agent skills
+make agents-skills-sync     # Подготовить tracked agent files к коммиту
+make agents-skills-add SOURCE=owner/repo SKILL=name
+make agents-skills-import-lock
 
 # Neovim
 make nvim-install      # Установить vim-plug и плагины
@@ -39,8 +45,10 @@ make fisher            # Установить fisher и плагины
 dotfiles/
 ├── Makefile              # Точка входа, включает все makefiles/*.mk
 ├── configuration.mk      # Определяет DOTFILES, PACKAGES, APPLIES
+├── .skill-lock.json       # Tracked manifest for agent skills
 ├── makefiles/            # Модульные конфигурации
 │   ├── linker.mk        # ⭐ Логика симлинков с автобекапом
+│   ├── agents.mk        # Claude/Codex skills installer wiring
 │   ├── nvim.mk          # Neovim setup
 │   ├── fish.mk          # Fish shell setup
 │   ├── packages.mk      # Установка через brew/apt
@@ -63,6 +71,7 @@ DOTFILES:=${DOTFILES} ~/.config/nvim
 
 # fish.mk
 DOTFILES:=${DOTFILES} ~/.config/fish/conf.d ~/.config/fish/config.fish
+
 ```
 
 **2. PACKAGES** - Устанавливаемые пакеты
@@ -251,6 +260,27 @@ make apply     # Выполнит пост-установку
 make dotfiles  # Повторный запуск не должен создавать дубликаты
 ```
 
+### Пример: manifest в git, global runtime у skills CLI
+
+Для agent skills храним manifest в `dotfiles`, а установленное состояние оставляем в global store самого `npx skills`:
+
+```makefile
+# makefiles/agents.mk
+PACKAGES:=${PACKAGES} jq
+agents-skills-install:
+	# Установить отсутствующие skills из .skill-lock.json
+
+agents-skills-update:
+	# Обновить уже установленные skills через global store skills CLI
+```
+
+Результат:
+
+```text
+~/dotfiles/.skill-lock.json  # tracked manifest
+npx skills global store      # local installed skills outside the repo
+```
+
 ### Примеры Специальных Модулей
 
 **С установкой плагинов (nvim.mk):**
@@ -298,3 +328,4 @@ $(ZELLIJ_TAB_STATUS):
 - [ ] Скопировать конфиг в `~/dotfiles/`
 - [ ] Проверить idempotent: `make dotfiles` дважды
 - [ ] Обновить документацию в `CLAUDE.md` (при необходимости)
+- [ ] Для directory-level конфигов проверить сценарий миграции с backup
