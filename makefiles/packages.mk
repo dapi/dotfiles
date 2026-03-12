@@ -19,9 +19,16 @@ apt_name = $(or $(APT_NAME_$(1)),$(1))
 cmd_name = $(or $(CMD_NAME_$(1)),$(1))
 
 package:
-	@echo "Install ${PACKAGE}"
 ifeq ($(UNAME),Darwin)
-	@which $(call cmd_name,${PACKAGE}) > /dev/null 2>&1 || brew install $(call brew_name,${PACKAGE})
+	@if command -v $(call cmd_name,${PACKAGE}) > /dev/null 2>&1; then \
+		echo "Install ${PACKAGE} - already exists"; \
+	else \
+		brew install $(call brew_name,${PACKAGE}) && echo "Install ${PACKAGE} - installed"; \
+	fi
 else
-	@which $(call cmd_name,${PACKAGE}) > /dev/null 2>&1 || sudo apt-get install -y $(call apt_name,${PACKAGE})
+	@if command -v $(call cmd_name,${PACKAGE}) > /dev/null 2>&1; then \
+		echo "Install ${PACKAGE} - already exists"; \
+	else \
+		sudo apt-get install -y $(call apt_name,${PACKAGE}) && echo "Install ${PACKAGE} - installed"; \
+	fi
 endif
