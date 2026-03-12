@@ -1,4 +1,5 @@
 [tools]
+ag = "latest"
 direnv = "latest"
 fzf = "latest"
 jq = "latest"
@@ -7,3 +8,4 @@ neovim = "latest"
 node = "latest"
 ruby = "3.4.8"
 yarn = "1"
+zoxide = "latest"

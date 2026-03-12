@@ -18,6 +18,8 @@ backup-config:
 REFERENCE_FILE=$(shell echo $(DST) | sed -e 's:$(HOME)/::g')
 REFERENCE=~/dotfiles/${REFERENCE_FILE}
 link-home-config: backup-config
-	@echo "Link ~/${REFERENCE_FILE} to ${REFERENCE}"
 	@mkdir -p "$(dir $(DST))"
-	@test -e ${DST} || test -L ${DST} || ln -s ${REAL_REFERENCE} ${DST}
+	@if [ ! -e "$(DST)" ] && [ ! -L "$(DST)" ]; then \
+		echo "Link ~/${REFERENCE_FILE} to ${REFERENCE}"; \
+		ln -s ${REAL_REFERENCE} ${DST}; \
+	fi

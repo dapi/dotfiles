@@ -9,6 +9,15 @@ test -f ~/.zsh.local && source ~/.zsh.local
 
 source "${ZDOTDIR:-${HOME}}/dotfiles/zsh/.zshrc-`uname`"
 
+# Created by `pipx` on 2025-02-02 18:43:53
+export PATH="$HOME/.local/bin:$PATH"
+
+if [ -x "$HOME/.local/bin/mise" ]; then
+  eval "$("$HOME/.local/bin/mise" activate zsh)"
+elif command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
+
 plugins=(git direnv rails docker-compose docker kubectl)
 
 # Должен вызываться после plugins
@@ -29,11 +38,6 @@ export PGOPTIONS='--client-min-messages=warning'
 unset GREP_OPTIONS
 
 export TERM=xterm-256color
-
-# Created by `pipx` on 2025-02-02 18:43:53
-export PATH="$PATH:/home/danil/.local/bin"
-
-eval "$(${HOME}/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
 
 # MySQL client for Rails development
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"

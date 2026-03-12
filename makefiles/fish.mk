@@ -1,5 +1,5 @@
 APPLIES:=$(APPLIES) fish-layout fisher
-PACKAGES:=$(PACKAGES) fish zoxide
+PACKAGES:=$(PACKAGES) fish
 
 # conf.d/ symlinked as whole dir; fisher-managed files (.gitignore'd)
 # functions/ stays a real dir — fisher puts dozens of files there
@@ -9,6 +9,7 @@ DOTFILES:=${DOTFILES} ~/.config/fish/functions/kimi-claude.fish ~/.config/fish/f
 
 # Migrate old directory-level symlinks to real dirs so fisher can manage plugins.
 # Also ensure fish files are linked even when running `make apply` without `make dotfiles`.
+# Completions are managed by fisher in a real directory, so don't re-backup them on each run.
 fish-layout:
 	@mkdir -p $(HOME)/.config/fish
 	@if [ -L $(HOME)/.config/fish/functions ]; then \
@@ -18,13 +19,7 @@ fish-layout:
 		fi; \
 	fi
 	@mkdir -p $(HOME)/.config/fish/functions
-	@for completion in fisher.fish spark.fish tide.fish direnv.fish; do \
-		if [ -f "$(HOME)/.config/fish/completions/$$completion" ] && [ ! -L "$(HOME)/.config/fish/completions/$$completion" ]; then \
-			backup="$$(date "+%Y%m%d-%H%M%S")"; \
-			mv "$(HOME)/.config/fish/completions/$$completion" "$(HOME)/.config/fish/completions/$$completion.bak.$$backup"; \
-			echo "Backed up ~/.config/fish/completions/$$completion to ~/.config/fish/completions/$$completion.bak.$$backup"; \
-		fi; \
-	done
+	@mkdir -p $(HOME)/.config/fish/completions
 
 fisher: fish-layout fisher-install fisher-plugins tide-configure
 

@@ -1,8 +1,7 @@
 DOTFILES:=${DOTFILES} ~/.config/nvim
-PACKAGES:=${PACKAGES} nvim
 APPLIES:=${APPLIES} nvim-install
 
-nvim-install: nvim-plug-install nvim-plugins-install
+nvim-install: mise-install nvim-plug-install nvim-plugins-install
 
 nvim-reinstall: nvim-clean nvim-install
 
@@ -15,7 +14,7 @@ $(NVIM_PLUG_FILE):
 	@sh -c 'curl -fLo ${NVIM_PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 nvim-plugins-install:
-	@nvim --headless "+PlugInstall --sync" +qa
+	@mise exec -- nvim --headless "+PlugInstall --sync" +qa
 
 nvim-clean:
 	@test ! -d ~/.config/nvim || mv ~/.config/nvim ~/.config/nvim-$(shell date "+%F-%T")
