@@ -1,6 +1,9 @@
 DOTFILES:=${DOTFILES} ~/mise.toml
-APPLIES:=$(APPLIES) mise-install
+BOOTSTRAPS:=$(BOOTSTRAPS) mise-package mise-install
 
-mise-install:
+mise-package:
+	@$(MAKE) package PACKAGE=mise
+
+mise-install: mise-package
 	@echo "Install mise tools"
 	@mise install --quiet

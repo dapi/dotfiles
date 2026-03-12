@@ -5,12 +5,11 @@ include makefiles/*.mk
 
 .DEFAULT_GOAL := all
 
-.PHONY: $(DOTFILES) dotfiles-status
+.PHONY: bootstrap $(BOOTSTRAPS) $(DOTFILES) dotfiles-status
 $(DOTFILES):
-	@raw_dst="$@"; \
-	dst="$(HOME)/$${raw_dst#~/}"; \
+	@dst="$@"; \
 	repo_dir="$(CURDIR)"; \
-	reference_file="$${raw_dst#~/}"; \
+	reference_file="$${dst#$(HOME)/}"; \
 	reference="$$repo_dir/$$reference_file"; \
 	dst_reference="$$(readlink "$$dst" 2>/dev/null || true)"; \
 	if [ -L "$$dst" ] && [ "$$dst_reference" = "$$reference" ]; then \
@@ -29,14 +28,16 @@ dotfiles-status:
 
 dotfiles: dotfiles-status $(DOTFILES)
 
+bootstrap: $(BOOTSTRAPS)
+
 .PHONY: $(PACKAGES)
 $(PACKAGES):
 	@$(MAKE) package PACKAGE=$@
 packages: $(PACKAGES)
 
 .PHONY: $(APPLIES)
-apply: $(APPLIES)
+apply: bootstrap $(APPLIES)
 
-all: packages dotfiles apply
+all: bootstrap packages dotfiles apply
 
 update: git-pull all
