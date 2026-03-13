@@ -48,3 +48,4 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/mysql-client/lib/pkgconfig"
 export WASMTIME_HOME="$HOME/.wasmtime"
 
 export PATH="$WASMTIME_HOME/bin:$PATH"
+export PATH="$HOME/.local/bin/zelda:$PATH" # zelda-wrappers

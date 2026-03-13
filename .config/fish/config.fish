@@ -10,3 +10,5 @@ end
 if test -f "$HOME/google-cloud-sdk/path.fish.inc"
     source "$HOME/google-cloud-sdk/path.fish.inc"
 end
+# zelda-wrappers
+fish_add_path -p ~/.local/bin/zelda
