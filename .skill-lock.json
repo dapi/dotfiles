@@ -6,6 +6,18 @@
     "gws-calendar": {
       "source": "googleworkspace/cli"
     },
+    "gws-calendar-agenda": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-calendar-insert": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-drive": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-drive-upload": {
+      "source": "googleworkspace/cli"
+    },
     "gws-docs": {
       "source": "googleworkspace/cli"
     },
@@ -13,6 +25,30 @@
       "source": "googleworkspace/cli"
     },
     "gws-gmail": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-gmail-forward": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-gmail-reply": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-gmail-reply-all": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-gmail-send": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-gmail-triage": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-meet": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-sheets": {
+      "source": "googleworkspace/cli"
+    },
+    "gws-tasks": {
       "source": "googleworkspace/cli"
     },
     "playwright-cli": {
