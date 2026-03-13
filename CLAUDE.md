@@ -9,8 +9,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Команды
 
 ```bash
-# Установить/обновить все (пакеты + dotfiles + плагины)
+# Установить/обновить базовые dotfiles
 make
+
+# Установить AI-слой: Codex, Claude Code, agent CLI, plugins и curated skills
+make ai
 
 # Обновить из git и применить
 make update
@@ -19,6 +22,8 @@ make update
 make packages     # Установить пакеты (ag, direnv, pass, fzf, nvim)
 make dotfiles     # Создать симлинки конфигов
 make apply        # Применить (nvim плагины, fisher)
+make agents-skills-install  # Установить curated agent skills
+make agents-skills-list     # Показать curated agent skills
 
 # Neovim
 make nvim-install      # Установить vim-plug и плагины
@@ -41,6 +46,7 @@ dotfiles/
 ├── configuration.mk      # Определяет DOTFILES, PACKAGES, APPLIES
 ├── makefiles/            # Модульные конфигурации
 │   ├── linker.mk        # ⭐ Логика симлинков с автобекапом
+│   ├── agents.mk        # AI tooling bootstrap and curated skills list
 │   ├── nvim.mk          # Neovim setup
 │   ├── fish.mk          # Fish shell setup
 │   ├── packages.mk      # Установка через brew/apt
@@ -63,6 +69,7 @@ DOTFILES:=${DOTFILES} ~/.config/nvim
 
 # fish.mk
 DOTFILES:=${DOTFILES} ~/.config/fish/conf.d ~/.config/fish/config.fish
+
 ```
 
 **2. PACKAGES** - Устанавливаемые пакеты
@@ -251,6 +258,26 @@ make apply     # Выполнит пост-установку
 make dotfiles  # Повторный запуск не должен создавать дубликаты
 ```
 
+### Пример: curated skills list в makefile
+
+Для agent skills держим простой список install-команд в `makefiles/agents.mk` и ставим их только для поддерживаемых агентов:
+
+```makefile
+# makefiles/agents.mk
+ai: bootstrap
+	$(MAKE) agents-install
+
+agents-skills-install:
+	$(SKILLS) add dapi/tgcli --skill tgcli -g -a codex -a claude-code -y
+```
+
+Результат:
+
+```text
+makefiles/agents.mk          # curated skills list в git
+make ai                      # отдельный bootstrap AI-инструментов
+```
+
 ### Примеры Специальных Модулей
 
 **С установкой плагинов (nvim.mk):**
@@ -298,3 +325,4 @@ $(ZELLIJ_TAB_STATUS):
 - [ ] Скопировать конфиг в `~/dotfiles/`
 - [ ] Проверить idempotent: `make dotfiles` дважды
 - [ ] Обновить документацию в `CLAUDE.md` (при необходимости)
+- [ ] Для directory-level конфигов проверить сценарий миграции с backup

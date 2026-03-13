@@ -13,6 +13,7 @@
 * `direnv`
 * `git`, `ag`, `ctags`
 * `ghostty`
+* AI agents, CLI tools, plugins и curated skills через `make ai`
 * Моноширинные шрифты поддерживающие statusline в fish, tmux, neovim для MacOS.
 
 # Как это выглядит?
@@ -48,6 +49,27 @@ cd ~; git clone git@github.com:dapi/dotfiles.git; cd ~/dotfiles; make
 ```sh
 curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/scripts/install.sh | bash
 ```
+
+# AI
+
+AI-часть вынесена в отдельный слой поверх базовых dotfiles:
+
+```sh
+make     # базовые пакеты, симлинки и привычные настройки
+make ai  # Codex, Claude Code, agent CLI, plugins и curated skills
+```
+
+Curated skills перечислены прямо в [agents.mk](/Users/danil/dotfiles/makefiles/agents.mk). Это обычный явный список `npx skills add ...`, без отдельного manifest-файла.
+
+Основные команды:
+
+```sh
+make ai
+make agents-skills-install
+make agents-skills-list
+```
+
+Чтобы добавить или убрать skill, правь [agents.mk](/Users/danil/dotfiles/makefiles/agents.mk): `tgcli`, `docmost`, `playwright-cli` перечислены отдельно, а `googleworkspace/cli` сгруппирован через `GOOGLE_WORKSPACE_SKILLS`.
 
 # GnuPG в публичном репозитории
 
