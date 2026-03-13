@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Обзор
 
 Репозиторий dotfiles для синхронизации конфигураций между MacOS и Linux (Ubuntu) машинами. Используется для консольной веб-разработки с neovim, fish/zsh, tmux.
+Node.js и Ruby version management в репозитории идут только через `mise.toml`; `nvm` и `rbenv` не используются.
 
 ## Команды
 
