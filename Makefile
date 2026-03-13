@@ -38,6 +38,8 @@ packages: $(PACKAGES)
 .PHONY: $(APPLIES)
 apply: bootstrap $(APPLIES)
 
+.PHONY: all
 all: bootstrap packages dotfiles apply
+	@printf "\nRun 'make ai' to install AI agents, CLI tools, plugins, and curated skills.\n"
 
 update: git-pull all

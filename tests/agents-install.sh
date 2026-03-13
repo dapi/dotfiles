@@ -57,6 +57,7 @@ test_default_make_does_not_include_ai_workflow() {
 
   assert_not_contains "Installing curated skills" "$output" "default make should not install curated skills"
   assert_not_contains "@anthropic-ai/claude-code" "$output" "default make should not install AI agents"
+  assert_contains "Run 'make ai' to install AI agents, CLI tools, plugins, and curated skills." "$output" "default make should remind about the separate AI bootstrap"
   pass "default make excludes the AI bootstrap workflow"
 }
 
