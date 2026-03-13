@@ -1,24 +1,37 @@
 # AI agents, CLI tools, skills, and plugins
 
 BLUE := \033[0;34m
-GREEN := \033[0;32m
 NC := \033[0m
 
 NPM ?= mise exec -- npm
 CLAUDE ?= mise exec -- claude
 SKILLS_NPX ?= mise exec -- npx
 SKILLS ?= $(SKILLS_NPX) skills
-DOTFILES_ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/..)
-AGENTS_LOCK_FILE := $(DOTFILES_ROOT)/.skill-lock.json
 AGENTS_TARGETS := codex claude-code
 AGENTS_SKILLS_AGENT_FLAGS := $(foreach agent,$(AGENTS_TARGETS),-a $(agent))
 
+GOOGLE_WORKSPACE_SKILLS := \
+	gws-docs \
+	gws-docs-write \
+	gws-calendar \
+	gws-calendar-agenda \
+	gws-calendar-insert \
+	gws-gmail \
+	gws-gmail-send \
+	gws-gmail-reply \
+	gws-gmail-reply-all \
+	gws-gmail-forward \
+	gws-gmail-triage \
+	gws-drive \
+	gws-drive-upload \
+	gws-sheets \
+	gws-tasks \
+	gws-meet
+
 .PHONY: ai agents-install agents agents-cli agents-skills agents-claude-plugins
-.PHONY: agents-skills-install agents-skills-update agents-skills-list agents-skills-add
-.PHONY: agents-skills-check-npx agents-skills-check-jq
+.PHONY: agents-skills-install agents-skills-list agents-skills-check-npx
 
 ai: bootstrap
-	@$(MAKE) package PACKAGE=jq
 	@$(MAKE) agents-install
 
 agents-install: agents agents-cli agents-skills agents-claude-plugins
@@ -44,59 +57,27 @@ agents-skills: agents-skills-install
 agents-skills-check-npx:
 	@$(SKILLS_NPX) --version >/dev/null 2>&1 || (echo "❌ npx not available via mise. Run 'make ai' after bootstrap installs Node.js." && exit 1)
 
-agents-skills-check-jq:
-	@command -v jq >/dev/null 2>&1 || (echo "❌ jq not found. Run 'make ai' so jq is installed before parsing the skills manifest." && exit 1)
+agents-skills-install: agents-skills-check-npx
+	@echo "$(BLUE)📦 Installing curated skills...$(NC)"
+	@echo "  📥 Installing tgcli from dapi/tgcli"
+	@$(SKILLS) add dapi/tgcli --skill tgcli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
+	@echo "  📥 Installing docmost from dapi/docmost-cli"
+	@$(SKILLS) add dapi/docmost-cli --skill docmost -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
+	@echo "  📥 Installing playwright-cli from microsoft/playwright-cli"
+	@$(SKILLS) add microsoft/playwright-cli --skill playwright-cli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
+	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
+		echo "  📥 Installing $$skill from googleworkspace/cli"; \
+		$(SKILLS) add googleworkspace/cli --skill "$$skill" -g $(AGENTS_SKILLS_AGENT_FLAGS) -y; \
+	done
 
-agents-skills-install: agents-skills-check-npx agents-skills-check-jq
-	@echo "$(BLUE)📦 Installing skills from .skill-lock.json...$(NC)"
-	@set -e; \
-	entries_file="$$(mktemp "$${TMPDIR:-/tmp}/agents-skills-install.XXXXXX")"; \
-	trap 'rm -f "$$entries_file"' EXIT HUP INT TERM; \
-	jq -r '.skills | to_entries[] | [.key, .value.source] | @tsv' "$(AGENTS_LOCK_FILE)" > "$$entries_file"; \
-	while IFS=$$'\t' read -r skill source; do \
-		if [ -z "$$skill" ]; then \
-			continue; \
-		fi; \
-		echo "  📥 Installing $$skill from $$source"; \
-		$(SKILLS) add "$$source" -g $(AGENTS_SKILLS_AGENT_FLAGS) -y --skill "$$skill"; \
-	done < "$$entries_file"
-
-agents-skills-update: agents-skills-check-npx agents-skills-check-jq
-	@echo "$(BLUE)🔄 Refreshing tracked skills from .skill-lock.json...$(NC)"
-	@set -e; \
-	entries_file="$$(mktemp "$${TMPDIR:-/tmp}/agents-skills-update.XXXXXX")"; \
-	trap 'rm -f "$$entries_file"' EXIT HUP INT TERM; \
-	jq -r '.skills | to_entries[] | [.key, .value.source] | @tsv' "$(AGENTS_LOCK_FILE)" > "$$entries_file"; \
-	while IFS=$$'\t' read -r skill source; do \
-		if [ -z "$$skill" ]; then \
-			continue; \
-		fi; \
-		echo "  🔄 Refreshing $$skill from $$source"; \
-		$(SKILLS) add "$$source" -g $(AGENTS_SKILLS_AGENT_FLAGS) -y --skill "$$skill"; \
-	done < "$$entries_file"
-
-agents-skills-list: agents-skills-check-jq
-	@echo "$(BLUE)📋 Tracked skills from .skill-lock.json:$(NC)"
-	@jq -r '.skills | to_entries[] | "  \(.key) (\(.value.source))"' "$(AGENTS_LOCK_FILE)"
-
-agents-skills-add: agents-skills-check-jq
-ifndef SOURCE
-	$(error Use 'make agents-skills-add SOURCE=owner/repo SKILL=name')
-endif
-ifndef SKILL
-	$(error Use 'make agents-skills-add SOURCE=owner/repo SKILL=name')
-endif
-	@echo "$(BLUE)➕ Adding $(SKILL) to tracked .skill-lock.json...$(NC)"
-	@set -e; \
-	updated_manifest="$$(mktemp "$${TMPDIR:-/tmp}/agents-skills-manifest.XXXXXX")"; \
-	trap 'rm -f "$$updated_manifest"' EXIT HUP INT TERM; \
-	jq --arg skill "$(SKILL)" --arg source "$(SOURCE)" ' \
-		.skills = (.skills // {}) \
-		| .skills[$$skill] = {source: $$source} \
-	' "$(AGENTS_LOCK_FILE)" > "$$updated_manifest"; \
-	mv "$$updated_manifest" "$(AGENTS_LOCK_FILE)"; \
-	echo "$(GREEN)✓ Updated tracked .skill-lock.json for $(SKILL)$(NC)"; \
-	echo "Run 'make agents-skills-install' or 'make ai' to install the new skill."
+agents-skills-list:
+	@echo "$(BLUE)📋 Curated skills:$(NC)"
+	@printf "  tgcli (dapi/tgcli)\n"
+	@printf "  docmost (dapi/docmost-cli)\n"
+	@printf "  playwright-cli (microsoft/playwright-cli)\n"
+	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
+		printf "  %s (googleworkspace/cli)\n" "$$skill"; \
+	done
 
 # --- Claude Code plugins ---
 

@@ -22,10 +22,8 @@ make update
 make packages     # Установить пакеты (ag, direnv, pass, fzf, nvim)
 make dotfiles     # Создать симлинки конфигов
 make apply        # Применить (nvim плагины, fisher)
-make agents-skills-install  # Установить недостающие agent skills из lock-файла
-make agents-skills-update   # Обновить установленные agent skills
-make agents-skills-list     # Показать tracked agent skills
-make agents-skills-add SOURCE=owner/repo SKILL=name
+make agents-skills-install  # Установить curated agent skills
+make agents-skills-list     # Показать curated agent skills
 
 # Neovim
 make nvim-install      # Установить vim-plug и плагины
@@ -46,10 +44,9 @@ make fisher            # Установить fisher и плагины
 dotfiles/
 ├── Makefile              # Точка входа, включает все makefiles/*.mk
 ├── configuration.mk      # Определяет DOTFILES, PACKAGES, APPLIES
-├── .skill-lock.json      # Curated manifest for agent skills
 ├── makefiles/            # Модульные конфигурации
 │   ├── linker.mk        # ⭐ Логика симлинков с автобекапом
-│   ├── agents.mk        # AI tooling bootstrap and skills manifest
+│   ├── agents.mk        # AI tooling bootstrap and curated skills list
 │   ├── nvim.mk          # Neovim setup
 │   ├── fish.mk          # Fish shell setup
 │   ├── packages.mk      # Установка через brew/apt
@@ -261,24 +258,23 @@ make apply     # Выполнит пост-установку
 make dotfiles  # Повторный запуск не должен создавать дубликаты
 ```
 
-### Пример: repo-owned manifest для skills
+### Пример: curated skills list в makefile
 
-Для agent skills храним в `dotfiles` только curated manifest, а `npx skills` используем как installer:
+Для agent skills держим простой список install-команд в `makefiles/agents.mk` и ставим их только для поддерживаемых агентов:
 
 ```makefile
 # makefiles/agents.mk
 ai: bootstrap
-	$(MAKE) package PACKAGE=jq
 	$(MAKE) agents-install
 
 agents-skills-install:
-	# Установить tracked skills из .skill-lock.json
+	$(SKILLS) add dapi/tgcli --skill tgcli -g -a codex -a claude-code -y
 ```
 
 Результат:
 
 ```text
-~/dotfiles/.skill-lock.json  # curated manifest в git
+makefiles/agents.mk          # curated skills list в git
 make ai                      # отдельный bootstrap AI-инструментов
 ```
 
