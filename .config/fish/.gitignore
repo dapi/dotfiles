@@ -2,3 +2,7 @@ fish_variables
 fishd.tmp.*
 completions/
 conf.d/local.fish
+conf.d/autopair.fish
+conf.d/fish-ssh-agent.fish
+conf.d/halostatue_fish_direnv.fish
+conf.d/nvm.fish
