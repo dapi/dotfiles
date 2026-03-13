@@ -1,9 +1,7 @@
 set -gx LESS -eiRMX
 set -gx ENABLE_CLAUDEAI_MCP_SERVERS false
-set -x PGOPTIONS '--client-min-messages=warning'
-set -x EDITOR nvim
-set -x PATH $PATH $HOME/.local/bin
-set -gx PATH $PATH $HOME/.krew/bin
+set -gx PGOPTIONS '--client-min-messages=warning'
+set -gx EDITOR nvim
 
 # nvimpager не умеет переходить в редактор по v как это делает less
 #

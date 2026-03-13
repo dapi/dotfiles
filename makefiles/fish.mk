@@ -5,10 +5,9 @@ PACKAGES:=$(PACKAGES) fish
 # functions/ stays a real dir — fisher puts dozens of files there
 DOTFILES:=${DOTFILES} ~/.config/fish/config.fish ~/.config/fish/fish_plugins
 DOTFILES:=${DOTFILES} ~/.config/fish/conf.d
-DOTFILES:=${DOTFILES} ~/.config/fish/functions/kimi-claude.fish ~/.config/fish/functions/proxy.fish ~/.config/fish/functions/zai.fish ~/.config/fish/functions/ssh.fish
+DOTFILES:=${DOTFILES} ~/.config/fish/functions/bugsnag.fish ~/.config/fish/functions/kimi-claude.fish ~/.config/fish/functions/proxy.fish ~/.config/fish/functions/zai.fish ~/.config/fish/functions/ssh.fish
 
 # Migrate old directory-level symlinks to real dirs so fisher can manage plugins.
-# Also ensure fish files are linked even when running `make apply` without `make dotfiles`.
 # Completions are managed by fisher in a real directory, so don't re-backup them on each run.
 fish-layout:
 	@mkdir -p $(HOME)/.config/fish
@@ -21,7 +20,7 @@ fish-layout:
 	@mkdir -p $(HOME)/.config/fish/functions
 	@mkdir -p $(HOME)/.config/fish/completions
 
-fisher: fish-layout fisher-install fisher-plugins tide-configure
+fisher: fish-layout dotfiles fisher-install fisher-plugins tide-configure
 
 fisher-install:
 	@echo 'Install fisher'
