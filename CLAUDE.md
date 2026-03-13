@@ -9,8 +9,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Команды
 
 ```bash
-# Установить/обновить все (пакеты + dotfiles + плагины)
+# Установить/обновить базовые dotfiles
 make
+
+# Установить AI-слой: Codex, Claude Code, agent CLI, plugins и curated skills
+make ai
 
 # Обновить из git и применить
 make update
@@ -21,10 +24,8 @@ make dotfiles     # Создать симлинки конфигов
 make apply        # Применить (nvim плагины, fisher)
 make agents-skills-install  # Установить недостающие agent skills из lock-файла
 make agents-skills-update   # Обновить установленные agent skills
-make agents-skills-list     # Показать установленные agent skills
-make agents-skills-sync     # Подготовить tracked agent files к коммиту
+make agents-skills-list     # Показать tracked agent skills
 make agents-skills-add SOURCE=owner/repo SKILL=name
-make agents-skills-import-lock
 
 # Neovim
 make nvim-install      # Установить vim-plug и плагины
@@ -45,10 +46,10 @@ make fisher            # Установить fisher и плагины
 dotfiles/
 ├── Makefile              # Точка входа, включает все makefiles/*.mk
 ├── configuration.mk      # Определяет DOTFILES, PACKAGES, APPLIES
-├── .skill-lock.json       # Tracked manifest for agent skills
+├── .skill-lock.json      # Curated manifest for agent skills
 ├── makefiles/            # Модульные конфигурации
 │   ├── linker.mk        # ⭐ Логика симлинков с автобекапом
-│   ├── agents.mk        # Claude/Codex skills installer wiring
+│   ├── agents.mk        # AI tooling bootstrap and skills manifest
 │   ├── nvim.mk          # Neovim setup
 │   ├── fish.mk          # Fish shell setup
 │   ├── packages.mk      # Установка через brew/apt
@@ -260,25 +261,25 @@ make apply     # Выполнит пост-установку
 make dotfiles  # Повторный запуск не должен создавать дубликаты
 ```
 
-### Пример: manifest в git, global runtime у skills CLI
+### Пример: repo-owned manifest для skills
 
-Для agent skills храним manifest в `dotfiles`, а установленное состояние оставляем в global store самого `npx skills`:
+Для agent skills храним в `dotfiles` только curated manifest, а `npx skills` используем как installer:
 
 ```makefile
 # makefiles/agents.mk
-PACKAGES:=${PACKAGES} jq
-agents-skills-install:
-	# Установить отсутствующие skills из .skill-lock.json
+ai: bootstrap
+	$(MAKE) package PACKAGE=jq
+	$(MAKE) agents-install
 
-agents-skills-update:
-	# Обновить уже установленные skills через global store skills CLI
+agents-skills-install:
+	# Установить tracked skills из .skill-lock.json
 ```
 
 Результат:
 
 ```text
-~/dotfiles/.skill-lock.json  # tracked manifest
-npx skills global store      # local installed skills outside the repo
+~/dotfiles/.skill-lock.json  # curated manifest в git
+make ai                      # отдельный bootstrap AI-инструментов
 ```
 
 ### Примеры Специальных Модулей

@@ -13,7 +13,7 @@
 * `direnv`
 * `git`, `ag`, `ctags`
 * `ghostty`
-* AI agent skills via tracked manifest in `~/dotfiles/.skill-lock.json`
+* AI agents, CLI tools, plugins и curated skills через `make ai`
 * Моноширинные шрифты поддерживающие statusline в fish, tmux, neovim для MacOS.
 
 # Как это выглядит?
@@ -50,30 +50,28 @@ cd ~; git clone git@github.com:dapi/dotfiles.git; cd ~/dotfiles; make
 curl -o- https://raw.githubusercontent.com/dapi/dotfiles/refs/heads/master/scripts/install.sh | bash
 ```
 
-# AI Agent Skills
+# AI
 
-Скиллы агентов теперь управляются из `dotfiles` так:
-
-```text
-~/dotfiles/.skill-lock.json  # tracked manifest in git
-npx skills global store      # managed outside the repo by the CLI itself
-```
-
-После первого `make` можно управлять skills так:
+AI-часть вынесена в отдельный слой поверх базовых dotfiles:
 
 ```sh
-make                        # в том числе установит недостающие skills из lock-файла
-make agents-skills-install  # установить недостающие skills отдельно
-make agents-skills-update   # обновить установленные skills
-make agents-skills-list     # показать установленные skills
-make agents-skills-sync     # подготовить изменения в ~/dotfiles к коммиту
-make agents-skills-add SOURCE=owner/repo SKILL=name
-make agents-skills-import-lock
+make     # базовые пакеты, симлинки и привычные настройки
+make ai  # Codex, Claude Code, agent CLI, plugins и curated skills
 ```
 
-`npx skills` сам хранит установленное состояние и свой внутренний global lock вне репозитория. В `dotfiles` мы храним только tracked manifest.
+Curated manifest для skills хранится в [`.skill-lock.json`](/Users/danil/dotfiles/.skill-lock.json). Это обычный repo-owned manifest, а не runtime lock-файл.
 
-`agents-skills-add` с `SKILL=name` обновляет в tracked manifest только этот skill. Для полной замены tracked manifest текущим global lock есть отдельный `make agents-skills-import-lock`.
+Основные команды:
+
+```sh
+make ai
+make agents-skills-install
+make agents-skills-update
+make agents-skills-list
+make agents-skills-add SOURCE=owner/repo SKILL=name
+```
+
+`agents-skills-add` обновляет tracked manifest. После этого установку можно выполнить через `make agents-skills-install` или полным `make ai`.
 
 # GnuPG в публичном репозитории
 
