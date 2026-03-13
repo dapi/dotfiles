@@ -1,4 +1,4 @@
-function ssh --wraps=ssh --description "SSH with Ghostty theme change"
+function rssh --wraps=ssh --description "SSH with Ghostty theme change"
     switch "$argv"
         case '*office2*'
             # Office2 - dark blue theme
