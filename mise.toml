@@ -1,5 +1,4 @@
 [tools]
-ag = "latest"
 direnv = "latest"
 fzf = "latest"
 gitleaks = "latest"
