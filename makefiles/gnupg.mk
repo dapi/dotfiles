@@ -6,7 +6,7 @@
 
 ifeq ($(UNAME),Linux)
 PACKAGES:=$(PACKAGES) pinentry-tty
-APPLIES:=$(APPLIES) gnupg-pinentry
+APPLIES:=$(APPLIES) gnupg-pinentry gnupg-forward-linux
 endif
 
 gnupg-pinentry:
