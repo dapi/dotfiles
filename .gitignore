@@ -4,6 +4,7 @@ tags
 fonts/
 tags.*
 .ssh/hosts/*
+!.ssh/hosts/office2.conf
 *.wasm
 .config/fish/fish_variables
 .config/fish/conf.d/_tide_init.fish

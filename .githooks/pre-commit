@@ -4,7 +4,7 @@ set -euo pipefail
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
-allowed='^\.gnupg/(\.gitignore|common\.conf|gpg-agent\.conf|gpg\.conf|dirmngr\.conf|scdaemon\.conf)$'
+allowed='^\.gnupg/(\.gitignore|common\.conf|gpg-agent\.conf|gpg-agent\.macos\.conf|gpg\.conf|dirmngr\.conf|scdaemon\.conf)$'
 
 staged_paths="$(git diff --cached --name-only --diff-filter=ACMR)"
 
