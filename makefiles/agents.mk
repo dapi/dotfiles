@@ -67,6 +67,8 @@ agents-skills-install: agents-skills-check-npx
 	@$(SKILLS) add microsoft/playwright-cli --skill playwright-cli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
 	@echo "  📥 Installing fpf-simple from CodeAlive-AI/fpf-simple-skill"
 	@$(SKILLS) add CodeAlive-AI/fpf-simple-skill --skill fpf-simple -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
+	@echo "  📥 Installing prompt-engeneering from CodeAlive-AI/prompt-engineering-skill"
+	@$(SKILLS) add CodeAlive-AI/prompt-engineering-skill@prompt-engeneering -g -y
 	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
 		echo "  📥 Installing $$skill from googleworkspace/cli"; \
 		$(SKILLS) add googleworkspace/cli --skill "$$skill" -g $(AGENTS_SKILLS_AGENT_FLAGS) -y; \
@@ -78,6 +80,7 @@ agents-skills-list:
 	@printf "  docmost (dapi/docmost-cli)\n"
 	@printf "  playwright-cli (microsoft/playwright-cli)\n"
 	@printf "  fpf-simple (CodeAlive-AI/fpf-simple-skill)\n"
+	@printf "  prompt-engeneering (CodeAlive-AI/prompt-engineering-skill)\n"
 	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
 		printf "  %s (googleworkspace/cli)\n" "$$skill"; \
 	done
