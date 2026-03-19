@@ -1,5 +1,8 @@
 set completeopt=noinsert,menuone,noselect " Modifies the auto-complete menu to behave more like an IDE.
 set cursorline " Highlights the current line in the editor
+
+" Мигающий блок-курсор во всех режимах
+set guicursor=n-v-c-sm:block-blinkon500-blinkoff500-Cursor,i-ci-ve:ver25-blinkon500-blinkoff500-Cursor,r-cr-o:hor20-blinkon500-blinkoff500-Cursor
 set hidden " Hide unused buffers
 set smartindent
 set autoindent " Indent a new line

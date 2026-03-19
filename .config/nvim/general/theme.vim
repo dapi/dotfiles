@@ -6,6 +6,11 @@ endif
 set background=dark " or light if you want light mode
 colorscheme gruvbox
 
+" Явный цвет курсора (gruvbox ставит reverse, что делает курсор невидимым)
+highlight Cursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
+highlight TermCursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
+highlight lCursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
+
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
