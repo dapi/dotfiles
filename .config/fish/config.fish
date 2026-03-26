@@ -12,3 +12,8 @@ if test -f "$HOME/google-cloud-sdk/path.fish.inc"
 end
 # zelda-wrappers
 fish_add_path -p ~/.local/bin/zelda
+
+# Obsidian CLI (macOS only)
+if test (uname) = Darwin
+    fish_add_path /Applications/Obsidian.app/Contents/MacOS
+end
