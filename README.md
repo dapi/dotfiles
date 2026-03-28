@@ -101,10 +101,3 @@ make agents-skills-list
 git config core.hooksPath .githooks
 ```
 
-# TODO
-
-Добавить управление фоном терминала в зависимости от ssh-сессии
-
-* https://github.com/fboender/sshbg
-* https://askubuntu.com/questions/310498/change-terminal-colour-based-on-ssh-session
-* https://superuser.com/questions/603909/how-to-change-terminal-colors-when-connecting-to-ssh-hosts
