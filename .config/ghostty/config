@@ -25,7 +25,9 @@ fullscreen = true
 # macos-non-native-fullscreen = true
 
 shell-integration = zsh
-shell-integration-features = cursor,sudo,title
+# ssh-terminfo: автоматически устанавливает terminfo на удалённые машины при первом SSH
+# ssh-env: fallback на xterm-256color если установка terminfo не удалась
+shell-integration-features = cursor,sudo,title,ssh-terminfo,ssh-env
 
 quit-after-last-window-closed=true
 

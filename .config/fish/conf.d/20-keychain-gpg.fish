@@ -6,7 +6,7 @@ if test (uname) = Linux
 end
 
 # Prefer forwarded GPG agent over a locally spawned one during SSH sessions.
-if set -q SSH_CONNECTION
+if set -q SSH_CONNECTION; and command -q gpgconf
     gpgconf --kill gpg-agent >/dev/null 2>&1
 end
 
