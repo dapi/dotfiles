@@ -1,13 +1,15 @@
 status --is-interactive; or return
 
-# Use systemd-managed ssh-agent socket (Linux only).
-if test (uname) = Linux
+# SSH agent: use fixed symlink path that ~/.ssh/rc maintains on each login.
+# This survives zellij/tmux reconnects — the symlink always points to the latest forwarded socket.
+if set -q SSH_CONNECTION
+    set -gx SSH_AUTH_SOCK ~/.ssh/agent.sock
+    if command -q gpgconf
+        gpgconf --kill gpg-agent >/dev/null 2>&1
+    end
+else if test (uname) = Linux
+    # Local session — use systemd-managed agent.
     set -gx SSH_AUTH_SOCK /run/user/(id -u)/openssh_agent
-end
-
-# Prefer forwarded GPG agent over a locally spawned one during SSH sessions.
-if set -q SSH_CONNECTION; and command -q gpgconf
-    gpgconf --kill gpg-agent >/dev/null 2>&1
 end
 
 # Tell pinentry which terminal to use.
