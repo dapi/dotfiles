@@ -27,4 +27,4 @@ import-hosts-from-server:
 .PHONY: $(DSH_HOSTS)
 import-hosts: $(DSH_HOSTS)
 $(DSH_HOSTS): $(DSH_PREFIX)%:
-	@$(MAKE) import-ssh-hosts-from-server SERVER=$*
+	@$(MAKE) import-hosts-from-server SERVER=$*

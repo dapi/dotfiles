@@ -1,5 +1,3 @@
-PACKAGES:=$(PACKAGES) bc
-
 UNAME := $(shell uname)
 
 # Маппинг: логическое имя → имя в brew
