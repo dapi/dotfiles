@@ -6,10 +6,14 @@ endif
 set background=dark " or light if you want light mode
 colorscheme gruvbox
 
-" Явный цвет курсора (gruvbox ставит reverse, что делает курсор невидимым)
-highlight Cursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
-highlight TermCursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
-highlight lCursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
+" Явный цвет курсора для Ghostty (gruvbox ставит inverse, что делает курсор невидимым).
+" В Zellij OSC 12 (cursor color) не работает — explicit цвета ломают курсор.
+" Оставляем gruvbox default (inverse) — reverse video блок видим в Zellij.
+if empty($ZELLIJ)
+  highlight Cursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
+  highlight TermCursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
+  highlight lCursor gui=NONE cterm=NONE guifg=#121800 guibg=#02d5cf
+endif
 
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.

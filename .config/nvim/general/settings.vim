@@ -1,8 +1,14 @@
 set completeopt=noinsert,menuone,noselect " Modifies the auto-complete menu to behave more like an IDE.
 set cursorline " Highlights the current line in the editor
 
-" Мигающий блок-курсор во всех режимах
-set guicursor=n-v-c-sm:block-blinkon500-blinkoff500-Cursor,i-ci-ve:ver25-blinkon500-blinkoff500-Cursor,r-cr-o:hor20-blinkon500-blinkoff500-Cursor
+" Курсор: Zellij не пробрасывает cursor color (OSC 12) и не рендерит beam cursor.
+" В Zellij используем мигающий block во всех режимах с reverse video.
+" В Ghostty напрямую — beam в insert, explicit Cursor colors.
+if !empty($ZELLIJ)
+  set guicursor=n-v-c-sm:block-blinkon500-blinkoff500,i-ci-ve:block-blinkon500-blinkoff500,r-cr-o:block-blinkon500-blinkoff500
+else
+  set guicursor=n-v-c-sm:block-blinkon500-blinkoff500-Cursor,i-ci-ve:ver25-blinkon500-blinkoff500-Cursor,r-cr-o:hor20-blinkon500-blinkoff500-Cursor
+endif
 set hidden " Hide unused buffers
 set smartindent
 set autoindent " Indent a new line
