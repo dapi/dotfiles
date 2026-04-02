@@ -13,7 +13,8 @@ end
 # zelda-wrappers
 fish_add_path -p ~/.local/bin/zelda
 
-# Obsidian CLI (macOS only)
+# macOS-only paths
 if test (uname) = Darwin
     fish_add_path /Applications/Obsidian.app/Contents/MacOS
+    set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3
 end
