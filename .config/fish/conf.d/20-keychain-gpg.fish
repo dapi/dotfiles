@@ -7,6 +7,12 @@ if set -q SSH_CONNECTION
     if command -q gpgconf
         gpgconf --kill gpg-agent >/dev/null 2>&1
     end
+else if test (uname) = Darwin
+    # Local macOS session — ensure gpg-agent is running so S.gpg-agent.extra
+    # exists before SSH RemoteForward needs it.
+    if command -q gpgconf
+        gpgconf --launch gpg-agent >/dev/null 2>&1
+    end
 else if test (uname) = Linux
     # Local session — use systemd-managed agent.
     set -gx SSH_AUTH_SOCK /run/user/(id -u)/openssh_agent
