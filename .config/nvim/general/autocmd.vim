@@ -1,6 +1,8 @@
 autocmd FileType gitcommit set textwidth=72
 autocmd FileType gitcommit set colorcolumn=73
 
+autocmd VimEnter,ColorScheme * lua local hl = vim.api.nvim_get_hl(0, { name = "Cursor" }); if hl.bg then io.write(("\27]12;#%06x\27\\"):format(hl.bg)) end
+autocmd VimLeave * lua io.write("\27]112\27\\")
 autocmd VimLeave * set guicursor=a:ver10-blinkon1
 "
 " autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml set ft=helm
