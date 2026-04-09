@@ -7,7 +7,7 @@ NPM ?= mise exec -- npm
 CLAUDE ?= mise exec -- claude
 SKILLS_NPX ?= mise exec -- npx
 SKILLS ?= $(SKILLS_NPX) skills
-AGENTS_TARGETS := codex claude-code
+AGENTS_TARGETS := codex claude-code kimi-cli
 AGENTS_SKILLS_AGENT_FLAGS := $(foreach agent,$(AGENTS_TARGETS),-a $(agent))
 
 GOOGLE_WORKSPACE_SKILLS := \
