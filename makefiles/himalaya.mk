@@ -1,0 +1,1 @@
+PACKAGES:=$(PACKAGES) himalaya

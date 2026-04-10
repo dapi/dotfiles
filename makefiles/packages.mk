@@ -11,22 +11,26 @@ CMD_NAME_exuberant-ctags = ctags
 # Маппинг: логическое имя → имя в apt
 APT_NAME_ag = silversearcher-ag
 
+# Кастомные команды установки для пакетов, которых нет в стандартных brew/apt потоках
+INSTALL_CMD_Linux_himalaya = curl -sSL https://raw.githubusercontent.com/pimalaya/himalaya/master/install.sh | PREFIX="$$HOME/.local" sh
+
 # Функции получения реального имени пакета
 brew_name = $(or $(BREW_NAME_$(1)),$(1))
 apt_name = $(or $(APT_NAME_$(1)),$(1))
 cmd_name = $(or $(CMD_NAME_$(1)),$(1))
+install_cmd = $(INSTALL_CMD_$(UNAME)_$(1))
 
 package:
 ifeq ($(UNAME),Darwin)
 	@if command -v $(call cmd_name,${PACKAGE}) > /dev/null 2>&1; then \
 		echo "Install ${PACKAGE} - already exists"; \
 	else \
-		brew install $(call brew_name,${PACKAGE}) && echo "Install ${PACKAGE} - installed"; \
+		$(or $(call install_cmd,${PACKAGE}),brew install $(call brew_name,${PACKAGE})) && echo "Install ${PACKAGE} - installed"; \
 	fi
 else
 	@if command -v $(call cmd_name,${PACKAGE}) > /dev/null 2>&1; then \
 		echo "Install ${PACKAGE} - already exists"; \
 	else \
-		sudo apt-get install -y $(call apt_name,${PACKAGE}) && echo "Install ${PACKAGE} - installed"; \
+		$(or $(call install_cmd,${PACKAGE}),sudo apt-get install -y $(call apt_name,${PACKAGE})) && echo "Install ${PACKAGE} - installed"; \
 	fi
 endif

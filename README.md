@@ -11,7 +11,7 @@
 * `neovim`, `vim` с набором [плагинов](nvim/vim-plug/plugins.vim)
 * `fish`, `zsh`, `tmux`
 * `direnv`
-* `git`, `ag`, `ctags`
+* `git`, `ag`, `ctags`, `himalaya`
 * `ghostty`
 * AI agents, CLI tools, plugins и curated skills через `make ai`
 * Моноширинные шрифты поддерживающие statusline в fish, tmux, neovim для MacOS.
@@ -100,4 +100,3 @@ make agents-skills-list
 ```sh
 git config core.hooksPath .githooks
 ```
-

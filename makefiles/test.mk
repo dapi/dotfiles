@@ -1,6 +1,6 @@
-.PHONY: test test-pre-commit test-agents-install test-mise-only
+.PHONY: test test-pre-commit test-agents-install test-mise-only test-packages-install
 
-test: test-pre-commit test-agents-install test-mise-only
+test: test-pre-commit test-agents-install test-mise-only test-packages-install
 
 test-pre-commit:
 	@bash tests/pre-commit.sh
@@ -10,3 +10,6 @@ test-agents-install:
 
 test-mise-only:
 	@bash tests/mise-only.sh
+
+test-packages-install:
+	@bash tests/packages-install.sh
