@@ -7,7 +7,7 @@ NPM ?= mise exec -- npm
 CLAUDE ?= mise exec -- claude
 SKILLS_NPX ?= mise exec -- npx
 SKILLS ?= $(SKILLS_NPX) skills
-AGENTS_TARGETS := codex claude-code kimi-cli
+AGENTS_TARGETS := codex claude-code kimi-cli opencode
 AGENTS_SKILLS_AGENT_FLAGS := $(foreach agent,$(AGENTS_TARGETS),-a $(agent))
 
 GOOGLE_WORKSPACE_SKILLS := \
@@ -41,6 +41,8 @@ agents-install: agents agents-cli agents-skills agents-claude-plugins
 agents:
 	@$(NPM) install -g @anthropic-ai/claude-code
 	@$(NPM) install -g @openai/codex
+	@brew upgrade opencode 2>/dev/null || brew install opencode-ai/tap/opencode
+	@uv tool upgrade kimi-cli 2>/dev/null || uv tool install kimi-cli
 
 # --- CLI tools used by agents ---
 
