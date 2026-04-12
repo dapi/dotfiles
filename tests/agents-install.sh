@@ -70,6 +70,7 @@ test_ai_target_includes_curated_skills_install() {
   assert_contains "Installing curated skills" "$output" "ai target should install curated skills"
   assert_contains "mise exec -- npx skills add dapi/tgcli --skill tgcli -g -a codex -a claude-code -y" "$output" "ai target should install tgcli only for supported agents"
   assert_contains "@openai/codex" "$output" "ai target should install Codex"
+  assert_contains "brew upgrade mmctl 2>/dev/null || brew install mmctl" "$output" "ai target should install mmctl via Homebrew"
   assert_not_contains "PACKAGE=jq" "$output" "ai target should not depend on jq anymore"
   pass "ai target bootstraps agents, tools, and curated skills"
 }

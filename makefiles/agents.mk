@@ -8,7 +8,8 @@ CLAUDE ?= mise exec -- claude
 SKILLS_NPX ?= mise exec -- npx
 SKILLS ?= $(SKILLS_NPX) skills
 AGENTS_TARGETS := codex claude-code kimi-cli opencode
-AGENTS_SKILLS_AGENT_FLAGS := $(foreach agent,$(AGENTS_TARGETS),-a $(agent))
+AGENTS_SKILLS_TARGETS := codex claude-code
+AGENTS_SKILLS_AGENT_FLAGS := $(foreach agent,$(AGENTS_SKILLS_TARGETS),-a $(agent))
 
 GOOGLE_WORKSPACE_SKILLS := \
 	gws-docs \
@@ -51,6 +52,7 @@ agents-cli:
 	@$(NPM) install -g @dapi/tgcli
 	@$(NPM) install -g @dapi/docmost-cli
 	@$(NPM) install -g @googleworkspace/cli
+	@brew upgrade mmctl 2>/dev/null || brew install mmctl
 
 # --- Skills for agents ---
 

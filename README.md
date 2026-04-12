@@ -62,6 +62,7 @@ make ai  # Codex, Claude Code, agent CLI, plugins и curated skills
 ```
 
 Curated skills перечислены прямо в [agents.mk](/Users/danil/dotfiles/makefiles/agents.mk). Это обычный явный список `npx skills add ...`, без отдельного manifest-файла.
+CLI для агентов ставятся там же: сейчас это `@playwright/cli`, `tgcli`, `docmost-cli`, `googleworkspace/cli` и `mmctl` (через Homebrew, без отдельного skill).
 
 Основные команды:
 
@@ -71,7 +72,7 @@ make agents-skills-install
 make agents-skills-list
 ```
 
-Чтобы добавить или убрать skill, правь [agents.mk](/Users/danil/dotfiles/makefiles/agents.mk): `tgcli`, `docmost`, `playwright-cli` перечислены отдельно, а `googleworkspace/cli` сгруппирован через `GOOGLE_WORKSPACE_SKILLS`.
+Чтобы добавить или убрать skill, правь [agents.mk](/Users/danil/dotfiles/makefiles/agents.mk): `tgcli`, `docmost`, `playwright-cli` перечислены отдельно, а `googleworkspace/cli` сгруппирован через `GOOGLE_WORKSPACE_SKILLS`. `mmctl` добавлен как отдельный CLI без skill-обёртки.
 
 # GnuPG в публичном репозитории
 
