@@ -11,7 +11,10 @@ if set -q SSH_CONNECTION
 else if test (uname) = Darwin
     # Local macOS session — manage ssh-agent
     # Look for existing running agent
-    set -l agent_sock (ls -t /tmp/ssh-*/agent.* 2>/dev/null | head -1)
+    set -l agent_sock
+    if test -d /tmp; and count /tmp/ssh-*/agent.* >/dev/null 2>&1
+        set agent_sock (ls -t /tmp/ssh-*/agent.* | head -1)
+    end
 
     if test -S "$agent_sock"
         set -gx SSH_AUTH_SOCK "$agent_sock"
