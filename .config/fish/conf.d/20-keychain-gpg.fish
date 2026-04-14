@@ -10,21 +10,35 @@ if set -q SSH_CONNECTION
     end
 else if test (uname) = Darwin
     # Local macOS session — manage ssh-agent
-    # Look for existing running agent
-    set -l agent_sock
-    if test -d /tmp; and count /tmp/ssh-*/agent.* >/dev/null 2>&1
-        set agent_sock (ls -t /tmp/ssh-*/agent.* | head -1)
+    # Clean up dead symlink from previous session
+    if test -L ~/.ssh/agent.sock; and not test -S ~/.ssh/agent.sock
+        rm -f ~/.ssh/agent.sock
     end
 
-    if test -S "$agent_sock"
+    # Look for existing running agent
+    set -l agent_sock
+    if test -d /tmp
+        # Find live sockets, verify they actually work
+        for sock in (ls -t /tmp/ssh-*/agent.* 2>/dev/null)
+            if test -S "$sock"
+                # Verify agent responds before using it
+                if SSH_AUTH_SOCK="$sock" ssh-add -l >/dev/null 2>&1
+                    set agent_sock "$sock"
+                    break
+                end
+            end
+        end
+    end
+
+    if test -n "$agent_sock"
         set -gx SSH_AUTH_SOCK "$agent_sock"
     else
-        # Start new agent
-        eval (ssh-agent -c | grep -E 'SSH_AUTH_SOCK|SSH_AGENT_PID')
+        # No live agent found — start a fresh one
+        eval (ssh-agent -c)
     end
 
     # Update symlink for tmux/zellij persistence
-    if test -S "$SSH_AUTH_SOCK"
+    if test -n "$SSH_AUTH_SOCK"; and test -S "$SSH_AUTH_SOCK"
         ln -sf "$SSH_AUTH_SOCK" ~/.ssh/agent.sock
     end
 
