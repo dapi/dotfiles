@@ -44,6 +44,7 @@ agents:
 	@$(NPM) install -g @openai/codex
 	@brew upgrade opencode 2>/dev/null || brew install opencode-ai/tap/opencode
 	@uv tool upgrade kimi-cli 2>/dev/null || uv tool install kimi-cli
+	@$(NPM) install -g @mariozechner/pi-coding-agent
 
 # --- CLI tools used by agents ---
 
