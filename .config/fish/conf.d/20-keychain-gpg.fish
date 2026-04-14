@@ -1,5 +1,49 @@
 status --is-interactive; or return
 
+function __ssh_agent_is_live --argument-names sock
+    test -S "$sock"; or return 1
+    SSH_AUTH_SOCK="$sock" ssh-add -l >/dev/null 2>&1
+end
+
+function __find_reusable_ssh_agent_sock_macos
+    if set -q SSH_AUTH_SOCK; and __ssh_agent_is_live "$SSH_AUTH_SOCK"
+        echo "$SSH_AUTH_SOCK"
+        return 0
+    end
+
+    if __ssh_agent_is_live "$HOME/.ssh/agent.sock"
+        echo "$HOME/.ssh/agent.sock"
+        return 0
+    end
+
+    for sock in (begin
+            find "$HOME/.ssh" -maxdepth 2 -type s -path "$HOME/.ssh/agent/*" -print0 2>/dev/null
+            find /tmp -maxdepth 2 -path '/tmp/ssh-*/agent.*' -type s -print0 2>/dev/null
+        end | xargs -0 stat -f '%m\t%N' 2>/dev/null | sort -rn | cut -f2-)
+        if __ssh_agent_is_live "$sock"
+            echo "$sock"
+            return 0
+        end
+    end
+
+    return 1
+end
+
+function __find_reusable_ssh_agent_sock_linux
+    if set -q SSH_AUTH_SOCK; and __ssh_agent_is_live "$SSH_AUTH_SOCK"
+        echo "$SSH_AUTH_SOCK"
+        return 0
+    end
+
+    set -l systemd_sock "/run/user/"(id -u)"/openssh_agent"
+    if __ssh_agent_is_live "$systemd_sock"
+        echo "$systemd_sock"
+        return 0
+    end
+
+    return 1
+end
+
 # SSH agent: use fixed symlink path that ~/.ssh/rc maintains on each login.
 # This survives zellij/tmux reconnects — the symlink always points to the latest forwarded socket.
 if set -q SSH_CONNECTION
@@ -15,20 +59,7 @@ else if test (uname) = Darwin
         rm -f ~/.ssh/agent.sock
     end
 
-    # Look for existing running agent
-    set -l agent_sock
-    if test -d /tmp
-        # Find live sockets, verify they actually work
-        for sock in (ls -t /tmp/ssh-*/agent.* 2>/dev/null)
-            if test -S "$sock"
-                # Verify agent responds before using it
-                if SSH_AUTH_SOCK="$sock" ssh-add -l >/dev/null 2>&1
-                    set agent_sock "$sock"
-                    break
-                end
-            end
-        end
-    end
+    set -l agent_sock (__find_reusable_ssh_agent_sock_macos)
 
     if test -n "$agent_sock"
         set -gx SSH_AUTH_SOCK "$agent_sock"
@@ -56,8 +87,10 @@ else if test (uname) = Darwin
         gpgconf --launch gpg-agent >/dev/null 2>&1
     end
 else if test (uname) = Linux
-    # Local session — use systemd-managed agent.
-    set -gx SSH_AUTH_SOCK /run/user/(id -u)/openssh_agent
+    set -l agent_sock (__find_reusable_ssh_agent_sock_linux)
+    if test -n "$agent_sock"
+        set -gx SSH_AUTH_SOCK "$agent_sock"
+    end
 end
 
 # Tell pinentry which terminal to use.
