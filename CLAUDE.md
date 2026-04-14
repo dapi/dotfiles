@@ -323,15 +323,6 @@ fisher-plugins:
 	./scripts/install-fish-plugins.fish
 ```
 
-**Со скачиванием бинарников (zellij.mk):**
-```makefile
-zellij-plugins: $(ZELLIJ_TAB_STATUS)
-
-$(ZELLIJ_TAB_STATUS):
-	mkdir -p $(ZELLIJ_PLUGINS_DIR)
-	curl -fL https://github.com/.../plugin.wasm -o $(ZELLIJ_TAB_STATUS)
-```
-
 ### Чеклист для Агента
 
 При добавлении нового инструмента:

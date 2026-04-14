@@ -14,7 +14,7 @@
 # Install: tic -x xterm-ghostty.terminfo
 # Result:  ~/.terminfo/x/xterm-ghostty (overrides system entry)
 
-xterm-ghostty|ghostty|Ghostty terminal emulator,
+xterm-ghostty|Ghostty terminal emulator,
 	am, bce, ccc, hs, km, mc5i, mir, msgr, npc, xenl,
 	colors#0x100, cols#80, it#8, lines#24, pairs#0x7fff,
 	acsc=++\,\,--..00``aaffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
