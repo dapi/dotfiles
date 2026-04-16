@@ -1,7 +1,13 @@
 status --is-interactive; or return
 
-# Auto-start zellij only for SSH sessions on Linux.
+# Auto-start zellij only for SSH sessions on Linux, skip mobile/narrow terminals.
 if set -q ZELLIJ; or not set -q SSH_TTY; or test (uname) = "Darwin"
+    return
+end
+
+if test "$TERM_PROGRAM" = terminus \
+    -o "$TIDE_STYLE" = minimal \
+    -o "$COLUMNS" -lt 100
     return
 end
 
