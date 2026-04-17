@@ -9,7 +9,11 @@ function __tide_mobile_minimal --on-variable COLUMNS
         -o "$COLUMNS" -lt 100
         set -g tide_left_prompt_items pwd character
         set -g tide_right_prompt_items
+    else
+        set -g tide_left_prompt_items pwd git character
+        set -g tide_right_prompt_items status cmd_duration context jobs
     end
 end
 
-__tide_mobile_minimal
+# Only run at load if COLUMNS is already set (terminal ready)
+test -n "$COLUMNS"; and __tide_mobile_minimal
