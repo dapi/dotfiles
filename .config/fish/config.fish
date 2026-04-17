@@ -18,3 +18,9 @@ if test (uname) = Darwin
     fish_add_path /Applications/Obsidian.app/Contents/MacOS
     set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3
 end
+
+# OpenClaw Completion
+set -l openclaw_completion "$HOME/.openclaw/completions/openclaw.fish"
+if test -f "$openclaw_completion"
+    source "$openclaw_completion"
+end
