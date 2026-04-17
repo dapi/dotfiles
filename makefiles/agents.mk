@@ -13,21 +13,7 @@ AGENTS_SKILLS_AGENT_FLAGS := $(foreach agent,$(AGENTS_SKILLS_TARGETS),-a $(agent
 
 GOOGLE_WORKSPACE_SKILLS := \
 	gws-docs \
-	gws-docs-write \
-	gws-calendar \
-	gws-calendar-agenda \
-	gws-calendar-insert \
-	gws-gmail \
-	gws-gmail-send \
-	gws-gmail-reply \
-	gws-gmail-reply-all \
-	gws-gmail-forward \
-	gws-gmail-triage \
-	gws-drive \
-	gws-drive-upload \
-	gws-sheets \
-	gws-tasks \
-	gws-meet
+	gws-docs-write
 
 .PHONY: ai agents-install agents agents-cli agents-skills agents-claude-plugins
 .PHONY: agents-skills-install agents-skills-list agents-skills-check-npx
@@ -70,10 +56,6 @@ agents-skills-install: agents-skills-check-npx
 	@$(SKILLS) add dapi/docmost-cli --skill docmost -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
 	@echo "  📥 Installing playwright-cli from microsoft/playwright-cli"
 	@$(SKILLS) add microsoft/playwright-cli --skill playwright-cli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
-	@echo "  📥 Installing fpf-problem-solving from CodeAlive-AI/fpf-simple-skill"
-	@$(SKILLS) add CodeAlive-AI/fpf-simple-skill --skill fpf-problem-solving -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
-	@echo "  📥 Installing prompt-engineering from CodeAlive-AI/prompt-engineering-skill"
-	@$(SKILLS) add CodeAlive-AI/prompt-engineering-skill --skill prompt-engineering -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
 	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
 		echo "  📥 Installing $$skill from googleworkspace/cli"; \
 		$(SKILLS) add googleworkspace/cli --skill "$$skill" -g $(AGENTS_SKILLS_AGENT_FLAGS) -y; \
@@ -84,8 +66,6 @@ agents-skills-list:
 	@printf "  tgcli (dapi/tgcli)\n"
 	@printf "  docmost (dapi/docmost-cli)\n"
 	@printf "  playwright-cli (microsoft/playwright-cli)\n"
-	@printf "  fpf-problem-solving (CodeAlive-AI/fpf-simple-skill)\n"
-	@printf "  prompt-engineering (CodeAlive-AI/prompt-engineering-skill)\n"
 	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
 		printf "  %s (googleworkspace/cli)\n" "$$skill"; \
 	done
